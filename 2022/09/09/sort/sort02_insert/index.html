@@ -20,28 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"rtf-zhang.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="LeetCode 01 两数之和 题目：给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。 你可以按任意顺序返回答案。  示例 1：  输入：nums &#x3D; [2,7,11,15], target &#x3D; 9 输出：[0,1]">
+    <meta name="description" content="排序算法 - 插入排序  思路  代码 1234567891011public void sort(int[] arr) &amp;#123;    for (int i &#x3D; 1; i &lt; arr.length; i++) &amp;#123;        for (int j &#x3D; i; j &gt; 0; j--) &amp;#123;            if (arr[j] &lt; arr[j - 1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 01 两数之和">
-<meta property="og:url" content="https://rtf-zhang.github.io/2022/09/09/LC01_TwoNumbers/index.html">
+<meta property="og:title" content="排序算法 - 插入排序">
+<meta property="og:url" content="https://rtf-zhang.github.io/2022/09/09/sort/sort02_insert/index.html">
 <meta property="og:site_name" content="Blogz">
-<meta property="og:description" content="LeetCode 01 两数之和 题目：给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。 你可以按任意顺序返回答案。  示例 1：  输入：nums &#x3D; [2,7,11,15], target &#x3D; 9 输出：[0,1]">
+<meta property="og:description" content="排序算法 - 插入排序  思路  代码 1234567891011public void sort(int[] arr) &amp;#123;    for (int i &#x3D; 1; i &lt; arr.length; i++) &amp;#123;        for (int j &#x3D; i; j &gt; 0; j--) &amp;#123;            if (arr[j] &lt; arr[j - 1">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-09-09T01:25:00.000Z">
-<meta property="article:modified_time" content="2022-09-09T01:39:20.371Z">
+<meta property="article:published_time" content="2022-09-09T07:37:00.000Z">
+<meta property="article:modified_time" content="2022-09-09T07:48:57.084Z">
 <meta property="article:author" content="Bob">
-<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="Sort">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://rtf-zhang.github.io/2022/09/09/LC01_TwoNumbers/">
+<link rel="canonical" href="https://rtf-zhang.github.io/2022/09/09/sort/sort02_insert/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://rtf-zhang.github.io/2022/09/09/LC01_TwoNumbers/","path":"2022/09/09/LC01_TwoNumbers/","title":"LeetCode 01 两数之和"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://rtf-zhang.github.io/2022/09/09/sort/sort02_insert/","path":"2022/09/09/sort/sort02_insert/","title":"排序算法 - 插入排序"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>LeetCode 01 两数之和 | Blogz</title>
+<title>排序算法 - 插入排序 | Blogz</title>
   
 
 
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 01 两数之和</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">题解：</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">排序算法 - 插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -133,7 +133,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -144,7 +144,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -188,7 +188,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/09/LC01_TwoNumbers/">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/09/sort/sort02_insert/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/header.jpg">
@@ -201,12 +201,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="LeetCode 01 两数之和 | Blogz">
+      <meta itemprop="name" content="排序算法 - 插入排序 | Blogz">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          LeetCode 01 两数之和
+          排序算法 - 插入排序
         </h1>
 
         <div class="post-meta-container">
@@ -218,7 +218,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-09-09 09:25:00 / Modified: 09:39:20" itemprop="dateCreated datePublished" datetime="2022-09-09T09:25:00+08:00">2022-09-09</time>
+      <time title="Created: 2022-09-09 15:37:00 / Modified: 15:48:57" itemprop="dateCreated datePublished" datetime="2022-09-09T15:37:00+08:00">2022-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -240,55 +240,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h4 id="LeetCode-01-两数之和"><a href="#LeetCode-01-两数之和" class="headerlink" title="LeetCode 01 两数之和"></a>LeetCode 01 两数之和</h4><hr>
-<h5 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h5><pre><code>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
-你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
-你可以按任意顺序返回答案。
-
-示例 1：
-
-输入：nums = [2,7,11,15], target = 9
-输出：[0,1]
-解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
-示例 2：
-
-输入：nums = [3,2,4], target = 6
-输出：[1,2]
-示例 3：
-
-输入：nums = [3,3], target = 6
-输出：[0,1]
-
-
-提示：
-
-2 &lt;= nums.length &lt;= 104
--109 &lt;= nums[i] &lt;= 109
--109 &lt;= target &lt;= 109
-只会存在一个有效答案
-进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？
-
-来源：力扣（LeetCode）
-链接：https://leetcode.cn/problems/two-sum
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
-<br/>
-
+        <blockquote>
+<h4 id="排序算法-插入排序"><a href="#排序算法-插入排序" class="headerlink" title="排序算法 - 插入排序"></a>排序算法 - 插入排序</h4></blockquote>
 <blockquote>
-<h5 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h5></blockquote>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5></blockquote>
 <blockquote>
-<p>解法 1 循环遍历判断<br>代码很简单，不解释直接上代码</p>
-</blockquote>
-<blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="type">int</span>[] twoSum0(<span class="type">int</span>[] nums, <span class="type">int</span> target) &#123;</span><br><span class="line">       <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">           <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; nums.length; j++) &#123;</span><br><span class="line">              <span class="keyword">if</span> (nums[i] + nums[j] == target) <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;i, j&#125;;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;&#125;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<br/>
-</blockquote>
-<blockquote>
-<p>解法 2 在上一步循环的基础上加个缓存记录遍历过的结果<br>代码也比较简单，不解释直接上代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span>[] twoSum(<span class="type">int</span>[] nums, <span class="type">int</span> target) &#123;</span><br><span class="line">       Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">       <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">           <span class="type">int</span> <span class="variable">remain</span> <span class="operator">=</span> target - nums[i];</span><br><span class="line">           <span class="type">Integer</span> <span class="variable">num</span> <span class="operator">=</span> map.get(remain);</span><br><span class="line">           <span class="keyword">if</span> (num != <span class="literal">null</span>) &#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;i, num&#125;;</span><br><span class="line">           &#125;</span><br><span class="line">           map.put(nums[i], i);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></blockquote>
-
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[j - <span class="number">1</span>]) &#123;</span><br><span class="line">                swap(arr, j, j - <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -297,20 +255,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+              <a href="/tags/Sort/" rel="tag"># Sort</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/09/09/LC02_TwoNumbers/" rel="prev" title="LeetCode 01 两数之和">
-                  <i class="fa fa-chevron-left"></i> LeetCode 01 两数之和
+                <a href="/2022/09/09/sort/sort03_select/" rel="prev" title="排序算法 - 选择排序">
+                  <i class="fa fa-chevron-left"></i> 排序算法 - 选择排序
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/09/09/Markdown/" rel="next" title="Blogzzz">
-                  Blogzzz <i class="fa fa-chevron-right"></i>
+                <a href="/2022/09/09/sort/sort01_bubble/" rel="next" title="排序算法 - 冒泡排序">
+                  排序算法 - 冒泡排序 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
