@@ -20,18 +20,20 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"rtf-zhang.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="排序算法 - 插入排序  思路  代码 1234567891011public void sort(int[] arr) &amp;#123;    for (int i &#x3D; 1; i &lt; arr.length; i++) &amp;#123;        for (int j &#x3D; i; j &gt; 0; j--) &amp;#123;            if (arr[j] &lt; arr[j - 1">
+    <meta name="description" content="排序算法 - 插入排序    思路    动图演示     代码 1234567891011public void sort(int[] arr) &amp;#123;    for (int i &#x3D; 1; i &lt; arr.length; i++) &amp;#123;        for (int j &#x3D; i; j &gt; 0; j--) &amp;#123;            if (arr[j] &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序算法 - 插入排序">
 <meta property="og:url" content="https://rtf-zhang.github.io/2022/09/09/sort/sort02_insert/index.html">
 <meta property="og:site_name" content="Blogz">
-<meta property="og:description" content="排序算法 - 插入排序  思路  代码 1234567891011public void sort(int[] arr) &amp;#123;    for (int i &#x3D; 1; i &lt; arr.length; i++) &amp;#123;        for (int j &#x3D; i; j &gt; 0; j--) &amp;#123;            if (arr[j] &lt; arr[j - 1">
+<meta property="og:description" content="排序算法 - 插入排序    思路    动图演示     代码 1234567891011public void sort(int[] arr) &amp;#123;    for (int i &#x3D; 1; i &lt; arr.length; i++) &amp;#123;        for (int j &#x3D; i; j &gt; 0; j--) &amp;#123;            if (arr[j] &amp;">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://rtf-zhang.github.io/images/git_sort_insert.gif">
 <meta property="article:published_time" content="2022-09-09T07:37:00.000Z">
-<meta property="article:modified_time" content="2022-09-09T07:48:57.084Z">
+<meta property="article:modified_time" content="2022-09-09T08:24:49.512Z">
 <meta property="article:author" content="Bob">
 <meta property="article:tag" content="Sort">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rtf-zhang.github.io/images/git_sort_insert.gif">
 
 
 <link rel="canonical" href="https://rtf-zhang.github.io/2022/09/09/sort/sort02_insert/">
@@ -118,7 +120,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">排序算法 - 插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">排序算法 - 插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E5%9B%BE%E6%BC%94%E7%A4%BA"><span class="nav-number">1.2.</span> <span class="nav-text">动图演示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -218,7 +220,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-09-09 15:37:00 / Modified: 15:48:57" itemprop="dateCreated datePublished" datetime="2022-09-09T15:37:00+08:00">2022-09-09</time>
+      <time title="Created: 2022-09-09 15:37:00 / Modified: 16:24:49" itemprop="dateCreated datePublished" datetime="2022-09-09T15:37:00+08:00">2022-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -242,8 +244,17 @@
     <div class="post-body" itemprop="articleBody">
         <blockquote>
 <h4 id="排序算法-插入排序"><a href="#排序算法-插入排序" class="headerlink" title="排序算法 - 插入排序"></a>排序算法 - 插入排序</h4></blockquote>
+<br/>
+
 <blockquote>
 <h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5></blockquote>
+<br/>
+
+<blockquote>
+<h5 id="动图演示"><a href="#动图演示" class="headerlink" title="动图演示"></a>动图演示</h5><img src="/images/git_sort_insert.gif">
+</blockquote>
+<br/>
+
 <blockquote>
 <h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5></blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[j - <span class="number">1</span>]) &#123;</span><br><span class="line">                swap(arr, j, j - <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
