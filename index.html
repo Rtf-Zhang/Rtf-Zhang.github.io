@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"rtf-zhang.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rtf-zhang.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="The description of your website">
 <meta property="og:type" content="website">
@@ -60,6 +60,9 @@
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -81,6 +84,10 @@
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
 
 
 
@@ -114,6 +121,8 @@
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Bob"
+      src="/images/header.jpg">
   <p class="site-author-name" itemprop="name">Bob</p>
   <div class="site-description" itemprop="description">The description of your website</div>
 </div>
@@ -121,20 +130,27 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+          <a href="/categories/">
         <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">categories</span>
+        <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+          <a href="/tags/">
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Rtf-Zhang/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Rtf-Zhang&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
 
 
@@ -168,10 +184,155 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/09/Markdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/09/Markdown/" class="post-title-link" itemprop="url">Blogzzz</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-09-09 09:25:00 / Modified: 09:41:17" itemprop="dateCreated datePublished" datetime="2022-09-09T09:25:00+08:00">2022-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/MarkDown/" itemprop="url" rel="index"><span itemprop="name">MarkDown</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><p><em>斜体</em>      <strong>粗体</strong>        <em><strong>粗斜体</strong></em>        <del>删除线</del></p>
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p><a target="_blank" rel="noopener" href="http://www.baidu.com/">百度的超链接</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a></p>
+<!-- ![图片的超链接](https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202005%2F12%2F20200512095809_SJfKV.thumb.400_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664960268&t=e8516450d43f9d504038c1b4ed72fcb3) -->
+
+<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202005%2F12%2F20200512095809_SJfKV.thumb.400_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664960268&t=e8516450d43f9d504038c1b4ed72fcb3" width="200" height="400">
+
+
+<h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<h2 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h2><p>创建脚注格式类似这样  [^BOB]</p>
+<p>[^BOB] : 脚注格式！！！</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><ul>
+<li>1<ul>
+<li>a<ul>
+<li>01</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2<ul>
+<li>b<ul>
+<li>02</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3<ul>
+<li>c<ul>
+<li>03</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h2><blockquote>
+<p>最外层</p>
+<blockquote>
+<p>第一层嵌套</p>
+<blockquote>
+<p>第二层嵌套</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p><code>printf()</code> 函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;This is java code.&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><table>
+<thead>
+<tr>
+<th align="center">表头</th>
+<th align="center">表头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">单元格</td>
+<td align="center">单元格</td>
+</tr>
+<tr>
+<td align="center">单元格</td>
+<td align="center">单元格</td>
+</tr>
+</tbody></table>
+<h2 id="修改文字颜色"><a href="#修改文字颜色" class="headerlink" title="修改文字颜色"></a>修改文字颜色</h2><p>浅红色文字：<font color="#dd0000">浅红色文字</font><br /><br>深红色文字：<font color="#660000">深红色文字</font><br /><br>浅绿色文字：<font color="#00dd00">浅绿色文字</font><br /><br>深绿色文字：<font color="#006600">深绿色文字</font><br /><br>浅蓝色文字：<font color="#0000dd">浅蓝色文字</font><br /><br>深蓝色文字：<font color="#000066">深蓝色文字</font><br /><br>浅黄色文字：<font color="#dddd00">浅黄色文字</font><br /><br>深黄色文字：<font color="#666600">深黄色文字</font><br /><br>浅青色文字：<font color="#00dddd">浅青色文字</font><br /><br>深青色文字：<font color="#006666">深青色文字</font><br /><br>浅紫色文字：<font color="#dd00dd">浅紫色文字</font><br /><br>深紫色文字：<font color="#660066">深紫色文字</font><br /></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/09/LC01_TwoNumbers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
       <meta itemprop="name" content="Bob">
     </span>
 
@@ -294,10 +455,10 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/09/Markdown/">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/09/LC02_TwoNumbers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/header.jpg">
       <meta itemprop="name" content="Bob">
     </span>
 
@@ -312,7 +473,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/09/Markdown/" class="post-title-link" itemprop="url">Blogzzz</a>
+          <a href="/2022/09/09/LC02_TwoNumbers/" class="post-title-link" itemprop="url">LeetCode 01 两数之和</a>
         </h2>
 
         <div class="post-meta-container">
@@ -324,7 +485,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-09-09 09:25:00 / Modified: 09:41:17" itemprop="dateCreated datePublished" datetime="2022-09-09T09:25:00+08:00">2022-09-09</time>
+      <time title="Created: 2022-09-09 09:25:00 / Modified: 14:15:51" itemprop="dateCreated datePublished" datetime="2022-09-09T09:25:00+08:00">2022-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -332,7 +493,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/MarkDown/" itemprop="url" rel="index"><span itemprop="name">MarkDown</span></a>
+          <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
         </span>
     </span>
 
@@ -346,73 +507,54 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><p><em>斜体</em>      <strong>粗体</strong>        <em><strong>粗斜体</strong></em>        <del>删除线</del></p>
-<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p><a target="_blank" rel="noopener" href="http://www.baidu.com/">百度的超链接</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a></p>
-<!-- ![图片的超链接](https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202005%2F12%2F20200512095809_SJfKV.thumb.400_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664960268&t=e8516450d43f9d504038c1b4ed72fcb3) -->
+          <h4 id="LeetCode-01-两数之和"><a href="#LeetCode-01-两数之和" class="headerlink" title="LeetCode 01 两数之和"></a>LeetCode 01 两数之和</h4><hr>
+<h5 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h5><pre><code>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
+你可以按任意顺序返回答案。
 
-<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202005%2F12%2F20200512095809_SJfKV.thumb.400_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664960268&t=e8516450d43f9d504038c1b4ed72fcb3" width="200" height="400">
+示例 1：
+
+输入：nums = [2,7,11,15], target = 9
+输出：[0,1]
+解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+示例 2：
+
+输入：nums = [3,2,4], target = 6
+输出：[1,2]
+示例 3：
+
+输入：nums = [3,3], target = 6
+输出：[0,1]
 
 
-<h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<h2 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h2><p>创建脚注格式类似这样  [^BOB]</p>
-<p>[^BOB] : 脚注格式！！！</p>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><ul>
-<li>1<ul>
-<li>a<ul>
-<li>01</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>2<ul>
-<li>b<ul>
-<li>02</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>3<ul>
-<li>c<ul>
-<li>03</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h2><blockquote>
-<p>最外层</p>
+提示：
+
+2 &lt;= nums.length &lt;= 104
+-109 &lt;= nums[i] &lt;= 109
+-109 &lt;= target &lt;= 109
+只会存在一个有效答案
+进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？
+
+来源：力扣（LeetCode）
+链接：https://leetcode.cn/problems/two-sum
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre>
+<br/>
+
 <blockquote>
-<p>第一层嵌套</p>
+<h5 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h5></blockquote>
 <blockquote>
-<p>第二层嵌套</p>
+<p>解法 1 循环遍历判断<br>代码很简单，不解释直接上代码</p>
 </blockquote>
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="keyword">public</span> <span class="type">int</span>[] twoSum0(<span class="type">int</span>[] nums, <span class="type">int</span> target) &#123;</span><br><span class="line">       <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">           <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; nums.length; j++) &#123;</span><br><span class="line">              <span class="keyword">if</span> (nums[i] + nums[j] == target) <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;i, j&#125;;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;&#125;;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 </blockquote>
+<blockquote>
+<br/>
 </blockquote>
-<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p><code>printf()</code> 函数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;This is java code.&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><table>
-<thead>
-<tr>
-<th align="center">表头</th>
-<th align="center">表头</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">单元格</td>
-<td align="center">单元格</td>
-</tr>
-<tr>
-<td align="center">单元格</td>
-<td align="center">单元格</td>
-</tr>
-</tbody></table>
-<h2 id="修改文字颜色"><a href="#修改文字颜色" class="headerlink" title="修改文字颜色"></a>修改文字颜色</h2><p>浅红色文字：<font color="#dd0000">浅红色文字</font><br /><br>深红色文字：<font color="#660000">深红色文字</font><br /><br>浅绿色文字：<font color="#00dd00">浅绿色文字</font><br /><br>深绿色文字：<font color="#006600">深绿色文字</font><br /><br>浅蓝色文字：<font color="#0000dd">浅蓝色文字</font><br /><br>深蓝色文字：<font color="#000066">深蓝色文字</font><br /><br>浅黄色文字：<font color="#dddd00">浅黄色文字</font><br /><br>深黄色文字：<font color="#666600">深黄色文字</font><br /><br>浅青色文字：<font color="#00dddd">浅青色文字</font><br /><br>深青色文字：<font color="#006666">深青色文字</font><br /><br>浅紫色文字：<font color="#dd00dd">浅紫色文字</font><br /><br>深紫色文字：<font color="#660066">深紫色文字</font><br /></p>
+<blockquote>
+<p>解法 2 在上一步循环的基础上加个缓存记录遍历过的结果<br>代码也比较简单，不解释直接上代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span>[] twoSum(<span class="type">int</span>[] nums, <span class="type">int</span> target) &#123;</span><br><span class="line">       Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">       <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">           <span class="type">int</span> <span class="variable">remain</span> <span class="operator">=</span> target - nums[i];</span><br><span class="line">           <span class="type">Integer</span> <span class="variable">num</span> <span class="operator">=</span> map.get(remain);</span><br><span class="line">           <span class="keyword">if</span> (num != <span class="literal">null</span>) &#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;i, num&#125;;</span><br><span class="line">           &#125;</span><br><span class="line">           map.put(nums[i], i);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></blockquote>
 
       
     </div>
