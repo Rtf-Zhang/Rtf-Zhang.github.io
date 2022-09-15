@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rtf-zhang.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="LeetCode 05 最长回文子串 题目：给你一个字符串 s，找到 s 中最长的回文子串。  示例 1：  输入：s &#x3D; &quot;babad&quot; 输出：&quot;bab&quot; 解释：&quot;aba&quot; 同样是符合题意的答案。 示例 2：  输入：s &#x3D; &quot;cbbd&quot; 输出：&quot;bb&quot;    提示：  1 &lt;&#x3D; s.len">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 05 最长回文子串">
+<meta property="og:url" content="https://rtf-zhang.github.io/2022/09/15/leetcode/LC05_LongestPalindrome/index.html">
+<meta property="og:site_name" content="Blogz">
+<meta property="og:description" content="LeetCode 05 最长回文子串 题目：给你一个字符串 s，找到 s 中最长的回文子串。  示例 1：  输入：s &#x3D; &quot;babad&quot; 输出：&quot;bab&quot; 解释：&quot;aba&quot; 同样是符合题意的答案。 示例 2：  输入：s &#x3D; &quot;cbbd&quot; 输出：&quot;bb&quot;    提示：  1 &lt;&#x3D; s.len">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-15T03:12:00.000Z">
+<meta property="article:modified_time" content="2022-09-15T06:06:33.182Z">
+<meta property="article:author" content="Bob">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://rtf-zhang.github.io/2022/09/15/leetcode/LC05_LongestPalindrome/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://rtf-zhang.github.io/2022/09/15/leetcode/LC05_LongestPalindrome/","path":"2022/09/15/leetcode/LC05_LongestPalindrome/","title":"LeetCode 05 最长回文子串"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>LeetCode 05 最长回文子串 | Blogz</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Blogz</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">The subtitle of your website</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode-05-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 05 最长回文子串</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">题解：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">代码：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Bob"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">Bob</p>
+  <div class="site-description" itemprop="description">The description of your website</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Rtf-Zhang/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Rtf-Zhang&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/15/leetcode/LC05_LongestPalindrome/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="LeetCode 05 最长回文子串 | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode 05 最长回文子串
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-09-15 11:12:00 / Modified: 14:06:33" itemprop="dateCreated datePublished" datetime="2022-09-15T11:12:00+08:00">2022-09-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="LeetCode-05-最长回文子串"><a href="#LeetCode-05-最长回文子串" class="headerlink" title="LeetCode 05 最长回文子串"></a>LeetCode 05 最长回文子串</h4><hr>
+<h5 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h5><pre><code>给你一个字符串 s，找到 s 中最长的回文子串。
+
+示例 1：
+
+输入：s = &quot;babad&quot;
+输出：&quot;bab&quot;
+解释：&quot;aba&quot; 同样是符合题意的答案。
+示例 2：
+
+输入：s = &quot;cbbd&quot;
+输出：&quot;bb&quot;
+ 
+
+提示：
+
+1 &lt;= s.length &lt;= 1000
+s 仅由数字和英文字母组成
+通过次数1,194,472提交次数3,217,315
+
+来源：力扣（LeetCode）
+链接：https://leetcode.cn/problems/longest-palindromic-substring
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre>
+<br/>
+
+<blockquote>
+<h5 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h5></blockquote>
+<pre><code>首先理解回文字符串，根据长度可分为两种：
+长度为偶数的回文串，例：abba
+长度为奇数的回文串，例：aba
+那么我们可以这样理解，
+如果是奇数回文串，可从中间位置依次往两边扫描，每次扫描左右位置字符相等
+如果是偶数回文串，从中间两个位置依次两边扫描，每次扫描左右位置字符相等
+每次扫描到最长位置后记录长度，取最大长度的回文串返回即可
+过程如下图示: (橙色代表遍历奇数回文串位置，橙色和青色一起代表遍历偶数回文串位置)
+</code></pre>
+<table style = "width:100px;border:2px">
+    <tr>
+        <td bgcolor=#FF6100>a</td><td>e</td><td>c</td><td>e</td><td>e</td><td>c</td><td>e</td>  
+    </tr>
+    <tr>
+        <td>⬆</td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td> 
+    </tr>
+</table>
+
+<pre><code>最长为 &quot;a&quot;
+</code></pre>
+<table style = "width:100px;border:2px">
+    <tr>
+        <td>a</td><td bgcolor=#FF6100>e</td><td>c</td><td>e</td><td>e</td><td>c</td><td>e</td>  
+    </tr>
+    <tr>
+        <td> </td><td>⬆</td><td> </td><td> </td><td> </td><td> </td><td> </td> 
+    </tr>
+</table>
+
+<pre><code>最长为 &quot;e&quot;
+</code></pre>
+<table style = "width:100px;border:2px">
+    <tr>
+        <td>a</td><td bgcolor=#B0E0E6>e</td><td bgcolor=#FF6100>c</td><td bgcolor=#B0E0E6>e</td><td>e</td><td>c</td><td>e</td>  
+    </tr>
+    <tr>
+        <td> </td><td> </td><td>⬆</td><td> </td><td> </td><td> </td><td> </td> 
+    </tr>
+</table>
+
+<pre><code>最长为 &quot;ece&quot;
+</code></pre>
+<table style = "width:100px;border:2px">
+    <tr>
+        <td>a</td><td>e</td><td>c</td><td bgcolor=#FF6100>e</td><td>e</td><td>c</td><td>e</td>  
+    </tr>
+    <tr>
+        <td> </td><td> </td><td> </td><td>⬆ </td><td> </td><td> </td><td> </td> 
+    </tr>
+</table>
+
+<pre><code>最长为 &quot;e&quot;
+</code></pre>
+<table style = "width:100px;border:2px">
+    <tr>
+        <td>a</td><td bgcolor=#B0E0E6>e</td><td bgcolor=#B0E0E6>c</td><td bgcolor=#FF6100>e</td><td bgcolor=#FF6100>e</td><td bgcolor=#B0E0E6>c</td><td bgcolor=#B0E0E6>e</td>  
+    </tr>
+    <tr>
+        <td> </td><td> </td><td> </td><td>⬆ </td><td>⬆</td><td></td><td> </td> 
+    </tr>
+</table>
+
+<pre><code>最长为 &quot;eceece&quot;
+</code></pre>
+<table style = "width:100px;border:2px">
+    <tr>
+        <td>a</td><td>e</td><td>c</td><td >e</td><td bgcolor=#FF6100>e</td><td>c</td><td>e</td>  
+    </tr>
+    <tr>
+        <td> </td><td> </td><td> </td><td> </td><td>⬆</td><td> </td><td> </td> 
+    </tr>
+</table>
+
+<pre><code>最长为 &quot;e&quot;
+</code></pre>
+<table style = "width:100px;border:2px">
+    <tr>
+        <td>a</td><td>e</td><td>c</td><td >e</td><td bgcolor=#B0E0E6>e</td><td bgcolor=#FF6100>c</td><td bgcolor=#B0E0E6>e</td>  
+    </tr>
+    <tr>
+        <td> </td><td> </td><td> </td><td> </td><td></td><td>⬆</td><td> </td> 
+    </tr>
+</table>
+
+<pre><code>最长为 &quot;ece&quot;
+</code></pre>
+<table style = "width:100px;border:2px">
+    <tr>
+        <td>a</td><td>e</td><td>c</td><td>e</td><td >e</td><td>c</td><td bgcolor=#FF6100>e</td>  
+    </tr>
+    <tr>
+        <td> </td><td> </td><td> </td><td> </td><td></td><td></td><td> ⬆</td> 
+    </tr>
+</table>
+
+<pre><code>最长为 &quot;e&quot;
+</code></pre>
+<br/>
+
+<pre><code>因此返回最长回文串为 &quot;eceece&quot;
+</code></pre>
+<br/>
+
+<blockquote>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">longestPalindrome</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (s.length() == <span class="number">0</span> || s.length() == <span class="number">1</span>) <span class="keyword">return</span> s;</span><br><span class="line">    <span class="type">char</span>[] chars = s.toCharArray();</span><br><span class="line">    <span class="type">String</span> <span class="variable">maxString</span> <span class="operator">=</span> String.valueOf(chars[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i - n - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; i + n + <span class="number">1</span> &lt; chars.length &amp;&amp; chars[i - n - <span class="number">1</span>] == chars[i + n + <span class="number">1</span>]) &#123;</span><br><span class="line">            n++;</span><br><span class="line">            len += <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (len &gt; maxString.length()) &#123;</span><br><span class="line">            maxString = s.substring(i - n, i + n + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i + <span class="number">1</span> &lt; chars.length &amp;&amp; chars[i] == chars[i + <span class="number">1</span>]) &#123;</span><br><span class="line">            n = <span class="number">0</span>;</span><br><span class="line">            len = <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">while</span> (i - n - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; i + <span class="number">1</span> + n + <span class="number">1</span> &lt; chars.length &amp;&amp; chars[i - n - <span class="number">1</span>] == chars[i + <span class="number">1</span> + n + <span class="number">1</span>]) &#123;</span><br><span class="line">                n++;</span><br><span class="line">                len += <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (len &gt; maxString.length()) &#123;</span><br><span class="line">                maxString = s.substring(i - n, i + <span class="number">1</span> + n + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxString;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/09/14/leetcode/LC04_FindMedianSortedArrays/" rel="prev" title="LeetCode 04 寻找两个正序数组的中位数">
+                  <i class="fa fa-chevron-left"></i> LeetCode 04 寻找两个正序数组的中位数
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bob</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
