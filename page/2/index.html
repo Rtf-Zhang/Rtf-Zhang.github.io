@@ -130,7 +130,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -184,7 +184,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/09/leetcode/LC01_TwoNumbers/">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/09/sort/sort05_shell/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/header.jpg">
@@ -202,7 +202,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/09/leetcode/LC01_TwoNumbers/" class="post-title-link" itemprop="url">LeetCode 01 两数之和</a>
+          <a href="/2022/09/09/sort/sort05_shell/" class="post-title-link" itemprop="url">排序算法 - 希尔排序</a>
         </h2>
 
         <div class="post-meta-container">
@@ -213,14 +213,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-09-09 09:25:00" itemprop="dateCreated datePublished" datetime="2022-09-09T09:25:00+08:00">2022-09-09</time>
+      <time title="Created: 2022-09-09 15:37:00" itemprop="dateCreated datePublished" datetime="2022-09-09T15:37:00+08:00">2022-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-09-13 15:20:44" itemprop="dateModified" datetime="2022-09-13T15:20:44+08:00">2022-09-13</time>
+      <time title="Modified: 2022-09-13 11:17:17" itemprop="dateModified" datetime="2022-09-13T11:17:17+08:00">2022-09-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -228,7 +228,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
+          <a href="/categories/SortAlgorithm/" itemprop="url" rel="index"><span itemprop="name">SortAlgorithm</span></a>
         </span>
     </span>
 
@@ -242,50 +242,121 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="LeetCode-01-两数之和"><a href="#LeetCode-01-两数之和" class="headerlink" title="LeetCode 01 两数之和"></a>LeetCode 01 两数之和</h4><hr>
-<h5 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h5><pre><code>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
-你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
-你可以按任意顺序返回答案。
-
-示例 1：
-
-输入：nums = [2,7,11,15], target = 9
-输出：[0,1]
-解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
-示例 2：
-
-输入：nums = [3,2,4], target = 6
-输出：[1,2]
-示例 3：
-
-输入：nums = [3,3], target = 6
-输出：[0,1]
-
-
-提示：
-
-2 &lt;= nums.length &lt;= 104
--109 &lt;= nums[i] &lt;= 109
--109 &lt;= target &lt;= 109
-只会存在一个有效答案
-进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？
-
-来源：力扣（LeetCode）
-链接：https://leetcode.cn/problems/two-sum
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
-<br/>
-
-<h5 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h5><blockquote>
-<p>解法 1 循环遍历判断<br>代码很简单，不解释直接上代码</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] twoSum0(<span class="type">int</span>[] nums, <span class="type">int</span> target) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; nums.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] + nums[j] == target) <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;i, j&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <blockquote>
+<h4 id="排序算法-希尔排序"><a href="#排序算法-希尔排序" class="headerlink" title="排序算法 - 希尔排序"></a>排序算法 - 希尔排序</h4></blockquote>
 <br/>
 
 <blockquote>
-<p>解法 2 在上一步循环的基础上加个缓存记录遍历过的结果<br>代码也比较简单，不解释直接上代码</p>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5></blockquote>
+<br/>
+
+<blockquote>
+<h5 id="动图演示"><a href="#动图演示" class="headerlink" title="动图演示"></a>动图演示</h5><img src="/images/git_sort_shell.gif">
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] twoSum(<span class="type">int</span>[] nums, <span class="type">int</span> target) &#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">remain</span> <span class="operator">=</span> target - nums[i];</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">num</span> <span class="operator">=</span> map.get(remain);</span><br><span class="line">        <span class="keyword">if</span> (num != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;i, num&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        map.put(nums[i], i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+
+<blockquote>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> arr.length;</span><br><span class="line">    <span class="type">int</span> <span class="variable">step</span> <span class="operator">=</span> len/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span> (step &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; step; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + step; j &lt; len; j += step) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> j;</span><br><span class="line">                <span class="keyword">while</span> (n - step &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (arr[n] &gt;= arr[n - step]) <span class="keyword">break</span>;</span><br><span class="line">                    <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> arr[n];</span><br><span class="line">                    arr[n] = arr[n - step];</span><br><span class="line">                    arr[n - step] = temp;</span><br><span class="line">                    n -= step;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        step /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/09/sort/sort04_quick/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/09/sort/sort04_quick/" class="post-title-link" itemprop="url">排序算法 - 快速排序</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-09-09 15:37:00" itemprop="dateCreated datePublished" datetime="2022-09-09T15:37:00+08:00">2022-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-09-13 11:17:19" itemprop="dateModified" datetime="2022-09-13T11:17:19+08:00">2022-09-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SortAlgorithm/" itemprop="url" rel="index"><span itemprop="name">SortAlgorithm</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<h4 id="排序算法-快速排序"><a href="#排序算法-快速排序" class="headerlink" title="排序算法 - 快速排序"></a>排序算法 - 快速排序</h4></blockquote>
+<br/>
+
+<blockquote>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5></blockquote>
+<br/>
+
+<blockquote>
+<h5 id="动图演示"><a href="#动图演示" class="headerlink" title="动图演示"></a>动图演示</h5><img src="/images/git_sort_quick.gif">
+</blockquote>
+<br/>
+
+<blockquote>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">quickSort</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> start;</span><br><span class="line">    <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> end;</span><br><span class="line">    <span class="keyword">if</span> (end - start &lt; <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">tempValue</span> <span class="operator">=</span> arr[start];</span><br><span class="line">    <span class="keyword">while</span> (left != right) &#123;</span><br><span class="line">        <span class="keyword">while</span> (left != right &amp;&amp; arr[right] &gt; tempValue) &#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(arr, left, right);</span><br><span class="line">        <span class="keyword">while</span> (left != right &amp;&amp; arr[left] &lt;= tempValue) &#123;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(arr, left, right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    quickSort(arr, start, left - <span class="number">1</span>);</span><br><span class="line">    quickSort(arr, left + <span class="number">1</span>, end);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
