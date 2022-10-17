@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://rtf-zhang.github.io/images/img_lc_11.jpg">
 <meta property="article:published_time" content="2022-09-27T12:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-09T09:29:45.270Z">
+<meta property="article:modified_time" content="2022-10-12T04:33:12.698Z">
 <meta property="article:author" content="Bob">
 <meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
@@ -120,7 +120,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode-11-%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 11 盛最多水的容器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">题解：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">代码：</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode-11-%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">LeetCode 11 盛最多水的容器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">题解：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%BE%E8%A7%A3%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">图解：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">代码：</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -135,18 +135,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -226,7 +226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-09 17:29:45" itemprop="dateModified" datetime="2022-10-09T17:29:45+08:00">2022-10-09</time>
+      <time title="Modified: 2022-10-12 12:33:12" itemprop="dateModified" datetime="2022-10-12T12:33:12+08:00">2022-10-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -279,13 +279,16 @@ n == height.length
 </code></pre>
 <br/>
 
-
-
 <blockquote>
 <h5 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h5></blockquote>
 <pre><code>思路就按照一条原则，补短板，求面积
 1.左右两边哪边短，就从那边开始收缩直至找到更高的边，才有可能比之前的面积更大
-示例: [1,8,6,2,5,4,8,3,7] 定义i,j分别为左右边界,max为最大盛水量,初始值为0
+</code></pre>
+<br/>
+
+<blockquote>
+<h5 id="图解："><a href="#图解：" class="headerlink" title="图解："></a>图解：</h5></blockquote>
+<pre><code>示例: [1,8,6,2,5,4,8,3,7] 定义i,j分别为左右边界,max为最大盛水量,初始值为0
 </code></pre>
 <table style = "width:200px;border:2px">
     <tr>
