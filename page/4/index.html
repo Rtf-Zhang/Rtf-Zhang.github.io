@@ -184,7 +184,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/09/sort/sort03_select/">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/09/sort/sort02_insert/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/header.jpg">
@@ -202,7 +202,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/09/sort/sort03_select/" class="post-title-link" itemprop="url">排序算法 - 选择排序</a>
+          <a href="/2022/09/09/sort/sort02_insert/" class="post-title-link" itemprop="url">排序算法 - 插入排序</a>
         </h2>
 
         <div class="post-meta-container">
@@ -220,7 +220,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-09-13 11:17:22" itemprop="dateModified" datetime="2022-09-13T11:17:22+08:00">2022-09-13</time>
+      <time title="Modified: 2022-09-13 11:17:25" itemprop="dateModified" datetime="2022-09-13T11:17:25+08:00">2022-09-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -243,7 +243,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <blockquote>
-<h4 id="排序算法-选择排序"><a href="#排序算法-选择排序" class="headerlink" title="排序算法 - 选择排序"></a>排序算法 - 选择排序</h4></blockquote>
+<h4 id="排序算法-插入排序"><a href="#排序算法-插入排序" class="headerlink" title="排序算法 - 插入排序"></a>排序算法 - 插入排序</h4></blockquote>
 <br/>
 
 <blockquote>
@@ -251,13 +251,13 @@
 <br/>
 
 <blockquote>
-<h5 id="动图演示"><a href="#动图演示" class="headerlink" title="动图演示"></a>动图演示</h5><img src="/images/git_sort_select.gif">
+<h5 id="动图演示"><a href="#动图演示" class="headerlink" title="动图演示"></a>动图演示</h5><img src="/images/git_sort_insert.gif">
 </blockquote>
 <br/>
 
 <blockquote>
 <h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5></blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i; j &lt; arr.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[n]) n = j;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(arr, i, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &lt; arr[j - <span class="number">1</span>]) &#123;</span><br><span class="line">                swap(arr, j, j - <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
