@@ -130,7 +130,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -141,7 +141,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -184,7 +184,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/17/android/activity/">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/29/leetcode/LC159_LengthOfLongestSubstringTwoDistinct/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/header.jpg">
@@ -202,7 +202,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/17/android/activity/" class="post-title-link" itemprop="url">Android开发--Activity</a>
+          <a href="/2022/10/29/leetcode/LC159_LengthOfLongestSubstringTwoDistinct/" class="post-title-link" itemprop="url">LeetCode 159 至多包含两个不同字符的最长子串</a>
         </h2>
 
         <div class="post-meta-container">
@@ -214,7 +214,1722 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-10-17 20:00:00 / Modified: 21:21:53" itemprop="dateCreated datePublished" datetime="2022-10-17T20:00:00+08:00">2022-10-17</time>
+      <time title="Created: 2022-10-29 20:00:00 / Modified: 15:38:02" itemprop="dateCreated datePublished" datetime="2022-10-29T20:00:00+08:00">2022-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="LeetCode-159-至多包含两个不同字符的最长子串"><a href="#LeetCode-159-至多包含两个不同字符的最长子串" class="headerlink" title="LeetCode 159 至多包含两个不同字符的最长子串"></a>LeetCode 159 至多包含两个不同字符的最长子串</h4><hr>
+<blockquote>
+<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
+<pre>
+给你一个字符串 s ，请你找出 至多 包含 两个不同字符 的最长子串，并返回该子串的长度。
+ 
+
+示例 1：
+
+输入：s = "eceba"
+输出：3
+解释：满足题目要求的子串是 "ece" ，长度为 3 。
+示例 2：
+
+输入：s = "ccaabbb"
+输出：5
+解释：满足题目要求的子串是 "aabbb" ，长度为 5 。
+ 
+
+提示：
+
+1 <= s.length <= 105
+s 由英文字母组成
+
+来源：力扣（LeetCode）
+链接：https://leetcode.cn/problems/longest-substring-with-at-most-two-distinct-characters
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
+<pre>
+此题使用双指针加滑动窗口来求解，主要需要注意边界条件
+解题思路:
+1.因为题目要求字串包含至多两个不同字符，我们使用长度为2的数据保存当前计数的字符 twoChar
+2.使用快慢指针，快指针遍历，慢指针总是指向和快指针上一个计数字符的起点
+  比如 aabbccd 如果快指针此刻正在计数c，那么慢指针指向第一个b位置，
+  这样我们可以保证从快指针到慢指针的范围内，一定只有b和c两种字符
+3.每次当快指针指向和当前计数的两种字符都不同的字符时候，我们需要计算之前计数的长度，然后替换
+  新的计数字符，且开始计数的值需加上快慢指针之间的字符数
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">lengthOfLongestSubstringTwoDistinct</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (s.length() == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">char</span>[] towC = <span class="keyword">new</span> <span class="title class_">char</span>[]&#123;<span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;-&#x27;</span>&#125;;</span><br><span class="line">    <span class="type">char</span>[] chars = s.toCharArray();</span><br><span class="line">    <span class="type">int</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    towC[<span class="number">0</span>] = chars[<span class="number">0</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">maxLen</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (++p2 &lt; chars.length) &#123;</span><br><span class="line">        <span class="keyword">if</span> (chars[p2] == towC[<span class="number">0</span>] || chars[p2] == towC[<span class="number">1</span>]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (chars[p2] != chars[p2 - <span class="number">1</span>]) &#123;</span><br><span class="line">                p1 = p2;</span><br><span class="line">            &#125;</span><br><span class="line">            len++;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (towC[<span class="number">1</span>] == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">            towC[<span class="number">1</span>] = chars[p2];</span><br><span class="line">            p1 = p2;</span><br><span class="line">            len++;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            maxLen = Math.max(maxLen, len);</span><br><span class="line">            len = p2 - p1 + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (towC[<span class="number">0</span>] == chars[p1]) &#123;</span><br><span class="line">                towC[<span class="number">1</span>] = chars[p2];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                towC[<span class="number">0</span>] = chars[p2];</span><br><span class="line">            &#125;</span><br><span class="line">            p1 = p2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    maxLen = Math.max(maxLen, len);</span><br><span class="line">    <span class="keyword">return</span> maxLen;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:10px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/28/leetcode/LC24_SwapPairs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/28/leetcode/LC24_SwapPairs/" class="post-title-link" itemprop="url">LeetCode 24 两两交换链表中的节点</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-10-28 21:00:00 / Modified: 11:56:37" itemprop="dateCreated datePublished" datetime="2022-10-28T21:00:00+08:00">2022-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="LeetCode-24-两两交换链表中的节点"><a href="#LeetCode-24-两两交换链表中的节点" class="headerlink" title="LeetCode 24 两两交换链表中的节点"></a>LeetCode 24 两两交换链表中的节点</h4><hr>
+<blockquote>
+<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
+<pre>
+给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。
+
+示例 1：
+
+
+输入：head = [1,2,3,4]
+输出：[2,1,4,3]
+示例 2：
+
+输入：head = []
+输出：[]
+示例 3：
+
+输入：head = [1]
+输出：[1]
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
+<pre>
+此题思路很简单，定义一个哨兵节点，然后交换链表节点重新拼接即可
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">swapPairs</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">null</span> || head.next == <span class="literal">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">root</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">p</span> <span class="operator">=</span> root;</span><br><span class="line">    p.next = head;</span><br><span class="line">    <span class="keyword">while</span> (p.next != <span class="literal">null</span> &amp;&amp; p.next.next != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">node</span> <span class="operator">=</span> p.next;</span><br><span class="line">        p.next = node.next;</span><br><span class="line">        node.next = p.next.next;</span><br><span class="line">        p.next.next = node;</span><br><span class="line">        p = p.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/28/leetcode/LC23_MergeKLists/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/28/leetcode/LC23_MergeKLists/" class="post-title-link" itemprop="url">LeetCode 23 合并K个升序链表</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-10-28 20:00:00 / Modified: 10:05:53" itemprop="dateCreated datePublished" datetime="2022-10-28T20:00:00+08:00">2022-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="LeetCode-23-合并K个升序链表"><a href="#LeetCode-23-合并K个升序链表" class="headerlink" title="LeetCode 23 合并K个升序链表"></a>LeetCode 23 合并K个升序链表</h4><hr>
+<blockquote>
+<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
+<pre>
+给你一个链表数组，每个链表都已经按升序排列。
+请你将所有链表合并到一个升序链表中，返回合并后的链表。
+
+示例 1：
+
+输入：lists = [[1,4,5],[1,3,4],[2,6]]
+输出：[1,1,2,3,4,4,5,6]
+解释：链表数组如下：
+[
+1->4->5,
+1->3->4,
+2->6
+]
+将它们合并到一个有序链表中得到。
+1->1->2->3->4->4->5->6
+示例 2：
+
+输入：lists = []
+输出：[]
+示例 3：
+
+输入：lists = [[]]
+输出：[]
+
+
+提示：
+
+k == lists.length
+0 <= k <= 10^4
+0 <= lists[i].length <= 500
+-10^4 <= lists[i][j] <= 10^4
+lists[i] 按 升序 排列
+lists[i].length 的总和不超过 10^4
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
+<pre>
+此题我们使用小顶堆数据结构巧解此事:
+
+解题步骤如下:
+1.创建K个指针依次指向K个链表的表头
+2.定义小顶堆，比较对象是K指针指向的节点的值
+3.将K个指针放入小顶堆
+4.定义哨兵节点Head
+5.取小顶堆顶部节点H，此节点为当前堆中最小值，将此节点链接到哨兵节点之后，
+  然后将此指针后移(如果有),然后重新放入小顶堆中重拍
+6.重复步骤5直至堆中节点全部推出
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> ListNode <span class="title function_">process</span><span class="params">(ListNode[] lists)</span>&#123;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">head</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">p</span> <span class="operator">=</span> head;</span><br><span class="line">    <span class="keyword">if</span> (lists.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    PriorityQueue&lt;ListNode&gt; priorityQueue = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(lists.length, Comparator.comparingInt(o -&gt; o.val));</span><br><span class="line">    <span class="keyword">for</span> (ListNode node : lists) &#123;</span><br><span class="line">        <span class="keyword">if</span> (node != <span class="literal">null</span>) &#123;</span><br><span class="line">            priorityQueue.offer(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!priorityQueue.isEmpty()) &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">node</span> <span class="operator">=</span> priorityQueue.poll();</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">next</span> <span class="operator">=</span> priorityQueue.peek();</span><br><span class="line">        <span class="keyword">if</span> (next == <span class="literal">null</span>) &#123;</span><br><span class="line">            p.next = node;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">pNode</span> <span class="operator">=</span> node;</span><br><span class="line">        <span class="keyword">while</span> (pNode.next != <span class="literal">null</span> &amp;&amp; pNode.next.val &lt;= next.val) &#123;</span><br><span class="line">            pNode = pNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (pNode.next != <span class="literal">null</span>) &#123;</span><br><span class="line">            priorityQueue.add(pNode.next);</span><br><span class="line">        &#125;</span><br><span class="line">        pNode.next = <span class="literal">null</span>;</span><br><span class="line">        p.next = node;</span><br><span class="line">        p = pNode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:10px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/27/leetcode/LC22_GenerateParenthesis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/27/leetcode/LC22_GenerateParenthesis/" class="post-title-link" itemprop="url">LeetCode 22 括号生成</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-10-27 23:00:00 / Modified: 18:38:40" itemprop="dateCreated datePublished" datetime="2022-10-27T23:00:00+08:00">2022-10-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="LeetCode-22-括号生成"><a href="#LeetCode-22-括号生成" class="headerlink" title="LeetCode 22 括号生成"></a>LeetCode 22 括号生成</h4><hr>
+<blockquote>
+<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
+<pre>
+数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+
+示例 1：
+
+输入：n = 3
+输出：["((()))","(()())","(())()","()(())","()()()"]
+示例 2：
+
+输入：n = 1
+输出：["()"]
+
+提示：
+1 <= n <= 8
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
+<pre>
+经典DFS算法 
+根据 <a href="https://rtf-zhang.github.io/2022/10/11/leetcode/LC20_IsValid/">LC20_IsValid</a> 我们定义的有效括号的特性可得到以下规律:
+
+1.我们必须保证每次放入后，右括号数必须小于或者等于左括号，即每个右括号一定要能匹配一个左括号
+2.如果一个括号组放入的左括号组的数量等于我们定义的括号对数量，则只能放入右括号
+3.其他情况即可以放入左括号，也可以放入右括号
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="图解"><a href="#图解" class="headerlink" title="图解:"></a>图解:</h5></blockquote>
+<pre>
+图解
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;String&gt; <span class="title function_">generateParenthesis</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    dfs(list, <span class="number">0</span>, n, <span class="keyword">new</span> <span class="title class_">StringBuilder</span>());</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">dfs</span><span class="params">(List&lt;String&gt; list, <span class="type">int</span> put, <span class="type">int</span> remain, StringBuilder s)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (put == <span class="number">0</span> &amp;&amp; remain == <span class="number">0</span>) &#123;</span><br><span class="line">        list.add(s.toString());</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (put == <span class="number">0</span> &amp;&amp; remain &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        dfs(list, put + <span class="number">1</span>, remain - <span class="number">1</span>, s .append(<span class="string">&#x27;(&#x27;</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (put &gt; <span class="number">0</span> &amp;&amp; remain == <span class="number">0</span>) &#123;</span><br><span class="line">        dfs(list, put - <span class="number">1</span>, remain, s.append(<span class="string">&#x27;)&#x27;</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        dfs(list, put + <span class="number">1</span>, remain - <span class="number">1</span>, <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(s.toString()).append(<span class="string">&#x27;(&#x27;</span>));</span><br><span class="line">        dfs(list, put - <span class="number">1</span>, remain, <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(s).append(<span class="string">&#x27;)&#x27;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:10px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/27/leetcode/LC20_IsValid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/27/leetcode/LC20_IsValid/" class="post-title-link" itemprop="url">LeetCode 20 有效的括号</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-27 22:00:00" itemprop="dateCreated datePublished" datetime="2022-10-27T22:00:00+08:00">2022-10-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-29 10:29:17" itemprop="dateModified" datetime="2022-10-29T10:29:17+08:00">2022-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="LeetCode-20-有效的括号"><a href="#LeetCode-20-有效的括号" class="headerlink" title="LeetCode 20 有效的括号"></a>LeetCode 20 有效的括号</h4><hr>
+<blockquote>
+<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
+<pre>
+给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效
+有效字符串需满足：
+
+左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。
+
+示例 1：
+
+输入：s = "()"
+输出：true
+示例 2：
+
+输入：s = "()[]{}"
+输出：true
+示例 3：
+
+输入：s = "(]"
+输出：false
+示例 4：
+
+输入：s = "([)]"
+输出：false
+示例 5：
+
+输入：s = "{[]}"
+输出：true
+
+
+提示：
+
+1 <= s.length <= 104
+s 仅由括号 '()[]{}' 组成
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
+<pre>
+此题我们使用数据结构中的栈结构来巧解此题
+我们知道，一个有效的括号组合有以下特性
+
+1.括号组的数量一定是偶数
+2.括号组的数量如果是0则一定有效
+3.每种类型的左括号和右括号数量相同
+4.每一对括号内要么没有其他括号组，如果有，其他括号组一定也是有效括号组
+
+我们按照以下规则处理:
+
+剪枝
+1.如果括号组数量是奇数直接返回False
+2.如果括号组的数量如果是0直接返回True
+
+遍历
+1.如果括号是左括号，直接入栈
+2.如果括号是右括号:
+  a.如果栈顶括号是与之匹配的左括号,栈顶括号出栈
+  b.其他所有情况直接返回False
+3.如果括号组全部匹配完毕返回True
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="图解"><a href="#图解" class="headerlink" title="图解:"></a>图解:</h5></blockquote>
+<img src="/images/img_lc_20.gif">
+
+
+<br/>
+
+<blockquote>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isValid</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> s.length();</span><br><span class="line">    <span class="keyword">if</span> (len == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (len % <span class="number">2</span> != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="type">char</span>[] chars = s.toCharArray();</span><br><span class="line">    Stack&lt;Character&gt; stack = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">    <span class="type">String</span> <span class="variable">signal</span> <span class="operator">=</span> <span class="string">&quot;&#123;[(&#125;])&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> signal.indexOf(chars[i]);</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            stack.add(chars[i]);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (stack.isEmpty()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="type">char</span> <span class="variable">c</span> <span class="operator">=</span> stack.pop();</span><br><span class="line">            <span class="keyword">if</span> (c != signal.charAt(index - <span class="number">3</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> stack.isEmpty();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:10px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/27/leetcode/LC18_FourSum/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/27/leetcode/LC18_FourSum/" class="post-title-link" itemprop="url">LeetCode 18 四数之和</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-10-27 21:00:00 / Modified: 17:50:38" itemprop="dateCreated datePublished" datetime="2022-10-27T21:00:00+08:00">2022-10-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="LeetCode-18-四数之和"><a href="#LeetCode-18-四数之和" class="headerlink" title="LeetCode 18 四数之和"></a>LeetCode 18 四数之和</h4><hr>
+<blockquote>
+<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
+<pre>
+给你一个由 n 个整数组成的数组 nums ，和一个目标值 target 。
+请你找出并返回满足下述全部条件且不重复的四元组 [nums[a], nums[b], nums[c], nums[d]] 
+（若两个四元组元素一一对应，则认为两个四元组重复）：
+
+0 <= a, b, c, d < n
+a、b、c 和 d 互不相同
+nums[a] + nums[b] + nums[c] + nums[d] == target
+你可以按 任意顺序 返回答案 。
+
+
+示例 1：
+
+输入：nums = [1,0,-1,0,-2,2], target = 0
+输出：[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+示例 2：
+
+输入：nums = [2,2,2,2,2], target = 8
+输出：[[2,2,2,2]]
+
+
+提示：
+
+1 <= nums.length <= 200
+-109 <= nums[i] <= 109
+-109 <= target <= 109
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
+<pre>
+四数之和和三数之和原理一致，也是利用双指针法求解
+详解请参照  <a href="https://rtf-zhang.github.io/2022/10/11/leetcode/LC15_ThreeSum/">[三数之和详解]</a>
+此题不给出详细的分析过程
+</pre>
+
+<br/>
+
+<blockquote>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">fourSum</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> nums.length;</span><br><span class="line">    <span class="keyword">if</span> (len &lt; <span class="number">4</span>) <span class="keyword">return</span> result;</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len - <span class="number">3</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i - <span class="number">1</span>] == nums[i]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="type">long</span>) nums[i] + nums[i + <span class="number">1</span>] + nums[i + <span class="number">2</span>] + nums[i + <span class="number">3</span>] &gt; target) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="type">long</span>) nums[i] + nums[len - <span class="number">1</span>] + nums[len - <span class="number">2</span>] + nums[len - <span class="number">3</span>] &lt; target) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; len - <span class="number">2</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j &gt; i + <span class="number">1</span> &amp;&amp; nums[j - <span class="number">1</span>] == nums[j]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> ((<span class="type">long</span>) nums[j] + nums[j + <span class="number">1</span>] + nums[j + <span class="number">2</span>] &gt; target - nums[i]) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span> ((<span class="type">long</span>) nums[j] + nums[len - <span class="number">1</span>] + nums[len - <span class="number">2</span>] &lt; target - nums[i]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="type">long</span> <span class="variable">remain</span> <span class="operator">=</span> (<span class="type">long</span>) target - nums[i] - nums[j];</span><br><span class="line">            <span class="type">int</span> <span class="variable">p1</span> <span class="operator">=</span> j + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">p2</span> <span class="operator">=</span> len - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (p1 &lt; p2) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[p1] + nums[p2] == remain) &#123;</span><br><span class="line">                    result.add(Arrays.asList(nums[i], nums[j], nums[p1], nums[p2]));</span><br><span class="line">                    <span class="keyword">while</span> (++p1 &lt;= p2 &amp;&amp; nums[p1] == nums[p1 - <span class="number">1</span>]) &#123;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">while</span> (--p2 &gt;= p1 &amp;&amp; nums[p2] == nums[p2 + <span class="number">1</span>]) &#123;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span> (nums[p1] + nums[p2] &lt; remain) &#123;</span><br><span class="line">                    <span class="keyword">while</span> (++p1 &lt;= p2 &amp;&amp; nums[p1] == nums[p1 - <span class="number">1</span>]) &#123;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">while</span> (--p2 &gt;= p1 &amp;&amp; nums[p2] == nums[p2 + <span class="number">1</span>]) &#123;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:10px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/21/android/Android04_FragmentTransaction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/21/android/Android04_FragmentTransaction/" class="post-title-link" itemprop="url">Android开发--FragmentTransaction</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-10-21 20:00:00 / Modified: 17:53:05" itemprop="dateCreated datePublished" datetime="2022-10-21T20:00:00+08:00">2022-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<h4 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h4></blockquote>
+<pre>
+在运行时，FragmentManager 可以添加、删除、替换和使用片段执行其他操作以响应用户交互。
+您提交的每组片段更改称为一个事务，您可以使用 FragmentTransaction 该类提供的 API 指定在事务中执行的操作
+您可以将多个操作分组到一个事务中——例如，一个事务可以添加或替换多个片段
+</pre>
+
+</br>
+
+<blockquote>
+<h4 id="创建和操作事务"><a href="#创建和操作事务" class="headerlink" title="创建和操作事务"></a>创建和操作事务</h4></blockquote>
+<pre>
+通过调用 FragmentManagerbeginTransaction() 获取FragmentTransaction的实例，如下例所示：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> ...</span><br><span class="line"><span class="type">FragmentTransaction</span> <span class="variable">fragmentTransaction</span> <span class="operator">=</span> fragmentManager.beginTransaction();</span><br></pre></td></tr></table></figure>
+
+<pre>
+每个人的最终调用都FragmentTransaction必须提交事务。该commit()调用FragmentManager表示所有操作都已添加到事务中
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> ...</span><br><span class="line"><span class="type">FragmentTransaction</span> <span class="variable">fragmentTransaction</span> <span class="operator">=</span> fragmentManager.beginTransaction();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Add operations here</span></span><br><span class="line"></span><br><span class="line">fragmentTransaction.commit();</span><br></pre></td></tr></table></figure>
+
+</br>
+
+<blockquote>
+<h4 id="片段状态更改重新排序"><a href="#片段状态更改重新排序" class="headerlink" title="片段状态更改重新排序"></a>片段状态更改重新排序</h4></blockquote>
+<pre>
+每个都 FragmentTransaction 应该使用 setReorderingAllowed(true) 允许片段状态更改重排序
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> ...</span><br><span class="line">fragmentManager.beginTransaction()</span><br><span class="line">    ...</span><br><span class="line">    .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">    .commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+为了行为兼容性，默认情况下不启用重新排序标志。
+但是，它需要允许FragmentManager正确执行您的FragmentTransaction，
+特别是当它在后台堆栈上运行并运行动画和过渡时。
+启用该标志可确保如果多个事务一起执行，任何中间片段（即添加然后立即替换的片段）
+不会经历生命周期更改或执行其动画或转换。
+
+请注意，此标志会影响事务的初始执行和使用 撤销事务popBackStack()
+</pre>
+
+</br>
+
+<blockquote>
+<h4 id="添加和删​​除片段"><a href="#添加和删​​除片段" class="headerlink" title="添加和删​​除片段"></a>添加和删​​除片段</h4></blockquote>
+<pre>
+调用 add()将片段添加到 FragmentManager。此方法接收片段容器的 ID ，以及您希望添加的片段的类名。
+添加的片段被移动到 RESUMED 状态。
+强烈建议容器是 FragmentContainerView 视图层次结构的一部分。
+
+要从主机中删除片段，请调用 remove() 方法传入一个片段实例
+该实例是由 findFragmentById() or findFragmentByTag()方法找到的
+如果片段的视图先前已添加到容器中，则此时视图将从容器中删除。移除的片段被移动到 DESTROYED 状态。
+
+用于 replace() 将容器中的现有片段替换为您提供的新片段类的实例。
+调用replace()相当于调用 remove() 先移除容器中的片段，然后将新片段添加到同一个容器中。
+
+以下代码片段显示了如何将一个片段替换为另一个片段：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create new fragment and transaction</span></span><br><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> ...</span><br><span class="line"><span class="type">FragmentTransaction</span> <span class="variable">transaction</span> <span class="operator">=</span> fragmentManager.beginTransaction();</span><br><span class="line">transaction.setReorderingAllowed(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Replace whatever is in the fragment_container view with this fragment</span></span><br><span class="line">transaction.replace(R.id.fragment_container, ExampleFragment.class, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Commit the transaction</span></span><br><span class="line">transaction.commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+在这个例子中，一个新的实例 ExampleFragment 替换了当前位于由 
+标识的布局容器中的片段（如果有的话） R.id.fragment_container
+</pre>
+
+<pre>
+<font color=#dd0000>注意：强烈建议始终使用采用 Class 而不是片段实例的片段操作，
+以确保创建片段的相同机制也用于从保存状态恢复片段。
+有关更多详细信息，请参阅 FragmentManager</font>
+</pre>
+
+<pre>
+默认情况下，在 FragmentTransaction 中所做的更改不会添加到后台堆栈。
+要保存这些更改，您可以调用 addToBackStack()
+</pre>
+
+</br>
+
+<blockquote>
+<h4 id="提交异步"><a href="#提交异步" class="headerlink" title="提交异步"></a>提交异步</h4></blockquote>
+<pre>
+调用 commit() 不会立即执行事务。事务被安排在主 UI 线程上运行，只要它能够这样做。
+但是，如有必要，您可以调用 commitNow() 以立即在您的 UI 线程上运行片段事务。
+
+请注意，commitNow 与 addToBackStack 是不兼容的. 或者，您可以通过调用 executePendingTransactions() 
+执行所有尚未运行的由FragmentTransactions提交的事务。
+这种方法与 addToBackStack 是兼容的
+
+对于绝大多数用例，使用 commit() 就足够了
+</pre>
+
+</br>
+
+<blockquote>
+<h4 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h4></blockquote>
+<pre>
+在 FragmentTransaction 中执行操作的顺序很重要，
+尤其是在使用setCustomAnimations(). 
+此方法将给定的动画应用于其后的所有片段操作
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">getSupportFragmentManager().beginTransaction()</span><br><span class="line">    .setCustomAnimations(enter1, exit1, popEnter1, popExit1)</span><br><span class="line">    .add(R.id.container, ExampleFragment.class, <span class="literal">null</span>) <span class="comment">// gets the first animations</span></span><br><span class="line">    .setCustomAnimations(enter2, exit2, popEnter2, popExit2)</span><br><span class="line">    .add(R.id.container, ExampleFragment.class, <span class="literal">null</span>) <span class="comment">// gets the second animations</span></span><br><span class="line">    .commit()</span><br></pre></td></tr></table></figure>
+
+</br>
+
+<blockquote>
+<h4 id="显示和隐藏"><a href="#显示和隐藏" class="headerlink" title="显示和隐藏"></a>显示和隐藏</h4></blockquote>
+<pre>
+使用 FragmentTransaction 中的 show() hide() 方法显示和隐藏已添加到容器的片段的视图
+这些方法设置片段视图的可见性，而不影响片段的生命周期
+
+虽然您不需要使用片段事务来切换片段中视图的可见性，
+但这些方法对于您希望更改可见性状态与后台堆栈上的事务相关联的情况很有用
+</pre>
+
+</br>
+
+<blockquote>
+<h4 id="附加和分离"><a href="#附加和分离" class="headerlink" title="附加和分离"></a>附加和分离</h4></blockquote>
+<pre>
+FragmentTransaction 方法 detach() 将片段与 UI 分离，破坏其视图层次结构。
+片段保持与放入回退栈时相同的状态(STOPPED)。这意味着片段已从 UI 中删除，但仍由片段管理器管理。
+
+attach() 方法重新附加之前分离的片段。这会导致其视图层次结构被重新创建、附加到 UI 并显示。
+
+由于 FragmentTransaction 被视为单个原子操作集，
+因此对同一事务中的同一片段实例的同时调用 detach 和 attach 会相互抵消，从而避免了片段 UI 的破坏和立即重建。
+如果想要实现立即 detach 然后 attach 操作需使用单独的事务分别 commit()
+然后使用 executePendingOperations() 方法立即执行挂起的事务
+</pre>
+
+<pre>
+
+</pre>
+
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:20px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/20/android/Android03_FragmentManager/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/20/android/Android03_FragmentManager/" class="post-title-link" itemprop="url">Android开发--FragmentManager</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-20 21:00:00" itemprop="dateCreated datePublished" datetime="2022-10-20T21:00:00+08:00">2022-10-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-21 11:45:01" itemprop="dateModified" datetime="2022-10-21T11:45:01+08:00">2022-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<h4 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h4></blockquote>
+<pre>
+FragmentManager 类负责在应用的 fragment 上执行一些操作，
+如添加、移除或替换操作，以及将操作添加到返回堆栈
+</pre>
+
+<br/>
+
+<blockquote>
+<h4 id="访问-FragmentManager"><a href="#访问-FragmentManager" class="headerlink" title="访问 FragmentManager"></a>访问 FragmentManager</h4></blockquote>
+<pre>
+我们可以在Activity和Fragment中访问FragmentManager，下面依次介绍两种访问方式和联系
+</pre>
+
+<blockquote>
+<h5 id="1-在-Activity-中访问"><a href="#1-在-Activity-中访问" class="headerlink" title="1.在 Activity 中访问"></a>1.在 Activity 中访问</h5></blockquote>
+<pre>
+每个 FragmentActivity 及其子类（如 AppCompatActivity）
+都可以通过 getSupportFragmentManager() 方法访问 FragmentManager
+</pre>
+
+<blockquote>
+<h5 id="2-在-Fragment-中访问"><a href="#2-在-Fragment-中访问" class="headerlink" title="2.在 Fragment 中访问"></a>2.在 Fragment 中访问</h5></blockquote>
+<pre>
+Fragment 也能够托管一个或多个子 fragment。在 fragment 内，
+您可以通过 getChildFragmentManager() 获取对管理 fragment 子级的 FragmentManager 的引用。
+如果您需要访问其宿主 FragmentManager，可以使用 getParentFragmentManager()
+</pre>
+
+<br/>
+
+<blockquote>
+<h4 id="托管-Fragment"><a href="#托管-Fragment" class="headerlink" title="托管 Fragment"></a>托管 Fragment</h4></blockquote>
+<pre>
+fragment、其宿主以及与每个 fragment 关联的 FragmentManager 实例之间的关系如下图所示
+</pre>
+
+<img src="/images/android_fragment_manager.png" width="60%" />
+
+<pre>
+两个界面布局示例，显示了 fragment 与其宿主 activity 之间的关系。每个示例中都有一个 activity 宿主。
+这两个示例中的宿主 activity 都以 BottomNavigationView 的形式向用户显示顶级导航，
+该视图负责以应用中的不同屏幕换出宿主 fragment，其中每个屏幕都实现为单独的 fragment
+
+示例 1 中的宿主 fragment 托管两个子 fragment，这些子 fragment 构成拆分视图屏幕。
+示例 2 中的宿主 fragment 托管一个子 fragment，该子 fragment 构成滑动视图的显示 fragment。
+
+基于此设置，您可以将每个宿主视为具有与其关联的 FragmentManager，用于管理其子 fragment。
+下图说明了这一点，并显示了 supportFragmentManager、parentFragmentManager 和 childFragmentManager 之间的属性映射
+</pre>
+
+<img src="/images/android_fragment_mapping.png" width="60%" />
+
+<pre>
+每个宿主都有与其关联的 FragmentManager，用于管理其子 fragment。
+需要引用的相应 FragmentManager 属性取决于调用点在 fragment 层次结构中的位置，
+以及您尝试访问的 fragment 管理器。对 FragmentManager 进行引用后，您就可以使用它来操纵向用户显示的 fragment。
+</pre>
+
+<blockquote>
+<h4 id="子-fragment-的管理"><a href="#子-fragment-的管理" class="headerlink" title="子 fragment 的管理"></a>子 fragment 的管理</h4></blockquote>
+<pre>
+一般来说，应用应由应用项目中的一个或少数几个 activity 组成，其中每个 activity 表示一组相关的屏幕。
+activity 可能会提供一个点来放置顶级导航，并提供一个位置来限定 ViewModels 以及 fragment 之间的其他视图状态的范围。
+应用中的每个目的地应由一个 fragment 来表示。
+
+如果您想要一次显示多个 fragment（如在拆分视图中或信息中心内），应使用子 fragment，
+它们由目的地 fragment 及其子 fragment 管理器进行管理。子 fragment 的其他用例可能包括：
+
+1.屏幕滑动，其中父 fragment 中的 ViewPager2 管理一系列子 fragment 视图。
+2.一组相关屏幕中的子导航。
+3.Jetpack Navigation 将子 fragment 用作各个目的地。一个 activity 托管一个父 NavHostFragment，
+    并在用户浏览应用时以不同的子目的地 fragment 填充它的空间。
+</pre>
+
+<blockquote>
+<h4 id="执行事务"><a href="#执行事务" class="headerlink" title="执行事务"></a>执行事务</h4></blockquote>
+<pre>
+如需在布局容器中显示 fragment，请使用 FragmentManager 创建 FragmentTransaction。
+在事务中，您随后可以对容器执行 add() 或 replace() 操作。
+
+例如，一个简单的 FragmentTransaction 可能如下所示：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> getSupportFragmentManager();</span><br><span class="line">fragmentManager.beginTransaction()</span><br><span class="line">    .replace(R.id.fragment_container, ExampleFragment.class, <span class="literal">null</span>)</span><br><span class="line">    .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">    .addToBackStack(<span class="string">&quot;name&quot;</span>) <span class="comment">// name can be null</span></span><br><span class="line">    .commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+在本例中，ExampleFragment 会替换当前在布局容器中的 fragment（如有），
+该布局容器由 R.id.fragment_container ID 进行标识。
+将 fragment 的类提供给 replace() 方法可让 FragmentManager 使用其 FragmentFactory 处理实例化
+
+setReorderingAllowed(true) 可优化事务中涉及的 fragment 的状态变化，
+以使动画和过渡正常运行。如需详细了解如何使用动画和过渡进行导航
+
+addToBackStack() 会将事务提交到返回堆栈。用户稍后可以通过按“返回”按钮反转事务，并恢复上一个 fragment。
+如果您在一个事务中添加或移除了多个 fragment，弹出返回堆栈时，所有这些操作都会撤消。
+在 addToBackStack() 调用中提供的可选名称使您能够使用 popBackStack() 弹回到该特定事务
+
+如果您在执行移除 fragment 的事务时未调用 addToBackStack()，则提交事务时会销毁已移除的 fragment，
+用户无法返回到该 fragment。如果您在移除某个 fragment 时调用了 addToBackStack()，
+则该 fragment 只会 STOPPED，稍后当用户返回时它会 RESUMED。请注意，在这种情况下，其视图会被销毁
+</pre>
+
+<br/>
+
+<blockquote>
+<h4 id="查找现有-fragment"><a href="#查找现有-fragment" class="headerlink" title="查找现有 fragment"></a>查找现有 fragment</h4></blockquote>
+<pre>
+可以通过 findFragmentById() 或者 findFragmentByTag() 获取对布局容器中当前 fragment 的引用
+</pre>
+
+<blockquote>
+<h5 id="findFragmentById"><a href="#findFragmentById" class="headerlink" title="findFragmentById()"></a>findFragmentById()</h5></blockquote>
+<pre>
+可使用 findFragmentById() 按给定的 ID 查找 fragment；
+在 FragmentTransaction 中添加时，可使用它按容器 ID 进行查找
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> getSupportFragmentManager();</span><br><span class="line">fragmentManager.beginTransaction()</span><br><span class="line">    .replace(R.id.fragment_container, ExampleFragment.class, <span class="literal">null</span>)</span><br><span class="line">    .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">    .addToBackStack(<span class="literal">null</span>)</span><br><span class="line">    .commit();</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="type">ExampleFragment</span> <span class="variable">fragment</span> <span class="operator">=</span></span><br><span class="line">        (ExampleFragment) fragmentManager.findFragmentById(R.id.fragment_container);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h5 id="findFragmentByTag"><a href="#findFragmentByTag" class="headerlink" title="findFragmentByTag()"></a>findFragmentByTag()</h5></blockquote>
+<pre>
+可以为 fragment 分配一个唯一的标记，并使用 findFragmentByTag() 获取引用。
+您可以在布局中定义的 fragment 上使用 android:tag XML 属性来分配标记，
+也可以在 FragmentTransaction 中的 add() 或 replace() 操作期间分配标记
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> getSupportFragmentManager();</span><br><span class="line">fragmentManager.beginTransaction()</span><br><span class="line">    .replace(R.id.fragment_container, ExampleFragment.class, <span class="literal">null</span>, <span class="string">&quot;tag&quot;</span>)</span><br><span class="line">    .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">    .addToBackStack(<span class="literal">null</span>)</span><br><span class="line">    .commit();</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="type">ExampleFragment</span> <span class="variable">fragment</span> <span class="operator">=</span> (ExampleFragment) fragmentManager.findFragmentByTag(<span class="string">&quot;tag&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<blockquote>
+<h4 id="有关子-fragment-和同级-fragment-的特殊注意事项"><a href="#有关子-fragment-和同级-fragment-的特殊注意事项" class="headerlink" title="有关子 fragment 和同级 fragment 的特殊注意事项"></a>有关子 fragment 和同级 fragment 的特殊注意事项</h4></blockquote>
+<pre>
+1.在任何给定的时间点，只允许一个 FragmentManager 控制 fragment 返回堆栈。
+
+2.如果应用在屏幕上同时显示多个同级 fragment，或者应用使用子 fragment，
+  则必须指定一个 FragmentManager 来处理应用的主要导航。  
+
+3.如需在 fragment 事务内定义主要导航 fragment，请对事务调用 setPrimaryNavigationFragment() 方法，
+  并传入一个 fragment 的实例，该 fragment 的 childFragmentManager 应具有主要控制权。
+
+4.将导航结构视为一系列层，其中 activity 作为最外层，封装下面的每一层子 fragment。
+  每一层都必须有一个主要导航 fragment。当发生返回事件时，最内层控制导航行为。
+  一旦最内层再也没有可从其弹回的 fragment 事务，控制权就会向外回一层，此过程会一直重复，直至到达 activity 为止。
+
+5.当同时显示两个或更多 fragment 时，其中只有一个可以是主要导航 fragment。
+
+6.如果将某个 fragment 设为主要导航 fragment，会移除对先前 fragment 的指定。在上例中，
+  如果您将详情 fragment 设为主要导航 fragment，就会移除对主 fragment 的指定。
+</pre>
+
+<blockquote>
+<h4 id="支持多个返回堆栈"><a href="#支持多个返回堆栈" class="headerlink" title="支持多个返回堆栈"></a>支持多个返回堆栈</h4></blockquote>
+<pre>
+在某些情况下，您的应用可能需要支持多个返回堆栈。一个常见示例是，您的应用使用底部导航栏。
+FragmentManager 可让您通过 saveBackStack() 和 restoreBackStack() 方法支持多个返回堆栈。
+这两种方法使您可以通过保存一个返回堆栈并恢复另一个返回堆栈来在返回堆栈之间进行交换。
+
+saveBackStack() 的工作方式类似于使用可选 name 参数调用 popBackStack()：
+弹出指定事务以及堆栈上在此之后的所有事务。不同之处在于 saveBackStack() 
+会保存弹出事务中所有 fragment 的状态。
+
+例如，假设您之前使用 addToBackStack() 提交 FragmentTransaction，从而将 fragment 添加到返回堆栈
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">supportFragmentManager.beginTransaction()</span><br><span class="line">  .replace(R.id.fragment_container, ExampleFragment.class, <span class="literal">null</span>)</span><br><span class="line">  <span class="comment">// setReorderingAllowed(true) and the optional string argument for</span></span><br><span class="line">  <span class="comment">// addToBackStack() are both required if you want to use saveBackStack().</span></span><br><span class="line">  .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">  .addToBackStack(<span class="string">&quot;replacement&quot;</span>)</span><br><span class="line">  .commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+在这种情况下，您可以通过调用 saveState() 来保存此 fragment 事务和 ExampleFragment 的状态：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supportFragmentManager.saveBackStack(<span class="string">&quot;replacement&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<pre>
+<font color=#dd0000>注意：您只能将 saveBackStack() 用于调用 setReorderingAllowed(true) 的事务，
+         以确保可以将事务还原为单一原子操作</font>
+</pre>
+
+<pre>
+您可以使用相同的名称参数调用 restoreBackStack()，以恢复所有弹出的事务以及所有保存的 fragment 状态
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supportFragmentManager.restoreBackStack(<span class="string">&quot;replacement&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<pre>
+<font color=#dd0000>注意：除非使用 addToBackStack() 传递 fragment 事务的可选名称，
+否则不能使用 saveBackStack() 和 restoreBackStack()</font>
+</pre>
+
+<blockquote>
+<h4 id="为-fragment-提供依赖项"><a href="#为-fragment-提供依赖项" class="headerlink" title="为 fragment 提供依赖项"></a>为 fragment 提供依赖项</h4></blockquote>
+<pre>
+添加 fragment 时，您可以手动实例化 fragment 并将其添加到 FragmentTransaction
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ExampleFragment</span> <span class="variable">myFragment</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExampleFragment</span>();</span><br><span class="line">fragmentManager.beginTransaction()</span><br><span class="line">    .add(R.id.fragment_view_container, myFragment)</span><br><span class="line">    .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">    .commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+当您提交 fragment 事务时，您创建的 fragment 实例就是使用的实例。不过，在配置更改期间，
+activity 及其所有 fragment 都会被销毁，然后使用最适用的 Android 资源重新创建。
+FragmentManager 会为您处理所有这些操作。
+它会重新创建 fragment 的实例，将其附加到宿主，并重新创建返回堆栈状态。
+
+默认情况下，FragmentManager 会使用框架提供的 FragmentFactory 来实例化 fragment 的新实例。
+<font color=#dd0000>此默认工厂使用反射来查找和调用 fragment 的无参数构造函数</font>。
+这意味着，您无法使用此默认工厂为 fragment 提供依赖项。
+这也意味着，默认情况下，在重新创建过程中，不会使用您首次创建 fragment 时所用的任何自定义构造函数。
+
+如需为 fragment 提供依赖项或使用任何自定义构造函数，
+您必须创建自定义 FragmentFactory 子类，然后替换 FragmentFactory.instantiate。
+您随后可以将 FragmentManager 的默认工厂替换为您的自定义工厂，该自定义工厂随后将用于实例化 fragment
+
+假设您有一个 DessertsFragment，负责显示您家乡受欢迎的甜点。
+我们假设 DessertsFragment 依赖于 DessertsRepository 类，该类可为其提供向用户显示正确界面所需的信息。
+
+您可以将 DessertsFragment 定义为在其构造函数中需要 DessertsRepository 实例
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DessertsFragment</span> <span class="keyword">extends</span> <span class="title class_">Fragment</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> DessertsRepository dessertsRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DessertsFragment</span><span class="params">(DessertsRepository dessertsRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.dessertsRepository = dessertsRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Getter omitted.</span></span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre>
+FragmentFactory 的简单实现可能与以下代码类似
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyFragmentFactory</span> <span class="keyword">extends</span> <span class="title class_">FragmentFactory</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> DessertsRepository repository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyFragmentFactory</span><span class="params">(DessertsRepository repository)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.repository = repository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NonNull</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Fragment <span class="title function_">instantiate</span><span class="params">(<span class="meta">@NonNull</span> ClassLoader classLoader, <span class="meta">@NonNull</span> String className)</span> &#123;</span><br><span class="line">        Class&lt;? <span class="keyword">extends</span> <span class="title class_">Fragment</span>&gt; fragmentClass = loadFragmentClass(classLoader, className);</span><br><span class="line">        <span class="keyword">if</span> (fragmentClass == DessertsFragment.class) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DessertsFragment</span>(repository);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">super</span>.instantiate(classLoader, className);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre>
+此示例创建了 FragmentFactory 的子类，替换了 instantiate() 方法，
+以便为 DessertsFragment 提供自定义 fragment 创建逻辑。
+其他 fragment 类通过 super.instantiate() 由 FragmentFactory 的默认行为进行处理。
+
+您随后可以通过在 FragmentManager 上设置一个属性，
+将 MyFragmentFactory 指定为要在构造应用的 fragment 时使用的工厂。
+您必须在 activity 的 super.onCreate() 之前设置此属性，
+以确保在重新创建 fragment 时使用 MyFragmentFactory
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MealActivity</span> <span class="keyword">extends</span> <span class="title class_">AppCompatActivity</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(<span class="meta">@Nullable</span> Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="type">DessertsRepository</span> <span class="variable">repository</span> <span class="operator">=</span> DessertsRepository.getInstance();</span><br><span class="line">        getSupportFragmentManager().setFragmentFactory(<span class="keyword">new</span> <span class="title class_">MyFragmentFactory</span>(repository));</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre>
+<font color=#dd0000>请注意，在 activity 中设置 FragmentFactory 会替换整个 activity 的 fragment 层次结构中
+ fragment 的创建。换句话说，您添加的任何子 fragment 的 childFragmentManager 
+ 都会使用此处设置的自定义 fragment 工厂，除非在较低的级别被替换</font>
+</pre>
+
+
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:20px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/17/android/Android02_Fragment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/17/android/Android02_Fragment/" class="post-title-link" itemprop="url">Android开发--Fragment</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-17 21:00:00" itemprop="dateCreated datePublished" datetime="2022-10-17T21:00:00+08:00">2022-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-20 22:00:47" itemprop="dateModified" datetime="2022-10-20T22:00:47+08:00">2022-10-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<h4 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h4></blockquote>
+<pre>
+1.Fragment 英文原意是“片断”或“碎片”,在 Android 系统中代表用户界面的局部区域,它可以是一个活动的部分,
+    可以单独设置局部用户界面,也可以单独接收用户输入和处理事件消息,与用户交互
+
+2.Android 在 Android 3.0（API 级别 11）中引入了片段，主要目的是为大屏幕（如平板电脑）上
+    更加动态和灵活的界面设计提供支持
+
+3.Fragment 的出现是为了适应平板电脑等大屏幕设备,改变了早期因手机屏幕较小而将整个屏幕作为一个整体界面
+    处理的状况,Fragment 组件可以将屏幕分成多个相对独立的区域,用户界面的更新可以在>局部区域发生,使得用户
+    界面切换方式更加高效、丰富
+
+4.每个片段都会通过各自的生命周期回调来定义自己的布局和行为，您可以将一个片段加入多个 Activity，因此，
+    您应采用可复用式设计，避免直接通过某个片段操纵另一个片段
+</pre>
+
+<br/>
+
+<blockquote>
+<h4 id="创建片段"><a href="#创建片段" class="headerlink" title="创建片段"></a>创建片段</h4></blockquote>
+<pre>
+如要创建片段，您必须创建 Fragment 的子类（或已有其子类）。Fragment 类的代码与 Activity 非常相似。
+它包含与 Activity 类似的回调方法，如 onCreate()、onStart()、onPause() 和 onStop()。实际上，
+如果您要将现有 Android 应用转换为使用片段，可能只需将代码从 Activity 的回调方法移入片段相应的回调方法中。
+
+片段通常用作 Activity 界面的一部分，并且会将其自己的布局融入 Activity。
+如要为片段提供布局，您必须实现 onCreateView() 回调方法，Android 系统会在片段需要绘制其布局时调用该方法。
+此方法的实现所返回的 View 必须是片段布局的根视图。
+
+如要从 onCreateView() 返回布局，您可以通过 XML 中定义的布局资源来扩展布局。为帮助您执行此操作，
+onCreateView() 提供了一个 LayoutInflater 对象。
+
+例：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ExampleFragment</span> <span class="keyword">extends</span> <span class="title class_">Fragment</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> View <span class="title function_">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container,</span></span><br><span class="line"><span class="params">                             Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="comment">// Inflate the layout for this fragment</span></span><br><span class="line">        <span class="keyword">return</span> inflater.inflate(R.layout.example_fragment, container, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre>
+传递至 onCreateView() 的 container 参数是您的片段布局将插入到的父级 ViewGroup（来自 Activity 的布局）。
+savedInstanceState 参数是在恢复片段时，提供上一片段实例相关数据的 Bundle
+
+inflate() 方法带有三个参数：
+1.您想要扩展的布局的资源 ID。
+2.将作为扩展布局父项的 ViewGroup。传递 container 对系统向扩展布局的根视图（由其所属的父视图指定）
+    应用布局参数具有重要意义。
+3.指示是否应在扩展期间将扩展布局附加至 ViewGroup（第二个参数）的布尔值。（在本例中，此值为 false，
+    因为系统已将扩展布局插入 container，而传递 true 值会在最终布局中创建一个多余的视图组。）
+</pre>
+
+<br/>
+
+<blockquote>
+<h4 id="添加片段"><a href="#添加片段" class="headerlink" title="添加片段"></a>添加片段</h4></blockquote>
+<pre>
+通常，片段会向宿主 Activity 贡献一部分界面，作为 Activity 整体视图层次结构的一部分嵌入到 Activity 中。
+可以通过两种方式向 Activity 布局添加片段：
+</pre>
+
+<blockquote>
+<h5 id="1-在-Activity-的布局文件内声明片段"><a href="#1-在-Activity-的布局文件内声明片段" class="headerlink" title="1.在 Activity 的布局文件内声明片段"></a>1.在 Activity 的布局文件内声明片段</h5></blockquote>
+<pre>
+例如，以下是拥有两个片段的 Activity 的布局文件
+</pre>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">&quot;com.example.news.ArticleListFragment&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/list&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_weight</span>=<span class="string">&quot;1&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;0dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">&quot;com.example.news.ArticleReaderFragment&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/viewer&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_weight</span>=<span class="string">&quot;2&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;0dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<pre>
+<fragment> 中的 android:name 属性指定要在布局中进行实例化的 Fragment 类。创建此 Activity 布局时，
+系统会将布局中指定的每个片段实例化，并为每个片段调用 onCreateView() 方法，以检索每个片段的布局。
+系统会直接插入片段返回的 View，从而代替 <fragment> 元素。
+</pre>
+
+<blockquote>
+<h5 id="2-通过编程方式将片段添加到某个现有-ViewGroup"><a href="#2-通过编程方式将片段添加到某个现有-ViewGroup" class="headerlink" title="2.通过编程方式将片段添加到某个现有 ViewGroup"></a>2.通过编程方式将片段添加到某个现有 ViewGroup</h5></blockquote>
+<pre>
+在 Activity 运行期间，您可以随时将片段添加到 Activity 布局中。您只需指定要将片段放入哪个 ViewGroup。
+如要在您的 Activity 中执行片段事务（如添加、移除或替换片段），则必须使用 FragmentTransaction 中的 API。
+如下所示，您可以从 FragmentActivity 获取一个 FragmentTransaction 实例
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> getSupportFragmentManager();</span><br><span class="line"><span class="type">FragmentTransaction</span> <span class="variable">fragmentTransaction</span> <span class="operator">=</span> fragmentManager.beginTransaction();</span><br></pre></td></tr></table></figure>
+
+<pre>
+然后，您可以使用 add() 方法添加一个片段，指定要添加的片段以及将其插入哪个视图。例如：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ExampleFragment</span> <span class="variable">fragment</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExampleFragment</span>();</span><br><span class="line">fragmentTransaction.add(R.id.fragment_container, fragment);</span><br><span class="line">fragmentTransaction.commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+传递到 add() 的第一个参数是 ViewGroup，即应放置片段的位置，由资源 ID 指定，第二个参数是要添加的片段。
+一旦您通过 FragmentTransaction 做出了更改，就必须调用 commit() 以使更改生效。
+</pre>    
+
+<br/>
+
+<blockquote>
+<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4></blockquote>
+<pre>
+Fragment生命周期图示如下,与Activity有所不同
+</pre>
+
+<table rules="none" align="center">
+    <tr>
+        <td>
+            <center>
+                <img src="/images/android_fragment_lifecycle.png" width="60%" />
+                <br/>
+                <font color="AAAAAA">Fragment.jpg</font>
+            </center>
+        </td>
+        <td>
+            <center>
+                <img src="/images/android_activity_lifecycle.gif" width="60%" />
+                <br/>
+                <font color="AAAAAA">Activity.jpg</font>
+            </center>
+        </td>
+    </tr>
+</table>
+
+<pre>
+下面来分析生命周期
+</pre>
+
+<blockquote>
+<h5 id="onAttach"><a href="#onAttach" class="headerlink" title="onAttach()"></a>onAttach()</h5></blockquote>
+<pre>
+onAttach()回调将在Fragment与其Activity关联之后调用。
+需要使用Activity的引用或者使用Activity作为其他操作的上下文，将在此回调方法中实现
+</pre>
+
+<blockquote>
+<h5 id="onCreate-Bundle-savedInstanceState"><a href="#onCreate-Bundle-savedInstanceState" class="headerlink" title="onCreate(Bundle savedInstanceState)"></a>onCreate(Bundle savedInstanceState)</h5></blockquote>
+<pre>
+此时的Fragment的onCreat回调时，该fragmet还没有获得Activity的onCreate()已完成的通知，
+所以不能将依赖于Activity视图层次结构存在性的代码放入此回调方法中。在onCreate()回调方法中，
+我们应该尽量避免耗时操作。此时的bundle就可以获取到activity传来的参数
+</pre>
+
+<blockquote>
+<h5 id="onCreateView-LayoutInflater-inflater-ViewGroup-container-Bundle-savedInstanceState"><a href="#onCreateView-LayoutInflater-inflater-ViewGroup-container-Bundle-savedInstanceState" class="headerlink" title="onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)"></a>onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)</h5></blockquote>
+<pre>
+其中的Bundle为状态包与上面的bundle不一样。
+注意的是：不要将视图层次结构附加到传入的ViewGroup父元素中，该关联会自动完成。
+如果在此回调中将碎片的视图层次结构附加到父元素，很可能会出现异常。
+这句话什么意思呢？就是不要把初始化的view视图主动添加到container里面，
+因为这会系统自带，所以inflate函数的第三个参数必须填false，而且不能出现container.addView(v)的操作。
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">View</span> <span class="variable">v</span> <span class="operator">=</span> inflater.inflate(R.layout.hello_world, container, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h5 id="onActivityCreated"><a href="#onActivityCreated" class="headerlink" title="onActivityCreated()"></a>onActivityCreated()</h5></blockquote>
+<pre>
+onActivityCreated()回调会在Activity完成其onCreate()回调之后调用。
+在调用onActivityCreated()之前，Activity的视图层次结构已经准备好了，
+这是在用户看到用户界面之前你可对用户界面执行的最后调整的地方。
+
+Note：如果Activity和它的Fragment是从保存的状态重新创建的，此回调尤其重要，
+也可以在这里确保此Activity的其他所有Fragment已经附加到该Activity中了
+</pre>
+
+<blockquote>
+<h5 id="onStart-onResume-onPause-onStop"><a href="#onStart-onResume-onPause-onStop" class="headerlink" title="onStart()\onResume()\onPause()\onStop()"></a>onStart()\onResume()\onPause()\onStop()</h5></blockquote>
+<pre>
+这四种生命周期和Activity的回调方法进行绑定，也就是说与Activity中对应的生命周期相同，因此不做过多介绍
+</pre>
+
+<blockquote>
+<h5 id="onDestroyView"><a href="#onDestroyView" class="headerlink" title="onDestroyView()"></a>onDestroyView()</h5></blockquote>
+<pre>
+该回调方法在视图层次结构与Fragment分离之后调用
+</pre>
+
+<blockquote>
+<h5 id="onDestroy"><a href="#onDestroy" class="headerlink" title="onDestroy()"></a>onDestroy()</h5></blockquote>
+<pre>
+不再使用Fragment时调用。（备注：Fragment仍然附加到Activity并任然可以找到，但是不能执行其他操作）
+</pre>
+
+<blockquote>
+<h5 id="onDetach"><a href="#onDetach" class="headerlink" title="onDetach()"></a>onDetach()</h5></blockquote>
+<pre>
+Fragme生命周期最后回调函数，调用后，Fragment不再与Activity绑定，释放资源。
+</pre>
+
+<blockquote>
+<h5 id="setRetainInstance"><a href="#setRetainInstance" class="headerlink" title="setRetainInstance()"></a>setRetainInstance()</h5></blockquote>
+<pre>
+在使用Fragment时，我发现了一个金矿，那就是setRetainInstance()方法,此方法可以有效地提高系统的运行效率，
+对流畅性要求较高的应用可以适当采用此方法进行设置。Fragment有一个非常强大的功能——就是可以在Activity重新创建时
+可以不完全销毁Fragment，以便Fragment可以恢复。在onCreate()方法中调用setRetainInstance(true/false)方法是最佳位置。
+当Fragment恢复时的生命周期如上图所示，注意图中的红色箭头。当在onCreate()方法中调用了setRetainInstance(true)后，
+Fragment恢复时会跳过onCreate()和onDestroy()方法，因此不能在onCreate()中放置一些初始化逻辑，切忌！
+</pre>
+
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:20px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/17/android/Android01_Activity/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/17/android/Android01_Activity/" class="post-title-link" itemprop="url">Android开发--Activity</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-17 20:00:00" itemprop="dateCreated datePublished" datetime="2022-10-17T20:00:00+08:00">2022-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-18 09:16:59" itemprop="dateModified" datetime="2022-10-18T09:16:59+08:00">2022-10-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -240,12 +1955,9 @@
 <h4 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h4></blockquote>
 <pre><code>1.Activity是Android组件中最基本也是最为常见用的四大组件（Activity，Service,Content Provider，BroadcastReceiver）之一 
 
-
 2.Activity是一个应用程序组件，提供一个屏幕，用户可以用来交互为了完成某项任务
 
-
 3.Activity中所有操作都与用户密切相关，是一个负责与用户交互的组件，可以通过setContentView(View)来显示指定控件
-
 
 4.在一个android应用中，一个Activity通常就是一个单独的屏幕，它上面可以显示一些控件也可以监听并处理用户的事件做出响应。Activity之间通过Intent进行通信
 </code></pre>
@@ -256,29 +1968,29 @@
 <pre><code>在android 中，Activity 拥有四种基本状态：
 </code></pre>
 <blockquote>
-<h5 id="1-Active-x2F-Running"><a href="#1-Active-x2F-Running" class="headerlink" title="1.Active&#x2F;Running"></a>1.Active&#x2F;Running</h5><pre><code>    一个新 Activity 启动入栈后，它显示在屏幕最前端，处理是处于栈的最顶端（Activity栈顶）
-    此时它处于可见并可和用户交互的激活状态,叫做活动状态或者运行状态（active or running）
+<h5 id="1-Active-x2F-Running"><a href="#1-Active-x2F-Running" class="headerlink" title="1.Active&#x2F;Running"></a>1.Active&#x2F;Running</h5></blockquote>
+<pre><code>一个新 Activity 启动入栈后，它显示在屏幕最前端，处理是处于栈的最顶端（Activity栈顶）
+此时它处于可见并可和用户交互的激活状态,叫做活动状态或者运行状态（active or running）
 </code></pre>
-</blockquote>
 <blockquote>
-<h5 id="2-Paused"><a href="#2-Paused" class="headerlink" title="2. Paused"></a>2. Paused</h5><pre><code>    当 Activity失去焦点， 被一个新的非全屏的Activity 或者一个透明的Activity 被放置在栈顶
-    此时的状态叫做暂停状态（Paused）。此时它依然与窗口管理器保持连接，
-    Activity依然保持活力（保持所有的状态，成员信息，和窗口管理器保持连接）
-    但是在系统内存极端低下的时候将被强行终止掉。所以它仍然可见，但已经失去了焦点故不可与用户进行交互
+<h5 id="2-Paused"><a href="#2-Paused" class="headerlink" title="2. Paused"></a>2. Paused</h5></blockquote>
+<pre><code>当 Activity失去焦点， 被一个新的非全屏的Activity 或者一个透明的Activity 被放置在栈顶
+此时的状态叫做暂停状态（Paused）。此时它依然与窗口管理器保持连接，
+Activity依然保持活力（保持所有的状态，成员信息，和窗口管理器保持连接）
+但是在系统内存极端低下的时候将被强行终止掉。所以它仍然可见，但已经失去了焦点故不可与用户进行交互
 </code></pre>
-</blockquote>
 <blockquote>
-<h5 id="3-Stopped"><a href="#3-Stopped" class="headerlink" title="3. Stopped"></a>3. Stopped</h5><pre><code>    如果一个Activity被另外的Activity完全覆盖掉，叫做停止状态（Stopped）
-    它依然保持所有状态和成员信息，但是它不再可见，所以它的窗口被隐藏
-    当系统内存需要被用在其他地方的时候，Stopped的Activity将被强行终止掉
+<h5 id="3-Stopped"><a href="#3-Stopped" class="headerlink" title="3. Stopped"></a>3. Stopped</h5></blockquote>
+<pre><code>如果一个Activity被另外的Activity完全覆盖掉，叫做停止状态（Stopped）
+它依然保持所有状态和成员信息，但是它不再可见，所以它的窗口被隐藏
+当系统内存需要被用在其他地方的时候，Stopped的Activity将被强行终止掉
 </code></pre>
-</blockquote>
 <blockquote>
-<h5 id="4-Killed"><a href="#4-Killed" class="headerlink" title="4. Killed"></a>4. Killed</h5><pre><code>    如果一个Activity是Paused或者Stopped状态，系统可以将该Activity从内存中删除
-    Android系统采用两种方式进行删除，要么要求该Activity结束，要么直接终止它的进程
-    当该Activity再次显示给用户时，它必须重新开始和重置前面的状态
+<h5 id="4-Killed"><a href="#4-Killed" class="headerlink" title="4. Killed"></a>4. Killed</h5></blockquote>
+<pre><code>如果一个Activity是Paused或者Stopped状态，系统可以将该Activity从内存中删除
+Android系统采用两种方式进行删除，要么要求该Activity结束，要么直接终止它的进程
+当该Activity再次显示给用户时，它必须重新开始和重置前面的状态
 </code></pre>
-</blockquote>
 <br/>
 
 <blockquote>
@@ -370,13 +2082,6 @@ Activity1 和 Activity2 的生命周期
     </tr>
 </table>
 
-<pre><code>这张图非常重要，可以帮我们解决异常情况下activity如何正常回复的问题
-当系统停止activity时，它会调用onSaveInstanceState()（过程1），
-如果activity被销毁了，但是需要创建同样的实例，
-系统会把过程1中的状态数据传给onCreate()和onRestoreInstanceState()，
-所以我们要在onSaveInstanceState()内做保存参数的动作，
-在onRestoreInstanceState()做获取参数的动作
-</code></pre>
 <br/>
 
 <blockquote>
@@ -439,2171 +2144,8 @@ Activity1 和 Activity2 的生命周期
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/12/leetcode/LC17_LetterCombinations/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Bob">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogz">
-      <meta itemprop="description" content="The description of your website">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Blogz">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/12/leetcode/LC17_LetterCombinations/" class="post-title-link" itemprop="url">LeetCode 17 电话号码的字母组合</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-10-12 21:00:00 / Modified: 18:47:04" itemprop="dateCreated datePublished" datetime="2022-10-12T21:00:00+08:00">2022-10-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="LeetCode-17-电话号码的字母组合"><a href="#LeetCode-17-电话号码的字母组合" class="headerlink" title="LeetCode 17 电话号码的字母组合"></a>LeetCode 17 电话号码的字母组合</h4><hr>
-<blockquote>
-<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
-<pre><code>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。
-给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
-</code></pre>
-<img src="/images/img_lc_17.png">
-
-<pre><code>示例 1：
-
-输入：digits = &quot;23&quot;
-输出：[&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]
-示例 2：
-
-输入：digits = &quot;&quot;
-输出：[]
-示例 3：
-
-输入：digits = &quot;2&quot;
-输出：[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]
- 
-
-提示：
-
-0 &lt;= digits.length &lt;= 4
-digits[i] 是范围 [&#39;2&#39;, &#39;9&#39;] 的一个数字。
-
-来源：力扣（LeetCode）
-链接：https://leetcode.cn/problems/letter-combinations-of-a-phone-number
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
-<pre><code>经典回溯算法求全组合
-根据提示我们可以得到以下数字-字符数组的映射表: &quot;abc&quot;,&quot;def&quot;,&quot;ghi&quot;,&quot;jkl&quot;,&quot;mno&quot;,&quot;pqrs&quot;,&quot;tuv&quot;,&quot;wxyz&quot;
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-    </tr>
-    <tr>
-        <td>[a,b,c]</td><td>[d,e,f]</td><td>[g,h,i]</td><td>[j,k,l]</td><td>[m,n,o]</td><td>[p,q,r,s]</td><td>[t,u,v]</td><td>[w,x,y,z]</td>
-    </tr>
-</table>
-
-<pre><code>思路
-1.拆分digits= &quot;23&quot; 得数字[2,3]
-2.匹配字符数组 charList = [[a,b,c],[d,e,f]] 深度 depth = 2 
-3.根据字符数组深度 depth 定义一个同样深度的栈 stack 存储组合的字符
-4.对charList从深度0开始递归，递归方式:
-    a.判断当前深度是否最深，最深则存储结果返回，否则继续
-    b.遍历当前深度所有字符 
-    c.每次遍历入栈当前字符
-    d.进入下一深度递归
-    e.出栈当前字符
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="图解"><a href="#图解" class="headerlink" title="图解:"></a>图解:</h5></blockquote>
-<pre><code>例: digits = &quot;23&quot;
-匹配可得字符数组为[[a,b,c],[d,e,f]]
-
-定义字符数组 charList = [[a,b,c],[d,e,f]] 
-定义栈深度 depth = 2
-定义栈 stack 
-定义结果集 list
-</code></pre>
-<br/>
-
-<pre><code>递归第一层 
-取字符 a 入栈
-进入第二层递归
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td bgcolor=#FF6100>a</td><td bgcolor=#B0E0E6>b</td><td bgcolor=#B0E0E6>c</td><td>a</td>
-    </tr>
-    <tr>
-        <td>d</td><td>e</td><td>f</td><td></td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>递归第二层 
-取字符 d 入栈
-此时到达底层，存储结果 &quot;ad&quot;
-list = [&quot;ad&quot;]
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td>a</td><td>b</td><td>c</td><td>a</td>
-    </tr>
-    <tr>
-        <td bgcolor=#FF6100>d</td><td bgcolor=#B0E0E6>e</td><td bgcolor=#B0E0E6>f</td><td>d</td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>字符 d 出栈
-字符 e 入栈
-此时到达底层，存储结果 &quot;ae&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;]
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td>a</td><td>b</td><td>c</td><td>a</td>
-    </tr>
-    <tr>
-        <td bgcolor=#B0E0E6>d</td><td bgcolor=#FF6100>e</td><td bgcolor=#B0E0E6>f</td><td>e</td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>字符 e 出栈
-字符 f 入栈
-此时到达底层，存储结果 &quot;af&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;]
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td>a</td><td>b</td><td>c</td><td>a</td>
-    </tr>
-    <tr>
-        <td bgcolor=#B0E0E6>d</td><td bgcolor=#B0E0E6>e</td><td bgcolor=#FF6100>f</td><td>f</td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>字符 f 出栈
-第二层遍历结束，回退回第一层遍历
-字符 a 出栈
-字符 b 入栈
-进入第二层递归
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td bgcolor=#B0E0E6>a</td><td bgcolor=#FF6100>b</td><td bgcolor=#B0E0E6>c</td><td>b</td>
-    </tr>
-    <tr>
-        <td>d</td><td>e</td><td>f</td><td></td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>递归第二层 
-取字符 d 入栈
-此时到达底层，存储结果 &quot;bd&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;]
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td>a</td><td>b</td><td>c</td><td>b</td>
-    </tr>
-    <tr>
-        <td bgcolor=#FF6100>d</td><td bgcolor=#B0E0E6>e</td><td bgcolor=#B0E0E6>f</td><td>d</td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>字符 d 出栈
-字符 e 入栈
-此时到达底层，存储结果 &quot;be&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;]
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td>a</td><td>b</td><td>c</td><td>b</td>
-    </tr>
-    <tr>
-        <td bgcolor=#B0E0E6>d</td><td bgcolor=#FF6100>e</td><td bgcolor=#B0E0E6>f</td><td>e</td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>字符 e 出栈
-字符 f 入栈
-此时到达底层，存储结果 &quot;bf&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;]
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td>a</td><td>b</td><td>c</td><td>b</td>
-    </tr>
-    <tr>
-        <td bgcolor=#B0E0E6>d</td><td bgcolor=#B0E0E6>e</td><td bgcolor=#FF6100>f</td><td>f</td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>字符 f 出栈
-第二层遍历结束，回退回第一层遍历
-字符 b 出栈
-字符 c 入栈
-进入第二层递归
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td bgcolor=#B0E0E6>a</td><td bgcolor=#B0E0E6>b</td><td bgcolor=#FF6100>c</td><td>c</td>
-    </tr>
-    <tr>
-        <td>d</td><td>e</td><td>f</td><td></td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>递归第二层 
-取字符 d 入栈
-此时到达底层，存储结果 &quot;cd&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;]
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td>a</td><td>b</td><td>c</td><td>c</td>
-    </tr>
-    <tr>
-        <td bgcolor=#FF6100>d</td><td bgcolor=#B0E0E6>e</td><td bgcolor=#B0E0E6>f</td><td>d</td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>字符 d 出栈
-字符 e 入栈
-此时到达底层，存储结果 &quot;ce&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;]
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td>a</td><td>b</td><td>c</td><td>c</td>
-    </tr>
-    <tr>
-        <td bgcolor=#B0E0E6>d</td><td bgcolor=#FF6100>e</td><td bgcolor=#B0E0E6>f</td><td>e</td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>字符 e 出栈
-字符 f 入栈
-此时到达底层，存储结果 &quot;cf&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td></td><td></td><td></td><td>Stack</td>
-    </tr>
-    <tr>
-        <td>a</td><td>b</td><td>c</td><td>c</td>
-    </tr>
-    <tr>
-        <td bgcolor=#B0E0E6>d</td><td bgcolor=#B0E0E6>e</td><td bgcolor=#FF6100>f</td><td>f</td>
-    </tr>
-</table>
-
-<br/>
-
-<pre><code>字符 f 出栈
-第二层遍历结束，回退回第一层遍历
-字符 c 出栈
-第一层遍历结束
-返回结果 list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;String&gt; <span class="title function_">letterCombinations</span><span class="params">(String digits)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> process(digits);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> List&lt;String&gt; <span class="title function_">process</span><span class="params">(String digits)</span> &#123;</span><br><span class="line">    List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (digits.isEmpty()) <span class="keyword">return</span> list;</span><br><span class="line">    String[] allChars = <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;abc&quot;</span>,<span class="string">&quot;def&quot;</span>,<span class="string">&quot;ghi&quot;</span>,<span class="string">&quot;jkl&quot;</span>,<span class="string">&quot;mno&quot;</span>,<span class="string">&quot;pqrs&quot;</span>,<span class="string">&quot;tuv&quot;</span>,<span class="string">&quot;wxyz&quot;</span>&#125;;</span><br><span class="line">    <span class="type">char</span> [] nums = digits.toCharArray();</span><br><span class="line">    dfs(allChars, nums, <span class="number">0</span>, <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(), list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">dfs</span><span class="params">(String[] allChars, <span class="type">char</span>[] nums, <span class="type">int</span> depth, StringBuilder s, List&lt;String&gt; list)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (depth == nums.length) &#123;</span><br><span class="line">        list.add(s.toString());</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> nums[depth] - <span class="number">50</span>;</span><br><span class="line">    <span class="type">char</span>[] chars = allChars[index].toCharArray();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">        s.append(chars[i]);</span><br><span class="line">        dfs(allChars, nums, depth + <span class="number">1</span>, s, list);</span><br><span class="line">        s.deleteCharAt(s.length() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/12/leetcode/LC16_ThreeNums/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Bob">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogz">
-      <meta itemprop="description" content="The description of your website">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Blogz">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/12/leetcode/LC16_ThreeNums/" class="post-title-link" itemprop="url">LeetCode 16 最接近的三数之和</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-10-12 20:00:00 / Modified: 15:51:01" itemprop="dateCreated datePublished" datetime="2022-10-12T20:00:00+08:00">2022-10-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="LeetCode-16-最接近的三数之和"><a href="#LeetCode-16-最接近的三数之和" class="headerlink" title="LeetCode 16 最接近的三数之和"></a>LeetCode 16 最接近的三数之和</h4><hr>
-<blockquote>
-<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
-<pre><code>给你一个长度为 n 的整数数组 nums 和 一个目标值 target。请你从 nums 中选出三个整数，使它们的和与 target 最接近。
-返回这三个数的和。
-假定每组输入只存在恰好一个解。
-
-
-示例 1：
-
-输入：nums = [-1,2,1,-4], target = 1
-输出：2
-解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。
-示例 2：
-
-输入：nums = [0,0,0], target = 1
-输出：0
- 
-
-提示：
-
-3 &lt;= nums.length &lt;= 1000
--1000 &lt;= nums[i] &lt;= 1000
--104 &lt;= target &lt;= 104
-通过次数413,132提交次数908,668
-
-来源：力扣（LeetCode）
-链接：https://leetcode.cn/problems/3sum-closest
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
-<pre><code>此题使用双指针法为最优方案
-具体流程如下:
-
-1.对数组排序
-
-2.遍历数组[0,nums.length-2)，i为当前遍历的位置,
-  定义L=i+1 R=nums.length-1，即L为i的下一位，R为数组末尾
-  定义minClose为最接近Target的距离，
-  定义sum为最接近Target的三数和
-  然后我们按照以下步骤寻找:
-
-    a.如果nums[i]+nums[L]+nums[R]-Target=0 直接返回结果
-
-    b.如果nums[i]+nums[L]+nums[R]-Target&gt;0 
-      比较三数和与Target距离和minClose，如果更接近则更新minClose和sum，
-      R左移使三数和与Target更接近
-
-    c.如果nums[i]+nums[L]+nums[R]-Target&lt;0 
-      比较三数和与Target距离和minClose，如果更接近则更新minClose和sum，
-      L右移使三数和与Target更接近
-
-    d.一旦L，R相遇则此次循环结束
-
-3.剪枝:
-
-    a.如果某一次遍历中 nums[i]+nums[i+1]+nums[i+2] &gt; Target，
-      说明此次遍历的最小和sumTemp &gt; Target
-      那么我们可以断言，如果最小和sumTemp与Target之间的距离sumTemp-Target
-      比当前记录的最小距离minClose还要大，那么后续无论怎么移动L和R和只会增大，
-      sumTemp与Target的距离sumTemp-Target只会更大，
-      并且下一次遍历i+1开始也是如此，
-      因此后续所有遍历均没有必要，可以直接退出返回结果
-
-    b.如果某一次遍历中 nums[i]+nums[nums.length-2]+nums[nums.length-1] &lt; Target，
-      说明此次遍历的最大和sumTemp &lt; Target
-      那么我们可以断言，如果最大和sumTemp与Target之间的距离Target-sumTemp
-      比当前记录的最小距离minClose还要大，那么后续无论怎么移动L和R和只会减小，
-      sumTemp与Target的距离Target-sumTemp只会更大，
-      但是下一轮遍历i+1使得和会增大，因此后续遍历无法断言，
-      只可以终止当前循环，直接进入下一轮循环
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="图解"><a href="#图解" class="headerlink" title="图解:"></a>图解:</h5></blockquote>
-<pre><code>例：nums = [3,5,-2,-1,8,10,15]
-   target = 9
-</code></pre>
-<br/>
-
-<pre><code>定义变量如下:
-sum = nums[0](-2)+nums[1](-1)+nums[2](3) = 0
-minClose = |sum(0) - target(9)| = 9
-
-第一轮遍历 [ i=0 minClose=9 sum=0 ]
-首先判断不满足剪枝条件，开始循环
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>4</td><td>5</td><td>8</td><td>10</td><td>15</td>
-    </tr>
-    <tr>
-        <td bgcolor=#00dddd>i</td><td bgcolor=#FF6100>L</td><td></td><td></td><td></td><td></td><td bgcolor=#FF6100>R</td>
-    </tr>
-</table>
-
-<pre><code>tempSum = nums[i](-2)+nums[L](-1)+nums[R](15) = 12
-|tempSum(12) - target(9)| = 3 &lt; minClose 替换原有的sum和minClose
-此时 sum = 12  minClose = 3
-由于tempSum &gt; target R指针左移 ⬇
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>4</td><td>5</td><td>8</td><td>10</td><td>15</td>
-    </tr>
-    <tr>
-        <td bgcolor=#00dddd>i</td><td bgcolor=#FF6100>L</td><td></td><td></td><td></td><td bgcolor=#FF6100>R</td><td></td>
-    </tr>
-</table>
-
-
-<pre><code>tempSum = nums[i](-2)+nums[L](-1)+nums[R](10) = 7
-|tempSum(7) - target(9)| = 2 &lt; minClose 替换原有的sum和minClose
-此时 sum = 7  minClose = 2
-由于tempSum &lt; target L指针右移 ⬇
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>4</td><td>5</td><td>8</td><td>10</td><td>15</td>
-    </tr>
-    <tr>
-        <td bgcolor=#00dddd>i</td><td></td><td bgcolor=#FF6100>L</td><td></td><td></td><td bgcolor=#FF6100>R</td><td></td>
-    </tr>
-</table>
-
-
-<pre><code>tempSum = nums[i](-2)+nums[L](3)+nums[R](10) = 11
-|tempSum(11) - target(9)| = 2 = minClose 原有的sum和minClose不变
-此时 sum = 7  minClose = 2
-由于tempSum &gt; target R指针左移 ⬇
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>4</td><td>5</td><td>8</td><td>10</td><td>15</td>
-    </tr>
-    <tr>
-        <td bgcolor=#00dddd>i</td><td></td><td bgcolor=#FF6100>L</td><td></td><td bgcolor=#FF6100>R</td><td></td><td></td>
-    </tr>
-</table>
-
-
-<pre><code>tempSum = nums[i](-2)+nums[L](4)+nums[R](8) = 10
-|tempSum(10) - target(9)| = 1 &lt; minClose 替换原有的sum和minClose
-此时 sum = 10  minClose = 1
-由于tempSum &gt; target R指针左移 ⬇
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>4</td><td>5</td><td>8</td><td>10</td><td>15</td>
-    </tr>
-    <tr>
-        <td bgcolor=#00dddd>i</td><td></td><td bgcolor=#FF6100>L</td><td bgcolor=#FF6100>R</td><td></td><td></td><td></td>
-    </tr>
-</table>
-
-
-<pre><code>tempSum = nums[i](-2)+nums[L](4)+nums[R](5) = 7
-|tempSum(7) - target(9)| = 2 &gt; minClose 原有的sum和minClose不变
-此时 sum = 10  minClose = 1
-L,R相遇，此轮遍历结束
-</code></pre>
-<br/>
-
-<pre><code>第二轮遍历 [ i=1 minClose=1 sum=10 ]
-首先判断不满足剪枝条件，开始循环
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>4</td><td>5</td><td>8</td><td>10</td><td>15</td>
-    </tr>
-    <tr>
-        <td></td><td bgcolor=#00dddd>i</td><td bgcolor=#FF6100>L</td><td></td><td></td><td></td><td bgcolor=#FF6100>R</td>
-    </tr>
-</table>
-
-<pre><code>tempSum = nums[i](-1)+nums[L](4)+nums[R](15) = 18
-|tempSum(18) - target(9)| = 9 &gt; minClose 原有的sum和minClose不变
-此时 sum = 10  minClose = 1
-由于tempSum &gt; target R指针左移 ⬇
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>4</td><td>5</td><td>8</td><td>10</td><td>15</td>
-    </tr>
-    <tr>
-        <td></td><td bgcolor=#00dddd>i</td><td bgcolor=#FF6100>L</td><td></td><td></td><td bgcolor=#FF6100>R</td><td></td>
-    </tr>
-</table>
-
-<pre><code>tempSum = nums[i](-1)+nums[L](4)+nums[R](10) = 13
-|tempSum(13) - target(9)| = 4 &gt; minClose 原有的sum和minClose不变
-此时 sum = 10  minClose = 1
-由于tempSum &gt; target R指针左移 ⬇ 
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>4</td><td>5</td><td>8</td><td>10</td><td>15</td>
-    </tr>
-    <tr>
-        <td></td><td bgcolor=#00dddd>i</td><td bgcolor=#FF6100>L</td><td></td><td bgcolor=#FF6100>R</td><td></td><td></td>
-    </tr>
-</table>
-
-<pre><code>tempSum = nums[i](-1)+nums[L](4)+nums[R](8) = 11
-|tempSum(11) - target(9)| = 2 &gt; minClose 原有的sum和minClose不变
-此时 sum = 10  minClose = 1
-由于tempSum &gt; target R指针左移 ⬇   
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>4</td><td>5</td><td>8</td><td>10</td><td>15</td>
-    </tr>
-    <tr>
-        <td></td><td bgcolor=#00dddd>i</td><td bgcolor=#FF6100>L</td><td bgcolor=#FF6100>R</td><td></td><td></td><td></td>
-    </tr>
-</table>
-
-<pre><code>tempSum = nums[i](-1)+nums[L](4)+nums[R](5) = 8
-|tempSum(8) - target(9)| = 1 = minClose 原有的sum和minClose不变
-此时 sum = 10  minClose = 1
-L,R相遇，此轮遍历结束  
-</code></pre>
-<br/>
-
-<pre><code>第三轮遍历 [ i=2 minClose=1 sum=10 ]
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>4</td><td>5</td><td>8</td><td>10</td><td>15</td>
-    </tr>
-    <tr>
-        <td></td><td></td><td bgcolor=#00dddd>i</td><td bgcolor=#FF6100>L</td><td></td><td></td><td bgcolor=#FF6100>R</td>
-    </tr>
-</table>
-
-<pre><code>此时我们可以发现
-最小和 minSum = nums[i](4)+nums[i+1](5)+nums[i+2](8) = 17 &gt; target
-并且最小和 minSum(17) - target(9) = 8 &gt; minClose(1)
-因此后续所有遍历和一定都大于17，直接返回结果即可
-
-结果返回 sum=10
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">threeSumClosest_02</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sumResult</span> <span class="operator">=</span> nums[<span class="number">0</span>] + nums[<span class="number">1</span>] + nums[<span class="number">2</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">minClose</span> <span class="operator">=</span> Math.abs(sumResult - target);</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length - <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//剪枝</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">maxV</span> <span class="operator">=</span> nums[i] + nums[i + <span class="number">1</span>] + nums[i + <span class="number">2</span>];</span><br><span class="line">        <span class="keyword">if</span> (maxV &gt; target &amp;&amp; maxV - target &gt; minClose) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//剪枝</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">minV</span> <span class="operator">=</span> nums[i] + nums[nums.length - <span class="number">1</span>] + nums[nums.length - <span class="number">2</span>];</span><br><span class="line">        <span class="keyword">if</span> (minV &lt; target &amp;&amp; target - minV &gt; minClose) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">L</span> <span class="operator">=</span> i + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">R</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (L &lt; R) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> nums[i] + nums[L] + nums[R];</span><br><span class="line">            <span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">                <span class="keyword">return</span> sum;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">                <span class="keyword">if</span> (sum - target &lt; minClose) &#123;</span><br><span class="line">                    minClose = sum - target;</span><br><span class="line">                    sumResult = sum;</span><br><span class="line">                &#125;</span><br><span class="line">                R--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (target - sum &lt; minClose) &#123;</span><br><span class="line">                    minClose = target - sum;</span><br><span class="line">                    sumResult = sum;</span><br><span class="line">                &#125;</span><br><span class="line">                L++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sumResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/11/leetcode/LC15_ThreeSum/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Bob">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogz">
-      <meta itemprop="description" content="The description of your website">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Blogz">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/11/leetcode/LC15_ThreeSum/" class="post-title-link" itemprop="url">LeetCode 15 三数之和</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-11 20:00:00" itemprop="dateCreated datePublished" datetime="2022-10-11T20:00:00+08:00">2022-10-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-12 12:30:34" itemprop="dateModified" datetime="2022-10-12T12:30:34+08:00">2022-10-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="LeetCode-15-三数之和"><a href="#LeetCode-15-三数之和" class="headerlink" title="LeetCode 15 三数之和"></a>LeetCode 15 三数之和</h4><hr>
-<blockquote>
-<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
-<pre><code>给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。请
-你返回所有和为 0 且不重复的三元组。
-注意：答案中不可以包含重复的三元组。
-
-
-示例 1：
-
-输入：nums = [-1,0,1,2,-1,-4]
-输出：[[-1,-1,2],[-1,0,1]]
-解释：
-nums[0] + nums[1] + nums[2] = (-1) + 0 + 1 = 0 。
-nums[1] + nums[2] + nums[4] = 0 + 1 + (-1) = 0 。
-nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
-不同的三元组是 [-1,0,1] 和 [-1,-1,2] 。
-注意，输出的顺序和三元组的顺序并不重要。
-示例 2：
-
-输入：nums = [0,1,1]
-输出：[]
-解释：唯一可能的三元组和不为 0 。
-示例 3：
-
-输入：nums = [0,0,0]
-输出：[[0,0,0]]
-解释：唯一可能的三元组和为 0 。
- 
-
-提示：
-
-3 &lt;= nums.length &lt;= 3000
--105 &lt;= nums[i] &lt;= 105
-
-来源：力扣（LeetCode）
-链接：https://leetcode.cn/problems/3sum
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
-<pre><code>此题可使用暴力递归和回溯算法都可以解出此题,但是时间复杂度高,此处不给出具体解法
-我们使用双指针法巧妙解决此问题,具体流程如下:
-
-例：nums = [-2,-1,0,1,2,2,-1,3]
-
-1.对数组排序
-2.出现以下情况直接返回
-    a.数组为空
-    b.数组最小值大于0
-    c.数组最大值小于0
-3.遍历数组，i为当前遍历的位置,定义L=i+1 R=数组长度-1，即L为i的下一位，R为数组末尾，然后我们按照以下步骤寻找:
-    a.如果nums[i]+nums[L]+nums[R]=0 记录结果且L左移R右移直至与当前L、R所在位置值不同的位置(此步骤就是去重操作)
-    b.如果nums[i]+nums[L]+nums[R]&gt;0 说明和太大，R左移直至与当前R所在位置值不同的位置(此步骤就是去重操作)
-    c.如果nums[i]+nums[L]+nums[R]&lt;0 说明和太小，L右移直至与当前L所在位置值不同的位置(此步骤就是去重操作)
-    d.一旦L，R相遇则此次循环结束
-4.结果存储在数组list中
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="图解"><a href="#图解" class="headerlink" title="图解:"></a>图解:</h5></blockquote>
-<pre><code>第一轮遍历
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>-1</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td>
-    </tr>
-    <tr>
-        <td bgcolor=#00dddd>i</td><td bgcolor=#FF6100>L</td><td></td><td></td><td></td><td></td><td></td><td bgcolor=#FF6100>R</td>
-    </tr>
-</table>
-
-<pre><code>nums[i](-2)+nums[L](-1)+nums[R](3) = 0
-记录下结果 [-2,-1,3]
-此时list=[[-2,-1,3]]
-L右移至与当前值不同的位置
-R左移至与当前值不同的位置
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>-1</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td>
-    </tr>
-    <tr>
-        <td bgcolor=#00dddd>i</td><td></td><td></td><td bgcolor=#FF6100>L</td><td></td><td></td><td bgcolor=#FF6100>R</td><td></td>
-    </tr>
-</table>
-
-<pre><code>nums[i](-2)+nums[L](0)+nums[R](2) = 0
-记录下结果 [-2,0,2]
-此时list=[[-2,-1,3],[-2,0,2]]
-L右移至与当前值不同的位置
-R左移至与当前值不同的位置
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>-1</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td>
-    </tr>
-    <tr>
-        <td bgcolor=#00dddd>i</td><td></td><td></td><td></td><td bgcolor=#FF6100>L,R</td><td></td><td></td><td></td>
-    </tr>
-</table>
-
-<pre><code>L,R相遇，循环结束，i右移至与当前位置值不同的位置开始下一轮循环
-</code></pre>
-<br/>
-
-<pre><code>第二轮遍历
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>-1</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td>
-    </tr>
-    <tr>
-        <td></td><td bgcolor=#00dddd>i</td><td bgcolor=#FF6100>L</td><td></td><td></td><td></td><td></td><td bgcolor=#FF6100>R</td>
-    </tr>
-</table>
-
-<pre><code>nums[i](-1)+nums[L](-1)+nums[R](3) = 1
-和大于0，R左移至与当前值不同的位置
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>-1</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td>
-    </tr>
-    <tr>
-        <td></td><td bgcolor=#00dddd>i</td><td bgcolor=#FF6100>L</td><td></td><td></td><td></td><td bgcolor=#FF6100>R</td><td></td>
-    </tr>
-</table>
-
-<pre><code>nums[i](-1)+nums[L](-1)+nums[R](2) = 0
-记录下结果 [-1,-1,2]
-此时list=[[-2,-1,3],[-2,0,2],[-1,-1,2]]
-L右移至与当前值不同的位置
-R左移至与当前值不同的位置
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>-1</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td>
-    </tr>
-    <tr>
-        <td></td><td bgcolor=#00dddd>i</td><td></td><td bgcolor=#FF6100>L</td><td bgcolor=#FF6100>R</td><td></td><td></td><td></td>
-    </tr>
-</table>
-
-<pre><code>nums[i](-1)+nums[L](0)+nums[R](1) = 0
-记录下结果 [-1,0,1]
-此时list=[[-2,-1,3],[-2,0,2],[-1,-1,2],[-1,0,1]]
-L右移至与当前值不同的位置
-R左移至与当前值不同的位置
-L,R相遇，循环结束，i右移至与当前位置值不同的位置开始下一轮循环
-</code></pre>
-<br/>
-
-<pre><code>第三轮遍历
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>-2</td><td>-1</td><td>-1</td><td>0</td><td>1</td><td>2</td><td>2</td><td>3</td>
-    </tr>
-    <tr>
-        <td></td><td></td><td></td><td bgcolor=#00dddd>i</td><td bgcolor=#FF6100>L</td><td></td><td></td><td bgcolor=#FF6100>R</td>
-    </tr>
-</table>
-
-<pre><code>注意此时 nums[i](0)+nums[L](1) = 1
-后续无论如何移动R将值减少也无法使和等于0，因此结束流程
-返回结果 
-list=[[-2,-1,3],[-2,0,2],[-1,-1,2],[-1,0,1]]
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; listResult = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="keyword">if</span> (nums.length &lt;= <span class="number">2</span> || nums[<span class="number">0</span>] &gt; <span class="number">0</span> || nums[nums.length - <span class="number">1</span>] &lt; <span class="number">0</span>) <span class="keyword">return</span> listResult;</span><br><span class="line">    <span class="type">int</span> <span class="variable">preI</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>) <span class="keyword">return</span> listResult;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] == preI) <span class="keyword">continue</span>;</span><br><span class="line">        preI = nums[i];</span><br><span class="line">        <span class="type">int</span> <span class="variable">L</span> <span class="operator">=</span> i + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">R</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (L &lt; R) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] + nums[L] &gt; <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> nums[i] + nums[L] + nums[R];</span><br><span class="line">            <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                listResult.add(Arrays.asList(nums[i], nums[L], nums[R]));</span><br><span class="line">                <span class="keyword">do</span> &#123;</span><br><span class="line">                    L++;</span><br><span class="line">                &#125; <span class="keyword">while</span> (L &lt; R &amp;&amp; nums[L] == nums[L - <span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">do</span> &#123;</span><br><span class="line">                    R--;</span><br><span class="line">                &#125; <span class="keyword">while</span> (L &lt; R &amp;&amp; nums[R] == nums[R + <span class="number">1</span>]);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">while</span> (L &lt; R &amp;&amp; nums[i] + nums[L] + nums[R] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                    L++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">while</span> (L &lt; R &amp;&amp; nums[i] + nums[L] + nums[R] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    R--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> listResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/10/leetcode/LC14_LongestCommonPrefix/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Bob">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogz">
-      <meta itemprop="description" content="The description of your website">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Blogz">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/10/leetcode/LC14_LongestCommonPrefix/" class="post-title-link" itemprop="url">LeetCode 14 最长公共前缀</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-10 21:00:00" itemprop="dateCreated datePublished" datetime="2022-10-10T21:00:00+08:00">2022-10-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-12 12:31:02" itemprop="dateModified" datetime="2022-10-12T12:31:02+08:00">2022-10-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="LeetCode-14-最长公共前缀"><a href="#LeetCode-14-最长公共前缀" class="headerlink" title="LeetCode 14 最长公共前缀"></a>LeetCode 14 最长公共前缀</h4><hr>
-<blockquote>
-<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
-<pre><code>编写一个函数来查找字符串数组中的最长公共前缀。
-如果不存在公共前缀，返回空字符串 &quot;&quot;。
-
-示例 1：
-
-输入：strs = [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]
-输出：&quot;fl&quot;
-示例 2：
-
-输入：strs = [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]
-输出：&quot;&quot;
-解释：输入不存在公共前缀。
- 
-
-提示：
-
-1 &lt;= strs.length &lt;= 200
-0 &lt;= strs[i].length &lt;= 200
-strs[i] 仅由小写英文字母组成
-
-来源：力扣（LeetCode）
-链接：https://leetcode.cn/problems/longest-common-prefix
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
-<pre><code>思路
-1.如果字符串数组为空，返回空
-2.任取字符串数组中一个字符串,从长到短取自身前缀去和数组其他字符串比较
-3.如果某个前缀同时也是其他字符串前缀则此前缀为最长公共前缀
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="图解"><a href="#图解" class="headerlink" title="图解:"></a>图解:</h5></blockquote>
-<pre><code>例: strs = [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]
-我们取第一个字符串&quot;flower&quot;作为比较对象
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>字符串/前缀</td><td>flower</td><td>flowe</td><td>flow</td><td>flo</td><td bgcolor=#00dddd>fl</td>
-    </tr>
-    <tr>
-        <td>flower</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td>
-    </tr>
-    <tr>
-        <td>flow</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td>
-    </tr>
-    <tr>
-        <td>flight</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td>
-    </tr>
-</table>
-
-<pre><code>返回结果 &quot;fl&quot; 即可
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">longestCommonPrefix</span><span class="params">(String[] strs)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (strs.length == <span class="number">0</span>) <span class="keyword">return</span> result;</span><br><span class="line">    result = strs[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; strs.length; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> result.length();</span><br><span class="line">        <span class="keyword">while</span> (!strs[i].startsWith(result)) &#123;</span><br><span class="line">            result = result.substring(<span class="number">0</span>, --n);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (result.length() == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/10/leetcode/LC13_RomanToInt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Bob">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogz">
-      <meta itemprop="description" content="The description of your website">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Blogz">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/10/leetcode/LC13_RomanToInt/" class="post-title-link" itemprop="url">LeetCode 13 罗马数字转整数</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-10 20:00:00" itemprop="dateCreated datePublished" datetime="2022-10-10T20:00:00+08:00">2022-10-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-12 12:31:28" itemprop="dateModified" datetime="2022-10-12T12:31:28+08:00">2022-10-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="LeetCode-13-罗马数字转整数"><a href="#LeetCode-13-罗马数字转整数" class="headerlink" title="LeetCode 13 罗马数字转整数"></a>LeetCode 13 罗马数字转整数</h4><hr>
-<blockquote>
-<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
-<pre><code>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。
-
-字符          数值
-I             1
-V             5
-X             10
-L             50
-C             100
-D             500
-M             1000
-例如， 罗马数字 2 写做 II ，即为两个并列的 1 。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。
-
-通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：
-
-I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
-X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 
-C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
-给定一个罗马数字，将其转换成整数。
-
- 
-
-示例 1:
-
-输入: s = &quot;III&quot;
-输出: 3
-示例 2:
-
-输入: s = &quot;IV&quot;
-输出: 4
-示例 3:
-
-输入: s = &quot;IX&quot;
-输出: 9
-示例 4:
-
-输入: s = &quot;LVIII&quot;
-输出: 58
-解释: L = 50, V= 5, III = 3.
-示例 5:
-
-输入: s = &quot;MCMXCIV&quot;
-输出: 1994
-解释: M = 1000, CM = 900, XC = 90, IV = 4.
- 
-
-提示：
-
-1 &lt;= s.length &lt;= 15
-s 仅含字符 (&#39;I&#39;, &#39;V&#39;, &#39;X&#39;, &#39;L&#39;, &#39;C&#39;, &#39;D&#39;, &#39;M&#39;)
-题目数据保证 s 是一个有效的罗马数字，且表示整数在范围 [1, 3999] 内
-题目所给测试用例皆符合罗马数字书写规则，不会出现跨位等情况。
-IL 和 IM 这样的例子并不符合题目要求，49 应该写作 XLIX，999 应该写作 CMXCIX 。
-关于罗马数字的详尽书写规则，可以参考 罗马数字 - Mathematics 。
-通过次数720,508提交次数1,156,547
-
-来源：力扣（LeetCode）
-链接：https://leetcode.cn/problems/roman-to-integer
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
-<pre><code>思路:
-1.分析可知罗马数字字符串一定从大到小排列组合
-2.直接生成所有可能的罗马数字对应的数字的表如下:
-reps  =  [ &quot;M&quot;,  &quot;CM&quot;,  &quot;D&quot;,  &quot;CD&quot;,  &quot;C&quot;,  &quot;XC&quot;,  &quot;L&quot;,  &quot;XL&quot;,  &quot;X&quot;,  &quot;IX&quot;,  &quot;V&quot;,  &quot;IV&quot;,  &quot;I&quot;]
-values = [1000,   900,  500,   400,  100,   90,   50,    40,   10,     9,    5,    4,     1]
-3.从头开始遍历罗马数字字符串取对应的数相加即可，我们可用字符串函数startWith(s,offset)方法
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="图解"><a href="#图解" class="headerlink" title="图解:"></a>图解:</h5></blockquote>
-<pre><code>例: s=&quot;MCMXCIV&quot;  设总和sum=0  字符头部偏移量 offset=0
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>M</td><td>CM</td><td>D</td><td>CD</td><td>C</td><td>XC</td><td>L</td><td>XL</td><td>X</td><td>IX</td><td>V</td><td>IV</td><td>I</td>
-    </tr>
-    <tr>
-        <td bgcolor=#B0E0E6>⬆</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>1000</td><td>900</td><td>500</td><td>400</td><td>100</td><td>90</td><td>50</td><td>40</td><td>10</td><td>9</td><td>5</td><td>4</td><td>1</td>
-    </tr>
-</table>
-
-<pre><code>1.s=&quot;MCMXCIV&quot;  offset=0  sum=0  
-2.此时判断头部是否是字符&quot;M&quot;
-3.判断 s.startWith(&quot;M&quot;,0)=true
-4.求和 sum = sum+1000 = 1000
-5.偏移 offset偏移字符&quot;M&quot;的长度 offset = offset+1 = 1
-6.继续判断offset为1 startWith(&quot;M&quot;,1)=false
-7.判断下一个罗马数字⬇
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>M</td><td>CM</td><td>D</td><td>CD</td><td>C</td><td>XC</td><td>L</td><td>XL</td><td>X</td><td>IX</td><td>V</td><td>IV</td><td>I</td>
-    </tr>
-    <tr>
-        <td></td><td bgcolor=#B0E0E6>⬆</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>1000</td><td>900</td><td>500</td><td>400</td><td>100</td><td>90</td><td>50</td><td>40</td><td>10</td><td>9</td><td>5</td><td>4</td><td>1</td>
-    </tr>
-</table>
-
-<pre><code>1.s=&quot;MCMXCIV&quot;  offset=1  sum=1000
-2.此时判断头部是否是字符&quot;CM&quot;
-3.判断 s.startWith(&quot;CM&quot;,1)=true
-4.求和 sum = sum+900 = 1900
-5.偏移 offset偏移字符&quot;CM&quot;的长度 offset = offset+2 = 3
-6.继续判断offset为3 startWith(&quot;CM&quot;,3)=false
-7.判断下一个罗马数字⬇
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>M</td><td>CM</td><td>D</td><td>CD</td><td>C</td><td>XC</td><td>L</td><td>XL</td><td>X</td><td>IX</td><td>V</td><td>IV</td><td>I</td>
-    </tr>
-    <tr>
-        <td></td><td></td><td bgcolor=#B0E0E6>⬆</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>1000</td><td>900</td><td>500</td><td>400</td><td>100</td><td>90</td><td>50</td><td>40</td><td>10</td><td>9</td><td>5</td><td>4</td><td>1</td>
-    </tr>
-</table>
-
-<pre><code>1.s=&quot;MCMXCIV&quot;  offset=3  sum=1900
-2.此时判断头部是否是字符&quot;D&quot;
-3.判断 s.startWith(&quot;D&quot;,3)=false
-4.判断下一个罗马数字⬇
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>M</td><td>CM</td><td>D</td><td>CD</td><td>C</td><td>XC</td><td>L</td><td>XL</td><td>X</td><td>IX</td><td>V</td><td>IV</td><td>I</td>
-    </tr>
-    <tr>
-        <td></td><td></td><td></td><td bgcolor=#B0E0E6>⬆</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>1000</td><td>900</td><td>500</td><td>400</td><td>100</td><td>90</td><td>50</td><td>40</td><td>10</td><td>9</td><td>5</td><td>4</td><td>1</td>
-    </tr>
-</table>
-
-<pre><code>1.s=&quot;MCMXCIV&quot;  offset=3  sum=1900
-2.此时判断头部是否是字符&quot;CD&quot;
-3.判断 s.startWith(&quot;CD&quot;,3)=false
-4.判断下一个罗马数字⬇
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>M</td><td>CM</td><td>D</td><td>CD</td><td>C</td><td>XC</td><td>L</td><td>XL</td><td>X</td><td>IX</td><td>V</td><td>IV</td><td>I</td>
-    </tr>
-    <tr>
-        <td></td><td></td><td></td><td></td><td bgcolor=#B0E0E6>⬆</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>1000</td><td>900</td><td>500</td><td>400</td><td>100</td><td>90</td><td>50</td><td>40</td><td>10</td><td>9</td><td>5</td><td>4</td><td>1</td>
-    </tr>
-</table>
-
-<pre><code>1.s=&quot;MCMXCIV&quot;  offset=3  sum=1900
-2.此时判断头部是否是字符&quot;C&quot;
-3.判断 s.startWith(&quot;C&quot;,3)=false
-4.判断下一个罗马数字⬇
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>M</td><td>CM</td><td>D</td><td>CD</td><td>C</td><td>XC</td><td>L</td><td>XL</td><td>X</td><td>IX</td><td>V</td><td>IV</td><td>I</td>
-    </tr>
-    <tr>
-        <td></td><td></td><td></td><td></td><td></td><td bgcolor=#B0E0E6>⬆</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-    <tr>
-        <td>1000</td><td>900</td><td>500</td><td>400</td><td>100</td><td>90</td><td>50</td><td>40</td><td>10</td><td>9</td><td>5</td><td>4</td><td>1</td>
-    </tr>
-</table>
-
-<pre><code>1.s=&quot;MCMXCIV&quot;  offset=3  sum=1900
-2.此时判断头部是否是字符&quot;XC&quot;
-3.判断 s.startWith(&quot;XC&quot;,3)=true
-4.求和 sum = sum+90 = 1990
-5.偏移 offset偏移字符&quot;CM&quot;的长度 offset = offset+2 = 5
-6.继续判断offset为5 startWith(&quot;XC&quot;,5)=false
-7.判断下一个罗马数字⬇
-</code></pre>
-<br/>
-
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>M</td><td>CM</td><td>D</td><td>CD</td><td>C</td><td>XC</td><td>L</td><td>XL</td><td>X</td><td>IX</td><td>V</td><td>IV</td><td>I</td>
-    </tr>
-    <tr>
-        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td bgcolor=#B0E0E6>⬆</td><td></td>
-    </tr>
-    <tr>
-        <td>1000</td><td>900</td><td>500</td><td>400</td><td>100</td><td>90</td><td>50</td><td>40</td><td>10</td><td>9</td><td>5</td><td>4</td><td>1</td>
-    </tr>
-</table>
-
-<pre><code>依次类推,下一个罗马数字为 &quot;IV&quot;
-1.s=&quot;MCMXCIV&quot;  offset=5  sum=1990
-2.此时判断头部是否是字符&quot;IV&quot;
-3.判断 s.startWith(&quot;IV&quot;,5)=true
-4.求和 sum = sum+4 = 1994
-5.偏移 offset偏移字符&quot;CM&quot;的长度 offset = offset+2 = 7
-6.全部判断完毕结束 
-
-返回结果为 sum = 1994
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">romanToInt</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="type">int</span>[] values = &#123;<span class="number">1000</span>, <span class="number">900</span>, <span class="number">500</span>, <span class="number">400</span>, <span class="number">100</span>, <span class="number">90</span>, <span class="number">50</span>, <span class="number">40</span>, <span class="number">10</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">1</span>&#125;;</span><br><span class="line">    String[] reps = &#123;<span class="string">&quot;M&quot;</span>, <span class="string">&quot;CM&quot;</span>, <span class="string">&quot;D&quot;</span>, <span class="string">&quot;CD&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;XC&quot;</span>, <span class="string">&quot;L&quot;</span>, <span class="string">&quot;XL&quot;</span>, <span class="string">&quot;X&quot;</span>, <span class="string">&quot;IX&quot;</span>, <span class="string">&quot;V&quot;</span>, <span class="string">&quot;IV&quot;</span>, <span class="string">&quot;I&quot;</span>&#125;;</span><br><span class="line">    <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">offset</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">13</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (s.startsWith(reps[i], offset)) &#123;</span><br><span class="line">            result += values[i];</span><br><span class="line">            offset += reps[i].length();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/09/leetcode/LC12_IntToRoman/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Bob">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogz">
-      <meta itemprop="description" content="The description of your website">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Blogz">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/10/09/leetcode/LC12_IntToRoman/" class="post-title-link" itemprop="url">LeetCode 12 整数转罗马数字</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-10-09 20:00:00" itemprop="dateCreated datePublished" datetime="2022-10-09T20:00:00+08:00">2022-10-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-12 12:32:39" itemprop="dateModified" datetime="2022-10-12T12:32:39+08:00">2022-10-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="LeetCode-12-整数转罗马数字"><a href="#LeetCode-12-整数转罗马数字" class="headerlink" title="LeetCode 12 整数转罗马数字"></a>LeetCode 12 整数转罗马数字</h4><hr>
-<blockquote>
-<h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
-<pre><code>罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。
-
-字符          数值
-I             1
-V             5
-X             10
-L             50
-C             100
-D             500
-M             1000
-例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。
-
-通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：
-
-I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
-X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 
-C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
-给你一个整数，将其转为罗马数字。
-
-示例 1:
-
-输入: num = 3
-输出: &quot;III&quot;
-示例 2:
-
-输入: num = 4
-输出: &quot;IV&quot;
-示例 3:
-
-输入: num = 9
-输出: &quot;IX&quot;
-示例 4:
-
-输入: num = 58
-输出: &quot;LVIII&quot;
-解释: L = 50, V = 5, III = 3.
-示例 5:
-
-输入: num = 1994
-输出: &quot;MCMXCIV&quot;
-解释: M = 1000, CM = 900, XC = 90, IV = 4.
-
-提示：
-1 &lt;= num &lt;= 3999
-
-来源：力扣（LeetCode）
-链接：https://leetcode.cn/problems/integer-to-roman
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h5></blockquote>
-<pre><code>思路:
-
-1.首先直接生成个位，十位，百位，千位上0-10的表示数组如下:
-chars0 = [&quot;&quot;, &quot;I&quot;, &quot;II&quot;, &quot;III&quot;, &quot;IV&quot;, &quot;V&quot;, &quot;VI&quot;, &quot;VII&quot;, &quot;VIII&quot;, &quot;IX&quot;]
-chars1 = [&quot;&quot;, &quot;X&quot;, &quot;XX&quot;, &quot;XXX&quot;, &quot;XL&quot;, &quot;L&quot;, &quot;LX&quot;, &quot;LXX&quot;, &quot;LXXX&quot;, &quot;XC&quot;]
-chars2 = [&quot;&quot;, &quot;C&quot;, &quot;CC&quot;, &quot;CCC&quot;, &quot;CD&quot;, &quot;D&quot;, &quot;DC&quot;, &quot;DCC&quot;, &quot;DCCC&quot;, &quot;CM&quot;]
-chars3 = [&quot;&quot;, &quot;M&quot;, &quot;MM&quot;, &quot;MMM&quot;]
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>位/数</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-    </tr>
-    <tr>
-        <td>个位</td><td></td><td>I</td><td>II</td><td>III</td><td>IV</td><td>V</td><td>VI</td><td>VII</td><td>VIII</td><td>IX</td>
-    </tr>
-    <tr>
-        <td>十位</td><td></td><td>X</td><td>XX</td><td>XXX</td><td>XL</td><td>L</td><td>LX</td><td>LXX</td><td>LXXX</td><td>XC</td>
-    </tr>
-    <tr>
-        <td>百位</td><td></td><td>C</td><td>CC</td><td>CCC</td><td>CD</td><td>D</td><td>DC</td><td>DCC</td><td>DCCC</td><td>CM</td>
-    </tr>
-    <tr>
-        <td>千位</td><td></td><td>M</td><td>MM</td><td>MMM</td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-</table>
-
-<pre><code>2.数字从最低位到最高位依次取出，然后对应表中相应罗马数字即可
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="图解："><a href="#图解：" class="headerlink" title="图解："></a>图解：</h5></blockquote>
-<pre><code>例: num = 1994 则对应表中位置如下:
-</code></pre>
-<table style = "text-align:center;font-size:14px;table-layout:fixed">
-    <tr>
-        <td>位/数</td><td>0</td><td>1</td><td>2</td><td>3</td><td >4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-    </tr>
-    <tr>
-        <td>个位</td><td></td><td>I</td><td>II</td><td>III</td><td bgcolor=#B0E0E6>IV</td><td>V</td><td>VI</td><td>VII</td><td>VIII</td><td>IX</td>
-    </tr>
-    <tr>
-        <td>十位</td><td></td><td>X</td><td>XX</td><td>XXX</td><td>XL</td><td>L</td><td>LX</td><td>LXX</td><td>LXXX</td><td bgcolor=#B0E0E6>XC</td>
-    </tr>
-    <tr>
-        <td>百位</td><td></td><td>C</td><td>CC</td><td>CCC</td><td>CD</td><td>D</td><td>DC</td><td>DCC</td><td>DCCC</td><td bgcolor=#B0E0E6>CM</td>
-    </tr>
-    <tr>
-        <td>千位</td><td></td><td bgcolor=#B0E0E6>M</td><td>MM</td><td>MMM</td><td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-</table>
-
-<pre><code>得出结果  MCMXCIV
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">intToRoman</span><span class="params">(<span class="type">int</span> num)</span> &#123;</span><br><span class="line">    String[] chars0 = &#123;<span class="string">&quot;&quot;</span>, <span class="string">&quot;I&quot;</span>, <span class="string">&quot;II&quot;</span>, <span class="string">&quot;III&quot;</span>, <span class="string">&quot;IV&quot;</span>, <span class="string">&quot;V&quot;</span>, <span class="string">&quot;VI&quot;</span>, <span class="string">&quot;VII&quot;</span>, <span class="string">&quot;VIII&quot;</span>, <span class="string">&quot;IX&quot;</span>&#125;;</span><br><span class="line">    String[] chars1 = &#123;<span class="string">&quot;&quot;</span>, <span class="string">&quot;X&quot;</span>, <span class="string">&quot;XX&quot;</span>, <span class="string">&quot;XXX&quot;</span>, <span class="string">&quot;XL&quot;</span>, <span class="string">&quot;L&quot;</span>, <span class="string">&quot;LX&quot;</span>, <span class="string">&quot;LXX&quot;</span>, <span class="string">&quot;LXXX&quot;</span>, <span class="string">&quot;XC&quot;</span>&#125;;</span><br><span class="line">    String[] chars2 = &#123;<span class="string">&quot;&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;CC&quot;</span>, <span class="string">&quot;CCC&quot;</span>, <span class="string">&quot;CD&quot;</span>, <span class="string">&quot;D&quot;</span>, <span class="string">&quot;DC&quot;</span>, <span class="string">&quot;DCC&quot;</span>, <span class="string">&quot;DCCC&quot;</span>, <span class="string">&quot;CM&quot;</span>&#125;;</span><br><span class="line">    String[] chars3 = &#123;<span class="string">&quot;&quot;</span>, <span class="string">&quot;M&quot;</span>, <span class="string">&quot;MM&quot;</span>, <span class="string">&quot;MMM&quot;</span>&#125;;</span><br><span class="line">    String[][] chars = <span class="keyword">new</span> <span class="title class_">String</span>[][]&#123;chars0, chars1, chars2, chars3&#125;;</span><br><span class="line">    <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (num &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> num % <span class="number">10</span>;</span><br><span class="line">        result = chars[d][n] + result;</span><br><span class="line">        num = num/<span class="number">10</span>;</span><br><span class="line">        d++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/27/leetcode/LC11_MaxArea/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Bob">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogz">
-      <meta itemprop="description" content="The description of your website">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Blogz">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/27/leetcode/LC11_MaxArea/" class="post-title-link" itemprop="url">LeetCode 11 盛最多水的容器</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-09-27 20:00:00" itemprop="dateCreated datePublished" datetime="2022-09-27T20:00:00+08:00">2022-09-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-12 12:33:12" itemprop="dateModified" datetime="2022-10-12T12:33:12+08:00">2022-10-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="LeetCode-11-盛最多水的容器"><a href="#LeetCode-11-盛最多水的容器" class="headerlink" title="LeetCode 11 盛最多水的容器"></a>LeetCode 11 盛最多水的容器</h4><hr>
-<blockquote>
-<h5 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h5></blockquote>
-<pre><code>给定一个长度为 n 的整数数组 height 。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i]) 。
-找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
-返回容器可以储存的最大水量。
-</code></pre>
-<img src="/images/img_lc_11.jpg">
-
-<pre><code>说明：你不能倾斜容器。
-
-示例 1：
-输入：[1,8,6,2,5,4,8,3,7]
-输出：49 
-解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。
-
-示例 2：
-输入：height = [1,1]
-输出：1
- 
-提示：
-n == height.length
-2 &lt;= n &lt;= 105
-0 &lt;= height[i] &lt;= 104
-
-来源：力扣（LeetCode）
-链接：https://leetcode.cn/problems/container-with-most-water
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h5></blockquote>
-<pre><code>思路就按照一条原则，补短板，求面积
-1.左右两边哪边短，就从那边开始收缩直至找到更高的边，才有可能比之前的面积更大
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="图解："><a href="#图解：" class="headerlink" title="图解："></a>图解：</h5></blockquote>
-<pre><code>示例: [1,8,6,2,5,4,8,3,7] 定义i,j分别为左右边界,max为最大盛水量,初始值为0
-</code></pre>
-<table style = "width:200px;border:2px">
-    <tr>
-        <td bgcolor=#FF6100>1</td><td>8</td><td>6</td><td>2</td><td>5</td><td>4</td><td>8</td><td>3</td><td bgcolor=#FF6100>7</td> 
-    </tr>
-    <tr>
-        <td>i</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>j</td>
-    </tr>
-</table>
-
-<pre><code>此时最大盛水量=8*1  [8]  max=8
-短板为左，i右移直至短板变长
-</code></pre>
-<table style = "width:200px;border:2px">
-    <tr>
-        <td>1</td><td bgcolor=#FF6100>8</td><td>6</td><td>2</td><td>5</td><td>4</td><td>8</td><td>3</td><td bgcolor=#FF6100>7</td> 
-    </tr>
-    <tr>
-        <td></td><td>i</td><td></td><td></td><td></td><td></td><td></td><td></td><td>j</td>
-    </tr>
-</table>
-
-<pre><code>此时最大盛水量=7*7  [8,49] max=49
-短板为右，j左移直至短板变长
-</code></pre>
-<table style = "width:200px;border:2px">
-    <tr>
-        <td>1</td><td bgcolor=#FF6100>8</td><td>6</td><td>2</td><td>5</td><td>4</td><td bgcolor=#FF6100>8</td><td>3</td><td>7</td> 
-    </tr>
-    <tr>
-        <td></td><td>i</td><td></td><td></td><td></td><td></td><td>j</td><td></td><td></td>
-    </tr>
-</table>
-
-<pre><code>此时最大盛水量=8*5  [8,49,40] max=49
-短板为左，i右移直至短板变长
-i直至和j相遇短板也无法继续增高，因此返回结果 49
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxArea</span><span class="params">(<span class="type">int</span>[] height)</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> height.length-<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> Math.min(height[i], height[j]);</span><br><span class="line">        res = Math.max(res, (j - i) * min);</span><br><span class="line">        <span class="keyword">if</span> (height[i] &lt;= height[j]) &#123;</span><br><span class="line">            <span class="keyword">while</span> (i &lt; j &amp;&amp; height[i] &lt;= min) i++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (i &lt; j &amp;&amp; height[j] &lt;= min) j--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/16/leetcode/LC09_IsPalindrome/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Bob">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogz">
-      <meta itemprop="description" content="The description of your website">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Blogz">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/16/leetcode/LC09_IsPalindrome/" class="post-title-link" itemprop="url">LeetCode 09 回文数</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-09-16 20:00:00" itemprop="dateCreated datePublished" datetime="2022-09-16T20:00:00+08:00">2022-09-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-12 12:33:27" itemprop="dateModified" datetime="2022-10-12T12:33:27+08:00">2022-10-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="LeetCode-09-回文数"><a href="#LeetCode-09-回文数" class="headerlink" title="LeetCode 09 回文数"></a>LeetCode 09 回文数</h4><hr>
-<blockquote>
-<h5 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h5></blockquote>
-<pre><code>给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。
-回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
-例如，121 是回文，而 123 不是。
- 
-示例 1：
-
-输入：x = 121
-输出：true
-示例 2：
-
-输入：x = -121
-输出：false
-解释：从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。
-示例 3：
-
-输入：x = 10
-输出：false
-解释：从右向左读, 为 01 。因此它不是一个回文数。
- 
-
-提示：
-
--231 &lt;= x &lt;= 231 - 1
-
-进阶：你能不将整数转为字符串来解决这个问题吗？
-
-来源：力扣（LeetCode）
-链接：https://leetcode.cn/problems/palindrome-number
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h5></blockquote>
-<pre><code>思路很简单
-1.负数直接返回False，一定不是回文数
-2.每次去除原数A最低位加上新数✖️10，得新数B，判断A是否等于B即可
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="图解："><a href="#图解：" class="headerlink" title="图解："></a>图解：</h5></blockquote>
-<pre><code>例：54345  步骤如下：
-</code></pre>
-<table style = "text-align:center;border:2px">
-    <tr>
-        <td>5434</td><td>543</td><td>54</td><td>5</td><td></td>
-    </tr>
-    <tr>
-        <td bgcolor=#B0E0E6>⬇(5)</td><td bgcolor=#B0E0E6>⬇(4)</td><td bgcolor=#B0E0E6>⬇(3)</td><td bgcolor=#B0E0E6>⬇(4)</td><td bgcolor=#B0E0E6>⬇(5)</td>
-    </tr>
-    <tr>
-        <td>0x10+5=5</td><td>5x10+4=54</td><td>54x10+3=543</td><td>543x10+4=5434</td><td>5432x10+5=54345</td>
-    </tr>
-</table>   
-
-<br/>
-
-<blockquote>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (x &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> x;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        n = n * <span class="number">10</span> + x % <span class="number">10</span>;</span><br><span class="line">        x = x / <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n == m) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/09/15/leetcode/LC08_MyAtoi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Bob">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blogz">
-      <meta itemprop="description" content="The description of your website">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Blogz">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/15/leetcode/LC08_MyAtoi/" class="post-title-link" itemprop="url">LeetCode 08 字符串转换整数 (atoi)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-09-15 22:00:00" itemprop="dateCreated datePublished" datetime="2022-09-15T22:00:00+08:00">2022-09-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-12 12:38:02" itemprop="dateModified" datetime="2022-10-12T12:38:02+08:00">2022-10-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/LeetCodeAlgorithm/" itemprop="url" rel="index"><span itemprop="name">LeetCodeAlgorithm</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="LeetCode-08-字符串转换整数-atoi"><a href="#LeetCode-08-字符串转换整数-atoi" class="headerlink" title="LeetCode 08 字符串转换整数 (atoi)"></a>LeetCode 08 字符串转换整数 (atoi)</h4><hr>
-<blockquote>
-<h5 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h5></blockquote>
-<pre><code>请你来实现一个 myAtoi(string s) 函数，使其能将字符串转换成一个 32 位有符号整数（类似 C/C++ 中的 atoi 函数）。
-函数 myAtoi(string s) 的算法如下：
-
-读入字符串并丢弃无用的前导空格
-检查下一个字符（假设还未到字符末尾）为正还是负号，读取该字符（如果有）。 确定最终结果是负数还是正数。 
-如果两者都不存在，则假定结果为正。读入下一个字符，直到到达下一个非数字字符或到达输入的结尾。字符串的其余部分将被忽略。
-将前面步骤读入的这些数字转换为整数（即，&quot;123&quot; -&gt; 123， &quot;0032&quot; -&gt; 32）。
-如果没有读入数字，则整数为 0 。必要时更改符号（从步骤 2 开始）。
-如果整数数超过 32 位有符号整数范围 [−231,  231 − 1] ，需要截断这个整数，使其保持在这个范围内。
-具体来说，小于 −231 的整数应该被固定为 −231 ，大于 231 − 1 的整数应该被固定为 231 − 1 。
-返回整数作为最终结果。
-注意：
-
-本题中的空白字符只包括空格字符 &#39; &#39; 。
-除前导空格或数字后的其余字符串外，请勿忽略 任何其他字符。
- 
-
-示例 1：
-
-输入：s = &quot;42&quot;
-输出：42
-解释：加粗的字符串为已经读入的字符，插入符号是当前读取的字符。
-第 1 步：&quot;42&quot;（当前没有读入字符，因为没有前导空格）
-        ^
-第 2 步：&quot;42&quot;（当前没有读入字符，因为这里不存在 &#39;-&#39; 或者 &#39;+&#39;）
-        ^
-第 3 步：&quot;42&quot;（读入 &quot;42&quot;）
-        ^
-解析得到整数 42 。
-由于 &quot;42&quot; 在范围 [-231, 231 - 1] 内，最终结果为 42 。
-示例 2：
-
-输入：s = &quot;   -42&quot;
-输出：-42
-解释：
-第 1 步：&quot;   -42&quot;（读入前导空格，但忽视掉）
-            ^
-第 2 步：&quot;   -42&quot;（读入 &#39;-&#39; 字符，所以结果应该是负数）
-            ^
-第 3 步：&quot;   -42&quot;（读入 &quot;42&quot;）
-            ^
-解析得到整数 -42 。
-由于 &quot;-42&quot; 在范围 [-231, 231 - 1] 内，最终结果为 -42 。
-示例 3：
-
-输入：s = &quot;4193 with words&quot;
-输出：4193
-解释：
-第 1 步：&quot;4193 with words&quot;（当前没有读入字符，因为没有前导空格）
-        ^
-第 2 步：&quot;4193 with words&quot;（当前没有读入字符，因为这里不存在 &#39;-&#39; 或者 &#39;+&#39;）
-        ^
-第 3 步：&quot;4193 with words&quot;（读入 &quot;4193&quot;；由于下一个字符不是一个数字，所以读入停止）
-            ^
-解析得到整数 4193 。
-由于 &quot;4193&quot; 在范围 [-231, 231 - 1] 内，最终结果为 4193 。
- 
-
-提示：
-
-0 &lt;= s.length &lt;= 200
-s 由英文字母（大写和小写）、数字（0-9）、&#39; &#39;、&#39;+&#39;、&#39;-&#39; 和 &#39;.&#39; 组成
-
-来源：力扣（LeetCode）
-链接：https://leetcode.cn/problems/string-to-integer-atoi
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h5></blockquote>
-<pre><code>字符串类型的题目需要判断的点较多，各种条件交错容易漏逻辑或者逻辑错误
-最好的办法首先分析写出逻辑表，然后按照逻辑表依条写
-此题我们可以将逻辑大体分为以下：
-
-1.依次读入字符
-
-2.如果字符不是 数字（0-9）、&#39; &#39;、&#39;+&#39;、&#39;-&#39; 这四种直接结束
-
-3.如果字符是 &#39; &#39; 且此时即没有确认符号也没有读入任何数字，继续读入，否则结束
-
-4.如果字符是 &#39;+&#39;、&#39;-&#39; 且此时没有确认符号，则确认符号，继续读入，否则结束
-
-5.如果字符是 数字（0-9）且此时没有确认符号，自动确认符号为 &#39;+&#39;,加入数字计算，
-  计算按照公式 已经计算的数x10+新读入的数 = 新计算数 
-  然后判断新计算数是否已经超过Int范围，如果超过则赋值最值后结束，否则继续读入
-  
-6.根据符号和最后计算数确认结果返回
-</code></pre>
-<br/>
-
-<blockquote>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">myAtoi</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    <span class="type">char</span>[] chars = s.toCharArray();</span><br><span class="line">    <span class="type">Boolean</span> <span class="variable">positive</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="type">long</span> <span class="variable">v</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (chars[i] == <span class="number">32</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (positive == <span class="literal">null</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (chars[i] == <span class="number">43</span> || chars[i] == <span class="number">45</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (positive != <span class="literal">null</span>) <span class="keyword">break</span>;</span><br><span class="line">            positive = chars[i] == <span class="number">43</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (chars[i] &gt;= <span class="number">48</span> &amp;&amp; chars[i] &lt;= <span class="number">57</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (positive == <span class="literal">null</span>) positive = <span class="literal">true</span>;</span><br><span class="line">            v = v * <span class="number">10</span> + (chars[i] - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            <span class="keyword">if</span> (positive &amp;&amp; v &gt; Integer.MAX_VALUE) &#123;</span><br><span class="line">                v = Integer.MAX_VALUE;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!positive &amp;&amp; v &gt; (<span class="type">long</span>) Integer.MAX_VALUE + <span class="number">1</span>) &#123;</span><br><span class="line">                v = (<span class="type">long</span>) Integer.MAX_VALUE + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="type">int</span>) (Boolean.TRUE.equals(positive) ?v:-v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 </div>

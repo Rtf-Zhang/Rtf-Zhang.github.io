@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rtf-zhang.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概要  1.Fragment 英文原意是“片断”或“碎片”,在 Android 系统中代表用户界面的局部区域,它可以是一个活动的部分,     可以单独设置局部用户界面,也可以单独接收用户输入和处理事件消息,与用户交互  2.Android 在 Android 3.0（API 级别 11）中引入了片段，主要目的是为大屏幕（如平板电脑）上     更加动态和灵活的界面设计提供支持  3.Fragm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发--Fragment">
+<meta property="og:url" content="https://rtf-zhang.github.io/2022/10/17/android/Android02_Fragment/index.html">
+<meta property="og:site_name" content="Blogz">
+<meta property="og:description" content="概要  1.Fragment 英文原意是“片断”或“碎片”,在 Android 系统中代表用户界面的局部区域,它可以是一个活动的部分,     可以单独设置局部用户界面,也可以单独接收用户输入和处理事件消息,与用户交互  2.Android 在 Android 3.0（API 级别 11）中引入了片段，主要目的是为大屏幕（如平板电脑）上     更加动态和灵活的界面设计提供支持  3.Fragm">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://rtf-zhang.github.io/images/android_fragment_lifecycle.png">
+<meta property="og:image" content="https://rtf-zhang.github.io/images/android_activity_lifecycle.gif">
+<meta property="article:published_time" content="2022-10-17T13:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-20T14:00:47.888Z">
+<meta property="article:author" content="Bob">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Fragment">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rtf-zhang.github.io/images/android_fragment_lifecycle.png">
+
+
+<link rel="canonical" href="https://rtf-zhang.github.io/2022/10/17/android/Android02_Fragment/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://rtf-zhang.github.io/2022/10/17/android/Android02_Fragment/","path":"2022/10/17/android/Android02_Fragment/","title":"Android开发--Fragment"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Android开发--Fragment | Blogz</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Blogz</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">The subtitle of your website</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">概要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%89%87%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">创建片段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%89%87%E6%AE%B5"><span class="nav-number">3.</span> <span class="nav-text">添加片段</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%9C%A8-Activity-%E7%9A%84%E5%B8%83%E5%B1%80%E6%96%87%E4%BB%B6%E5%86%85%E5%A3%B0%E6%98%8E%E7%89%87%E6%AE%B5"><span class="nav-number">3.1.</span> <span class="nav-text">1.在 Activity 的布局文件内声明片段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E9%80%9A%E8%BF%87%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F%E5%B0%86%E7%89%87%E6%AE%B5%E6%B7%BB%E5%8A%A0%E5%88%B0%E6%9F%90%E4%B8%AA%E7%8E%B0%E6%9C%89-ViewGroup"><span class="nav-number">3.2.</span> <span class="nav-text">2.通过编程方式将片段添加到某个现有 ViewGroup</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">4.</span> <span class="nav-text">生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#onAttach"><span class="nav-number">4.1.</span> <span class="nav-text">onAttach()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#onCreate-Bundle-savedInstanceState"><span class="nav-number">4.2.</span> <span class="nav-text">onCreate(Bundle savedInstanceState)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#onCreateView-LayoutInflater-inflater-ViewGroup-container-Bundle-savedInstanceState"><span class="nav-number">4.3.</span> <span class="nav-text">onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#onActivityCreated"><span class="nav-number">4.4.</span> <span class="nav-text">onActivityCreated()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#onStart-onResume-onPause-onStop"><span class="nav-number">4.5.</span> <span class="nav-text">onStart()\onResume()\onPause()\onStop()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#onDestroyView"><span class="nav-number">4.6.</span> <span class="nav-text">onDestroyView()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#onDestroy"><span class="nav-number">4.7.</span> <span class="nav-text">onDestroy()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#onDetach"><span class="nav-number">4.8.</span> <span class="nav-text">onDetach()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#setRetainInstance"><span class="nav-number">4.9.</span> <span class="nav-text">setRetainInstance()</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Bob"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">Bob</p>
+  <div class="site-description" itemprop="description">The description of your website</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Rtf-Zhang/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Rtf-Zhang&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/17/android/Android02_Fragment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Android开发--Fragment | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android开发--Fragment
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-17 21:00:00" itemprop="dateCreated datePublished" datetime="2022-10-17T21:00:00+08:00">2022-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-20 22:00:47" itemprop="dateModified" datetime="2022-10-20T22:00:47+08:00">2022-10-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<h4 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h4></blockquote>
+<pre>
+1.Fragment 英文原意是“片断”或“碎片”,在 Android 系统中代表用户界面的局部区域,它可以是一个活动的部分,
+    可以单独设置局部用户界面,也可以单独接收用户输入和处理事件消息,与用户交互
+
+2.Android 在 Android 3.0（API 级别 11）中引入了片段，主要目的是为大屏幕（如平板电脑）上
+    更加动态和灵活的界面设计提供支持
+
+3.Fragment 的出现是为了适应平板电脑等大屏幕设备,改变了早期因手机屏幕较小而将整个屏幕作为一个整体界面
+    处理的状况,Fragment 组件可以将屏幕分成多个相对独立的区域,用户界面的更新可以在>局部区域发生,使得用户
+    界面切换方式更加高效、丰富
+
+4.每个片段都会通过各自的生命周期回调来定义自己的布局和行为，您可以将一个片段加入多个 Activity，因此，
+    您应采用可复用式设计，避免直接通过某个片段操纵另一个片段
+</pre>
+
+<br/>
+
+<blockquote>
+<h4 id="创建片段"><a href="#创建片段" class="headerlink" title="创建片段"></a>创建片段</h4></blockquote>
+<pre>
+如要创建片段，您必须创建 Fragment 的子类（或已有其子类）。Fragment 类的代码与 Activity 非常相似。
+它包含与 Activity 类似的回调方法，如 onCreate()、onStart()、onPause() 和 onStop()。实际上，
+如果您要将现有 Android 应用转换为使用片段，可能只需将代码从 Activity 的回调方法移入片段相应的回调方法中。
+
+片段通常用作 Activity 界面的一部分，并且会将其自己的布局融入 Activity。
+如要为片段提供布局，您必须实现 onCreateView() 回调方法，Android 系统会在片段需要绘制其布局时调用该方法。
+此方法的实现所返回的 View 必须是片段布局的根视图。
+
+如要从 onCreateView() 返回布局，您可以通过 XML 中定义的布局资源来扩展布局。为帮助您执行此操作，
+onCreateView() 提供了一个 LayoutInflater 对象。
+
+例：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">ExampleFragment</span> <span class="keyword">extends</span> <span class="title class_">Fragment</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> View <span class="title function_">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container,</span></span><br><span class="line"><span class="params">                             Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="comment">// Inflate the layout for this fragment</span></span><br><span class="line">        <span class="keyword">return</span> inflater.inflate(R.layout.example_fragment, container, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre>
+传递至 onCreateView() 的 container 参数是您的片段布局将插入到的父级 ViewGroup（来自 Activity 的布局）。
+savedInstanceState 参数是在恢复片段时，提供上一片段实例相关数据的 Bundle
+
+inflate() 方法带有三个参数：
+1.您想要扩展的布局的资源 ID。
+2.将作为扩展布局父项的 ViewGroup。传递 container 对系统向扩展布局的根视图（由其所属的父视图指定）
+    应用布局参数具有重要意义。
+3.指示是否应在扩展期间将扩展布局附加至 ViewGroup（第二个参数）的布尔值。（在本例中，此值为 false，
+    因为系统已将扩展布局插入 container，而传递 true 值会在最终布局中创建一个多余的视图组。）
+</pre>
+
+<br/>
+
+<blockquote>
+<h4 id="添加片段"><a href="#添加片段" class="headerlink" title="添加片段"></a>添加片段</h4></blockquote>
+<pre>
+通常，片段会向宿主 Activity 贡献一部分界面，作为 Activity 整体视图层次结构的一部分嵌入到 Activity 中。
+可以通过两种方式向 Activity 布局添加片段：
+</pre>
+
+<blockquote>
+<h5 id="1-在-Activity-的布局文件内声明片段"><a href="#1-在-Activity-的布局文件内声明片段" class="headerlink" title="1.在 Activity 的布局文件内声明片段"></a>1.在 Activity 的布局文件内声明片段</h5></blockquote>
+<pre>
+例如，以下是拥有两个片段的 Activity 的布局文件
+</pre>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">&quot;com.example.news.ArticleListFragment&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/list&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_weight</span>=<span class="string">&quot;1&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;0dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">fragment</span> <span class="attr">android:name</span>=<span class="string">&quot;com.example.news.ArticleReaderFragment&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/viewer&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_weight</span>=<span class="string">&quot;2&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;0dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<pre>
+<fragment> 中的 android:name 属性指定要在布局中进行实例化的 Fragment 类。创建此 Activity 布局时，
+系统会将布局中指定的每个片段实例化，并为每个片段调用 onCreateView() 方法，以检索每个片段的布局。
+系统会直接插入片段返回的 View，从而代替 <fragment> 元素。
+</pre>
+
+<blockquote>
+<h5 id="2-通过编程方式将片段添加到某个现有-ViewGroup"><a href="#2-通过编程方式将片段添加到某个现有-ViewGroup" class="headerlink" title="2.通过编程方式将片段添加到某个现有 ViewGroup"></a>2.通过编程方式将片段添加到某个现有 ViewGroup</h5></blockquote>
+<pre>
+在 Activity 运行期间，您可以随时将片段添加到 Activity 布局中。您只需指定要将片段放入哪个 ViewGroup。
+如要在您的 Activity 中执行片段事务（如添加、移除或替换片段），则必须使用 FragmentTransaction 中的 API。
+如下所示，您可以从 FragmentActivity 获取一个 FragmentTransaction 实例
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> getSupportFragmentManager();</span><br><span class="line"><span class="type">FragmentTransaction</span> <span class="variable">fragmentTransaction</span> <span class="operator">=</span> fragmentManager.beginTransaction();</span><br></pre></td></tr></table></figure>
+
+<pre>
+然后，您可以使用 add() 方法添加一个片段，指定要添加的片段以及将其插入哪个视图。例如：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ExampleFragment</span> <span class="variable">fragment</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExampleFragment</span>();</span><br><span class="line">fragmentTransaction.add(R.id.fragment_container, fragment);</span><br><span class="line">fragmentTransaction.commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+传递到 add() 的第一个参数是 ViewGroup，即应放置片段的位置，由资源 ID 指定，第二个参数是要添加的片段。
+一旦您通过 FragmentTransaction 做出了更改，就必须调用 commit() 以使更改生效。
+</pre>    
+
+<br/>
+
+<blockquote>
+<h4 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h4></blockquote>
+<pre>
+Fragment生命周期图示如下,与Activity有所不同
+</pre>
+
+<table rules="none" align="center">
+    <tr>
+        <td>
+            <center>
+                <img src="/images/android_fragment_lifecycle.png" width="60%" />
+                <br/>
+                <font color="AAAAAA">Fragment.jpg</font>
+            </center>
+        </td>
+        <td>
+            <center>
+                <img src="/images/android_activity_lifecycle.gif" width="60%" />
+                <br/>
+                <font color="AAAAAA">Activity.jpg</font>
+            </center>
+        </td>
+    </tr>
+</table>
+
+<pre>
+下面来分析生命周期
+</pre>
+
+<blockquote>
+<h5 id="onAttach"><a href="#onAttach" class="headerlink" title="onAttach()"></a>onAttach()</h5></blockquote>
+<pre>
+onAttach()回调将在Fragment与其Activity关联之后调用。
+需要使用Activity的引用或者使用Activity作为其他操作的上下文，将在此回调方法中实现
+</pre>
+
+<blockquote>
+<h5 id="onCreate-Bundle-savedInstanceState"><a href="#onCreate-Bundle-savedInstanceState" class="headerlink" title="onCreate(Bundle savedInstanceState)"></a>onCreate(Bundle savedInstanceState)</h5></blockquote>
+<pre>
+此时的Fragment的onCreat回调时，该fragmet还没有获得Activity的onCreate()已完成的通知，
+所以不能将依赖于Activity视图层次结构存在性的代码放入此回调方法中。在onCreate()回调方法中，
+我们应该尽量避免耗时操作。此时的bundle就可以获取到activity传来的参数
+</pre>
+
+<blockquote>
+<h5 id="onCreateView-LayoutInflater-inflater-ViewGroup-container-Bundle-savedInstanceState"><a href="#onCreateView-LayoutInflater-inflater-ViewGroup-container-Bundle-savedInstanceState" class="headerlink" title="onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)"></a>onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)</h5></blockquote>
+<pre>
+其中的Bundle为状态包与上面的bundle不一样。
+注意的是：不要将视图层次结构附加到传入的ViewGroup父元素中，该关联会自动完成。
+如果在此回调中将碎片的视图层次结构附加到父元素，很可能会出现异常。
+这句话什么意思呢？就是不要把初始化的view视图主动添加到container里面，
+因为这会系统自带，所以inflate函数的第三个参数必须填false，而且不能出现container.addView(v)的操作。
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">View</span> <span class="variable">v</span> <span class="operator">=</span> inflater.inflate(R.layout.hello_world, container, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h5 id="onActivityCreated"><a href="#onActivityCreated" class="headerlink" title="onActivityCreated()"></a>onActivityCreated()</h5></blockquote>
+<pre>
+onActivityCreated()回调会在Activity完成其onCreate()回调之后调用。
+在调用onActivityCreated()之前，Activity的视图层次结构已经准备好了，
+这是在用户看到用户界面之前你可对用户界面执行的最后调整的地方。
+
+Note：如果Activity和它的Fragment是从保存的状态重新创建的，此回调尤其重要，
+也可以在这里确保此Activity的其他所有Fragment已经附加到该Activity中了
+</pre>
+
+<blockquote>
+<h5 id="onStart-onResume-onPause-onStop"><a href="#onStart-onResume-onPause-onStop" class="headerlink" title="onStart()\onResume()\onPause()\onStop()"></a>onStart()\onResume()\onPause()\onStop()</h5></blockquote>
+<pre>
+这四种生命周期和Activity的回调方法进行绑定，也就是说与Activity中对应的生命周期相同，因此不做过多介绍
+</pre>
+
+<blockquote>
+<h5 id="onDestroyView"><a href="#onDestroyView" class="headerlink" title="onDestroyView()"></a>onDestroyView()</h5></blockquote>
+<pre>
+该回调方法在视图层次结构与Fragment分离之后调用
+</pre>
+
+<blockquote>
+<h5 id="onDestroy"><a href="#onDestroy" class="headerlink" title="onDestroy()"></a>onDestroy()</h5></blockquote>
+<pre>
+不再使用Fragment时调用。（备注：Fragment仍然附加到Activity并任然可以找到，但是不能执行其他操作）
+</pre>
+
+<blockquote>
+<h5 id="onDetach"><a href="#onDetach" class="headerlink" title="onDetach()"></a>onDetach()</h5></blockquote>
+<pre>
+Fragme生命周期最后回调函数，调用后，Fragment不再与Activity绑定，释放资源。
+</pre>
+
+<blockquote>
+<h5 id="setRetainInstance"><a href="#setRetainInstance" class="headerlink" title="setRetainInstance()"></a>setRetainInstance()</h5></blockquote>
+<pre>
+在使用Fragment时，我发现了一个金矿，那就是setRetainInstance()方法,此方法可以有效地提高系统的运行效率，
+对流畅性要求较高的应用可以适当采用此方法进行设置。Fragment有一个非常强大的功能——就是可以在Activity重新创建时
+可以不完全销毁Fragment，以便Fragment可以恢复。在onCreate()方法中调用setRetainInstance(true/false)方法是最佳位置。
+当Fragment恢复时的生命周期如上图所示，注意图中的红色箭头。当在onCreate()方法中调用了setRetainInstance(true)后，
+Fragment恢复时会跳过onCreate()和onDestroy()方法，因此不能在onCreate()中放置一些初始化逻辑，切忌！
+</pre>
+
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:20px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/Fragment/" rel="tag"># Fragment</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/17/android/Android01_Activity/" rel="prev" title="Android开发--Activity">
+                  <i class="fa fa-chevron-left"></i> Android开发--Activity
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/10/20/android/Android03_FragmentManager/" rel="next" title="Android开发--FragmentManager">
+                  Android开发--FragmentManager <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bob</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

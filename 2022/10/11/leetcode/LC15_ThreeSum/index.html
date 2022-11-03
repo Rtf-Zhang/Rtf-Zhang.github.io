@@ -28,9 +28,10 @@
 <meta property="og:description" content="LeetCode 15 三数之和  题目: 给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i !&#x3D; j、i !&#x3D; k 且 j !&#x3D; k ，同时还满足 nums[i] + nums[j] + nums[k] &#x3D;&#x3D; 0 。请 你返回所有和为 0 且不重复的三元组。 注意：答案中不可以包含重复的三元组。   示例 1：  输入：nums">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-10-11T12:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-12T04:30:34.858Z">
+<meta property="article:modified_time" content="2022-10-27T05:51:33.488Z">
 <meta property="article:author" content="Bob">
 <meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="双指针">
 <meta name="twitter:card" content="summary">
 
 
@@ -133,7 +134,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -144,7 +145,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -224,7 +225,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-12 12:30:34" itemprop="dateModified" datetime="2022-10-12T12:30:34+08:00">2022-10-12</time>
+      <time title="Modified: 2022-10-27 13:51:33" itemprop="dateModified" datetime="2022-10-27T13:51:33+08:00">2022-10-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -300,7 +301,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
     b.数组最小值大于0
     c.数组最大值小于0
 3.遍历数组，i为当前遍历的位置,定义L=i+1 R=数组长度-1，即L为i的下一位，R为数组末尾，然后我们按照以下步骤寻找:
-    a.如果nums[i]+nums[L]+nums[R]=0 记录结果且L左移R右移直至与当前L、R所在位置值不同的位置(此步骤就是去重操作)
+    a.如果nums[i]+nums[L]+nums[R]=0 记录结果且R左移L右移直至与当前L、R所在位置值不同的位置(此步骤就是去重操作)
     b.如果nums[i]+nums[L]+nums[R]&gt;0 说明和太大，R左移直至与当前R所在位置值不同的位置(此步骤就是去重操作)
     c.如果nums[i]+nums[L]+nums[R]&lt;0 说明和太小，L右移直至与当前L所在位置值不同的位置(此步骤就是去重操作)
     d.一旦L，R相遇则此次循环结束
@@ -444,6 +445,7 @@ list=[[-2,-1,3],[-2,0,2],[-1,-1,2],[-1,0,1]]
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+              <a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/" rel="tag"># 双指针</a>
           </div>
 
         

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rtf-zhang.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概要  FragmentManager 类负责在应用的 fragment 上执行一些操作， 如添加、移除或替换操作，以及将操作添加到返回堆栈      访问 FragmentManager  我们可以在Activity和Fragment中访问FragmentManager，下面依次介绍两种访问方式和联系    1.在 Activity 中访问  每个 FragmentActivity 及其子类（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发--FragmentManager">
+<meta property="og:url" content="https://rtf-zhang.github.io/2022/10/20/android/Android03_FragmentManager/index.html">
+<meta property="og:site_name" content="Blogz">
+<meta property="og:description" content="概要  FragmentManager 类负责在应用的 fragment 上执行一些操作， 如添加、移除或替换操作，以及将操作添加到返回堆栈      访问 FragmentManager  我们可以在Activity和Fragment中访问FragmentManager，下面依次介绍两种访问方式和联系    1.在 Activity 中访问  每个 FragmentActivity 及其子类（">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://rtf-zhang.github.io/images/android_fragment_manager.png">
+<meta property="og:image" content="https://rtf-zhang.github.io/images/android_fragment_mapping.png">
+<meta property="article:published_time" content="2022-10-20T13:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-21T03:45:01.064Z">
+<meta property="article:author" content="Bob">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Fragment">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rtf-zhang.github.io/images/android_fragment_manager.png">
+
+
+<link rel="canonical" href="https://rtf-zhang.github.io/2022/10/20/android/Android03_FragmentManager/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://rtf-zhang.github.io/2022/10/20/android/Android03_FragmentManager/","path":"2022/10/20/android/Android03_FragmentManager/","title":"Android开发--FragmentManager"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Android开发--FragmentManager | Blogz</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Blogz</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">The subtitle of your website</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">概要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE-FragmentManager"><span class="nav-number">2.</span> <span class="nav-text">访问 FragmentManager</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%9C%A8-Activity-%E4%B8%AD%E8%AE%BF%E9%97%AE"><span class="nav-number">2.1.</span> <span class="nav-text">1.在 Activity 中访问</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%9C%A8-Fragment-%E4%B8%AD%E8%AE%BF%E9%97%AE"><span class="nav-number">2.2.</span> <span class="nav-text">2.在 Fragment 中访问</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%98%E7%AE%A1-Fragment"><span class="nav-number">3.</span> <span class="nav-text">托管 Fragment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90-fragment-%E7%9A%84%E7%AE%A1%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">子 fragment 的管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E4%BA%8B%E5%8A%A1"><span class="nav-number">5.</span> <span class="nav-text">执行事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E7%8E%B0%E6%9C%89-fragment"><span class="nav-number">6.</span> <span class="nav-text">查找现有 fragment</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#findFragmentById"><span class="nav-number">6.1.</span> <span class="nav-text">findFragmentById()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#findFragmentByTag"><span class="nav-number">6.2.</span> <span class="nav-text">findFragmentByTag()</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E5%85%B3%E5%AD%90-fragment-%E5%92%8C%E5%90%8C%E7%BA%A7-fragment-%E7%9A%84%E7%89%B9%E6%AE%8A%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">7.</span> <span class="nav-text">有关子 fragment 和同级 fragment 的特殊注意事项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%A4%9A%E4%B8%AA%E8%BF%94%E5%9B%9E%E5%A0%86%E6%A0%88"><span class="nav-number">8.</span> <span class="nav-text">支持多个返回堆栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA-fragment-%E6%8F%90%E4%BE%9B%E4%BE%9D%E8%B5%96%E9%A1%B9"><span class="nav-number">9.</span> <span class="nav-text">为 fragment 提供依赖项</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Bob"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">Bob</p>
+  <div class="site-description" itemprop="description">The description of your website</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Rtf-Zhang/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Rtf-Zhang&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/20/android/Android03_FragmentManager/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Android开发--FragmentManager | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android开发--FragmentManager
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-20 21:00:00" itemprop="dateCreated datePublished" datetime="2022-10-20T21:00:00+08:00">2022-10-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-21 11:45:01" itemprop="dateModified" datetime="2022-10-21T11:45:01+08:00">2022-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<h4 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h4></blockquote>
+<pre>
+FragmentManager 类负责在应用的 fragment 上执行一些操作，
+如添加、移除或替换操作，以及将操作添加到返回堆栈
+</pre>
+
+<br/>
+
+<blockquote>
+<h4 id="访问-FragmentManager"><a href="#访问-FragmentManager" class="headerlink" title="访问 FragmentManager"></a>访问 FragmentManager</h4></blockquote>
+<pre>
+我们可以在Activity和Fragment中访问FragmentManager，下面依次介绍两种访问方式和联系
+</pre>
+
+<blockquote>
+<h5 id="1-在-Activity-中访问"><a href="#1-在-Activity-中访问" class="headerlink" title="1.在 Activity 中访问"></a>1.在 Activity 中访问</h5></blockquote>
+<pre>
+每个 FragmentActivity 及其子类（如 AppCompatActivity）
+都可以通过 getSupportFragmentManager() 方法访问 FragmentManager
+</pre>
+
+<blockquote>
+<h5 id="2-在-Fragment-中访问"><a href="#2-在-Fragment-中访问" class="headerlink" title="2.在 Fragment 中访问"></a>2.在 Fragment 中访问</h5></blockquote>
+<pre>
+Fragment 也能够托管一个或多个子 fragment。在 fragment 内，
+您可以通过 getChildFragmentManager() 获取对管理 fragment 子级的 FragmentManager 的引用。
+如果您需要访问其宿主 FragmentManager，可以使用 getParentFragmentManager()
+</pre>
+
+<br/>
+
+<blockquote>
+<h4 id="托管-Fragment"><a href="#托管-Fragment" class="headerlink" title="托管 Fragment"></a>托管 Fragment</h4></blockquote>
+<pre>
+fragment、其宿主以及与每个 fragment 关联的 FragmentManager 实例之间的关系如下图所示
+</pre>
+
+<img src="/images/android_fragment_manager.png" width="60%" />
+
+<pre>
+两个界面布局示例，显示了 fragment 与其宿主 activity 之间的关系。每个示例中都有一个 activity 宿主。
+这两个示例中的宿主 activity 都以 BottomNavigationView 的形式向用户显示顶级导航，
+该视图负责以应用中的不同屏幕换出宿主 fragment，其中每个屏幕都实现为单独的 fragment
+
+示例 1 中的宿主 fragment 托管两个子 fragment，这些子 fragment 构成拆分视图屏幕。
+示例 2 中的宿主 fragment 托管一个子 fragment，该子 fragment 构成滑动视图的显示 fragment。
+
+基于此设置，您可以将每个宿主视为具有与其关联的 FragmentManager，用于管理其子 fragment。
+下图说明了这一点，并显示了 supportFragmentManager、parentFragmentManager 和 childFragmentManager 之间的属性映射
+</pre>
+
+<img src="/images/android_fragment_mapping.png" width="60%" />
+
+<pre>
+每个宿主都有与其关联的 FragmentManager，用于管理其子 fragment。
+需要引用的相应 FragmentManager 属性取决于调用点在 fragment 层次结构中的位置，
+以及您尝试访问的 fragment 管理器。对 FragmentManager 进行引用后，您就可以使用它来操纵向用户显示的 fragment。
+</pre>
+
+<blockquote>
+<h4 id="子-fragment-的管理"><a href="#子-fragment-的管理" class="headerlink" title="子 fragment 的管理"></a>子 fragment 的管理</h4></blockquote>
+<pre>
+一般来说，应用应由应用项目中的一个或少数几个 activity 组成，其中每个 activity 表示一组相关的屏幕。
+activity 可能会提供一个点来放置顶级导航，并提供一个位置来限定 ViewModels 以及 fragment 之间的其他视图状态的范围。
+应用中的每个目的地应由一个 fragment 来表示。
+
+如果您想要一次显示多个 fragment（如在拆分视图中或信息中心内），应使用子 fragment，
+它们由目的地 fragment 及其子 fragment 管理器进行管理。子 fragment 的其他用例可能包括：
+
+1.屏幕滑动，其中父 fragment 中的 ViewPager2 管理一系列子 fragment 视图。
+2.一组相关屏幕中的子导航。
+3.Jetpack Navigation 将子 fragment 用作各个目的地。一个 activity 托管一个父 NavHostFragment，
+    并在用户浏览应用时以不同的子目的地 fragment 填充它的空间。
+</pre>
+
+<blockquote>
+<h4 id="执行事务"><a href="#执行事务" class="headerlink" title="执行事务"></a>执行事务</h4></blockquote>
+<pre>
+如需在布局容器中显示 fragment，请使用 FragmentManager 创建 FragmentTransaction。
+在事务中，您随后可以对容器执行 add() 或 replace() 操作。
+
+例如，一个简单的 FragmentTransaction 可能如下所示：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> getSupportFragmentManager();</span><br><span class="line">fragmentManager.beginTransaction()</span><br><span class="line">    .replace(R.id.fragment_container, ExampleFragment.class, <span class="literal">null</span>)</span><br><span class="line">    .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">    .addToBackStack(<span class="string">&quot;name&quot;</span>) <span class="comment">// name can be null</span></span><br><span class="line">    .commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+在本例中，ExampleFragment 会替换当前在布局容器中的 fragment（如有），
+该布局容器由 R.id.fragment_container ID 进行标识。
+将 fragment 的类提供给 replace() 方法可让 FragmentManager 使用其 FragmentFactory 处理实例化
+
+setReorderingAllowed(true) 可优化事务中涉及的 fragment 的状态变化，
+以使动画和过渡正常运行。如需详细了解如何使用动画和过渡进行导航
+
+addToBackStack() 会将事务提交到返回堆栈。用户稍后可以通过按“返回”按钮反转事务，并恢复上一个 fragment。
+如果您在一个事务中添加或移除了多个 fragment，弹出返回堆栈时，所有这些操作都会撤消。
+在 addToBackStack() 调用中提供的可选名称使您能够使用 popBackStack() 弹回到该特定事务
+
+如果您在执行移除 fragment 的事务时未调用 addToBackStack()，则提交事务时会销毁已移除的 fragment，
+用户无法返回到该 fragment。如果您在移除某个 fragment 时调用了 addToBackStack()，
+则该 fragment 只会 STOPPED，稍后当用户返回时它会 RESUMED。请注意，在这种情况下，其视图会被销毁
+</pre>
+
+<br/>
+
+<blockquote>
+<h4 id="查找现有-fragment"><a href="#查找现有-fragment" class="headerlink" title="查找现有 fragment"></a>查找现有 fragment</h4></blockquote>
+<pre>
+可以通过 findFragmentById() 或者 findFragmentByTag() 获取对布局容器中当前 fragment 的引用
+</pre>
+
+<blockquote>
+<h5 id="findFragmentById"><a href="#findFragmentById" class="headerlink" title="findFragmentById()"></a>findFragmentById()</h5></blockquote>
+<pre>
+可使用 findFragmentById() 按给定的 ID 查找 fragment；
+在 FragmentTransaction 中添加时，可使用它按容器 ID 进行查找
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> getSupportFragmentManager();</span><br><span class="line">fragmentManager.beginTransaction()</span><br><span class="line">    .replace(R.id.fragment_container, ExampleFragment.class, <span class="literal">null</span>)</span><br><span class="line">    .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">    .addToBackStack(<span class="literal">null</span>)</span><br><span class="line">    .commit();</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="type">ExampleFragment</span> <span class="variable">fragment</span> <span class="operator">=</span></span><br><span class="line">        (ExampleFragment) fragmentManager.findFragmentById(R.id.fragment_container);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h5 id="findFragmentByTag"><a href="#findFragmentByTag" class="headerlink" title="findFragmentByTag()"></a>findFragmentByTag()</h5></blockquote>
+<pre>
+可以为 fragment 分配一个唯一的标记，并使用 findFragmentByTag() 获取引用。
+您可以在布局中定义的 fragment 上使用 android:tag XML 属性来分配标记，
+也可以在 FragmentTransaction 中的 add() 或 replace() 操作期间分配标记
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> getSupportFragmentManager();</span><br><span class="line">fragmentManager.beginTransaction()</span><br><span class="line">    .replace(R.id.fragment_container, ExampleFragment.class, <span class="literal">null</span>, <span class="string">&quot;tag&quot;</span>)</span><br><span class="line">    .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">    .addToBackStack(<span class="literal">null</span>)</span><br><span class="line">    .commit();</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="type">ExampleFragment</span> <span class="variable">fragment</span> <span class="operator">=</span> (ExampleFragment) fragmentManager.findFragmentByTag(<span class="string">&quot;tag&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<blockquote>
+<h4 id="有关子-fragment-和同级-fragment-的特殊注意事项"><a href="#有关子-fragment-和同级-fragment-的特殊注意事项" class="headerlink" title="有关子 fragment 和同级 fragment 的特殊注意事项"></a>有关子 fragment 和同级 fragment 的特殊注意事项</h4></blockquote>
+<pre>
+1.在任何给定的时间点，只允许一个 FragmentManager 控制 fragment 返回堆栈。
+
+2.如果应用在屏幕上同时显示多个同级 fragment，或者应用使用子 fragment，
+  则必须指定一个 FragmentManager 来处理应用的主要导航。  
+
+3.如需在 fragment 事务内定义主要导航 fragment，请对事务调用 setPrimaryNavigationFragment() 方法，
+  并传入一个 fragment 的实例，该 fragment 的 childFragmentManager 应具有主要控制权。
+
+4.将导航结构视为一系列层，其中 activity 作为最外层，封装下面的每一层子 fragment。
+  每一层都必须有一个主要导航 fragment。当发生返回事件时，最内层控制导航行为。
+  一旦最内层再也没有可从其弹回的 fragment 事务，控制权就会向外回一层，此过程会一直重复，直至到达 activity 为止。
+
+5.当同时显示两个或更多 fragment 时，其中只有一个可以是主要导航 fragment。
+
+6.如果将某个 fragment 设为主要导航 fragment，会移除对先前 fragment 的指定。在上例中，
+  如果您将详情 fragment 设为主要导航 fragment，就会移除对主 fragment 的指定。
+</pre>
+
+<blockquote>
+<h4 id="支持多个返回堆栈"><a href="#支持多个返回堆栈" class="headerlink" title="支持多个返回堆栈"></a>支持多个返回堆栈</h4></blockquote>
+<pre>
+在某些情况下，您的应用可能需要支持多个返回堆栈。一个常见示例是，您的应用使用底部导航栏。
+FragmentManager 可让您通过 saveBackStack() 和 restoreBackStack() 方法支持多个返回堆栈。
+这两种方法使您可以通过保存一个返回堆栈并恢复另一个返回堆栈来在返回堆栈之间进行交换。
+
+saveBackStack() 的工作方式类似于使用可选 name 参数调用 popBackStack()：
+弹出指定事务以及堆栈上在此之后的所有事务。不同之处在于 saveBackStack() 
+会保存弹出事务中所有 fragment 的状态。
+
+例如，假设您之前使用 addToBackStack() 提交 FragmentTransaction，从而将 fragment 添加到返回堆栈
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">supportFragmentManager.beginTransaction()</span><br><span class="line">  .replace(R.id.fragment_container, ExampleFragment.class, <span class="literal">null</span>)</span><br><span class="line">  <span class="comment">// setReorderingAllowed(true) and the optional string argument for</span></span><br><span class="line">  <span class="comment">// addToBackStack() are both required if you want to use saveBackStack().</span></span><br><span class="line">  .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">  .addToBackStack(<span class="string">&quot;replacement&quot;</span>)</span><br><span class="line">  .commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+在这种情况下，您可以通过调用 saveState() 来保存此 fragment 事务和 ExampleFragment 的状态：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supportFragmentManager.saveBackStack(<span class="string">&quot;replacement&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<pre>
+<font color=#dd0000>注意：您只能将 saveBackStack() 用于调用 setReorderingAllowed(true) 的事务，
+         以确保可以将事务还原为单一原子操作</font>
+</pre>
+
+<pre>
+您可以使用相同的名称参数调用 restoreBackStack()，以恢复所有弹出的事务以及所有保存的 fragment 状态
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supportFragmentManager.restoreBackStack(<span class="string">&quot;replacement&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<pre>
+<font color=#dd0000>注意：除非使用 addToBackStack() 传递 fragment 事务的可选名称，
+否则不能使用 saveBackStack() 和 restoreBackStack()</font>
+</pre>
+
+<blockquote>
+<h4 id="为-fragment-提供依赖项"><a href="#为-fragment-提供依赖项" class="headerlink" title="为 fragment 提供依赖项"></a>为 fragment 提供依赖项</h4></blockquote>
+<pre>
+添加 fragment 时，您可以手动实例化 fragment 并将其添加到 FragmentTransaction
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ExampleFragment</span> <span class="variable">myFragment</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExampleFragment</span>();</span><br><span class="line">fragmentManager.beginTransaction()</span><br><span class="line">    .add(R.id.fragment_view_container, myFragment)</span><br><span class="line">    .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">    .commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+当您提交 fragment 事务时，您创建的 fragment 实例就是使用的实例。不过，在配置更改期间，
+activity 及其所有 fragment 都会被销毁，然后使用最适用的 Android 资源重新创建。
+FragmentManager 会为您处理所有这些操作。
+它会重新创建 fragment 的实例，将其附加到宿主，并重新创建返回堆栈状态。
+
+默认情况下，FragmentManager 会使用框架提供的 FragmentFactory 来实例化 fragment 的新实例。
+<font color=#dd0000>此默认工厂使用反射来查找和调用 fragment 的无参数构造函数</font>。
+这意味着，您无法使用此默认工厂为 fragment 提供依赖项。
+这也意味着，默认情况下，在重新创建过程中，不会使用您首次创建 fragment 时所用的任何自定义构造函数。
+
+如需为 fragment 提供依赖项或使用任何自定义构造函数，
+您必须创建自定义 FragmentFactory 子类，然后替换 FragmentFactory.instantiate。
+您随后可以将 FragmentManager 的默认工厂替换为您的自定义工厂，该自定义工厂随后将用于实例化 fragment
+
+假设您有一个 DessertsFragment，负责显示您家乡受欢迎的甜点。
+我们假设 DessertsFragment 依赖于 DessertsRepository 类，该类可为其提供向用户显示正确界面所需的信息。
+
+您可以将 DessertsFragment 定义为在其构造函数中需要 DessertsRepository 实例
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DessertsFragment</span> <span class="keyword">extends</span> <span class="title class_">Fragment</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> DessertsRepository dessertsRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DessertsFragment</span><span class="params">(DessertsRepository dessertsRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.dessertsRepository = dessertsRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Getter omitted.</span></span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre>
+FragmentFactory 的简单实现可能与以下代码类似
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyFragmentFactory</span> <span class="keyword">extends</span> <span class="title class_">FragmentFactory</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> DessertsRepository repository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyFragmentFactory</span><span class="params">(DessertsRepository repository)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.repository = repository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NonNull</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Fragment <span class="title function_">instantiate</span><span class="params">(<span class="meta">@NonNull</span> ClassLoader classLoader, <span class="meta">@NonNull</span> String className)</span> &#123;</span><br><span class="line">        Class&lt;? <span class="keyword">extends</span> <span class="title class_">Fragment</span>&gt; fragmentClass = loadFragmentClass(classLoader, className);</span><br><span class="line">        <span class="keyword">if</span> (fragmentClass == DessertsFragment.class) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DessertsFragment</span>(repository);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">super</span>.instantiate(classLoader, className);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre>
+此示例创建了 FragmentFactory 的子类，替换了 instantiate() 方法，
+以便为 DessertsFragment 提供自定义 fragment 创建逻辑。
+其他 fragment 类通过 super.instantiate() 由 FragmentFactory 的默认行为进行处理。
+
+您随后可以通过在 FragmentManager 上设置一个属性，
+将 MyFragmentFactory 指定为要在构造应用的 fragment 时使用的工厂。
+您必须在 activity 的 super.onCreate() 之前设置此属性，
+以确保在重新创建 fragment 时使用 MyFragmentFactory
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MealActivity</span> <span class="keyword">extends</span> <span class="title class_">AppCompatActivity</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(<span class="meta">@Nullable</span> Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="type">DessertsRepository</span> <span class="variable">repository</span> <span class="operator">=</span> DessertsRepository.getInstance();</span><br><span class="line">        getSupportFragmentManager().setFragmentFactory(<span class="keyword">new</span> <span class="title class_">MyFragmentFactory</span>(repository));</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre>
+<font color=#dd0000>请注意，在 activity 中设置 FragmentFactory 会替换整个 activity 的 fragment 层次结构中
+ fragment 的创建。换句话说，您添加的任何子 fragment 的 childFragmentManager 
+ 都会使用此处设置的自定义 fragment 工厂，除非在较低的级别被替换</font>
+</pre>
+
+
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:20px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/Fragment/" rel="tag"># Fragment</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/17/android/Android02_Fragment/" rel="prev" title="Android开发--Fragment">
+                  <i class="fa fa-chevron-left"></i> Android开发--Fragment
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/10/21/android/Android04_FragmentTransaction/" rel="next" title="Android开发--FragmentTransaction">
+                  Android开发--FragmentTransaction <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bob</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

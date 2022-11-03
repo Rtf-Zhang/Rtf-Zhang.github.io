@@ -20,19 +20,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"rtf-zhang.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="概要 1.Activity是Android组件中最基本也是最为常见用的四大组件（Activity，Service,Content Provider，BroadcastReceiver）之一    2.Activity是一个应用程序组件，提供一个屏幕，用户可以用来交互为了完成某项任务   3.Activity中所有操作都与用户密切相关，是一个负责与用户交互的组件，可以通过setContentVie">
+    <meta name="description" content="概要 1.Activity是Android组件中最基本也是最为常见用的四大组件（Activity，Service,Content Provider，BroadcastReceiver）之一   2.Activity是一个应用程序组件，提供一个屏幕，用户可以用来交互为了完成某项任务  3.Activity中所有操作都与用户密切相关，是一个负责与用户交互的组件，可以通过setContentView(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android开发--Activity">
-<meta property="og:url" content="https://rtf-zhang.github.io/2022/10/17/android/activity/index.html">
+<meta property="og:url" content="https://rtf-zhang.github.io/2022/10/17/android/Android01_Activity/index.html">
 <meta property="og:site_name" content="Blogz">
-<meta property="og:description" content="概要 1.Activity是Android组件中最基本也是最为常见用的四大组件（Activity，Service,Content Provider，BroadcastReceiver）之一    2.Activity是一个应用程序组件，提供一个屏幕，用户可以用来交互为了完成某项任务   3.Activity中所有操作都与用户密切相关，是一个负责与用户交互的组件，可以通过setContentVie">
+<meta property="og:description" content="概要 1.Activity是Android组件中最基本也是最为常见用的四大组件（Activity，Service,Content Provider，BroadcastReceiver）之一   2.Activity是一个应用程序组件，提供一个屏幕，用户可以用来交互为了完成某项任务  3.Activity中所有操作都与用户密切相关，是一个负责与用户交互的组件，可以通过setContentView(">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://rtf-zhang.github.io/images/andoird_activity_status_switch.jpeg">
 <meta property="og:image" content="https://rtf-zhang.github.io/images/android_activity_stack.jpeg">
 <meta property="og:image" content="https://rtf-zhang.github.io/images/android_activity_lifecycle.gif">
 <meta property="og:image" content="https://rtf-zhang.github.io/images/android_activity_status.png">
 <meta property="article:published_time" content="2022-10-17T12:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-17T13:21:53.189Z">
+<meta property="article:modified_time" content="2022-10-18T01:16:59.175Z">
 <meta property="article:author" content="Bob">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="Activity">
@@ -40,11 +40,11 @@
 <meta name="twitter:image" content="https://rtf-zhang.github.io/images/andoird_activity_status_switch.jpeg">
 
 
-<link rel="canonical" href="https://rtf-zhang.github.io/2022/10/17/android/activity/">
+<link rel="canonical" href="https://rtf-zhang.github.io/2022/10/17/android/Android01_Activity/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://rtf-zhang.github.io/2022/10/17/android/activity/","path":"2022/10/17/android/activity/","title":"Android开发--Activity"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://rtf-zhang.github.io/2022/10/17/android/Android01_Activity/","path":"2022/10/17/android/Android01_Activity/","title":"Android开发--Activity"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Android开发--Activity | Blogz</title>
@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -150,7 +150,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -194,7 +194,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/17/android/activity/">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/17/android/Android01_Activity/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/header.jpg">
@@ -222,9 +222,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-10-17 20:00:00 / Modified: 21:21:53" itemprop="dateCreated datePublished" datetime="2022-10-17T20:00:00+08:00">2022-10-17</time>
+      <time title="Created: 2022-10-17 20:00:00" itemprop="dateCreated datePublished" datetime="2022-10-17T20:00:00+08:00">2022-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-18 09:16:59" itemprop="dateModified" datetime="2022-10-18T09:16:59+08:00">2022-10-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -250,12 +256,9 @@
 <h4 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h4></blockquote>
 <pre><code>1.Activity是Android组件中最基本也是最为常见用的四大组件（Activity，Service,Content Provider，BroadcastReceiver）之一 
 
-
 2.Activity是一个应用程序组件，提供一个屏幕，用户可以用来交互为了完成某项任务
 
-
 3.Activity中所有操作都与用户密切相关，是一个负责与用户交互的组件，可以通过setContentView(View)来显示指定控件
-
 
 4.在一个android应用中，一个Activity通常就是一个单独的屏幕，它上面可以显示一些控件也可以监听并处理用户的事件做出响应。Activity之间通过Intent进行通信
 </code></pre>
@@ -266,29 +269,29 @@
 <pre><code>在android 中，Activity 拥有四种基本状态：
 </code></pre>
 <blockquote>
-<h5 id="1-Active-x2F-Running"><a href="#1-Active-x2F-Running" class="headerlink" title="1.Active&#x2F;Running"></a>1.Active&#x2F;Running</h5><pre><code>    一个新 Activity 启动入栈后，它显示在屏幕最前端，处理是处于栈的最顶端（Activity栈顶）
-    此时它处于可见并可和用户交互的激活状态,叫做活动状态或者运行状态（active or running）
+<h5 id="1-Active-x2F-Running"><a href="#1-Active-x2F-Running" class="headerlink" title="1.Active&#x2F;Running"></a>1.Active&#x2F;Running</h5></blockquote>
+<pre><code>一个新 Activity 启动入栈后，它显示在屏幕最前端，处理是处于栈的最顶端（Activity栈顶）
+此时它处于可见并可和用户交互的激活状态,叫做活动状态或者运行状态（active or running）
 </code></pre>
-</blockquote>
 <blockquote>
-<h5 id="2-Paused"><a href="#2-Paused" class="headerlink" title="2. Paused"></a>2. Paused</h5><pre><code>    当 Activity失去焦点， 被一个新的非全屏的Activity 或者一个透明的Activity 被放置在栈顶
-    此时的状态叫做暂停状态（Paused）。此时它依然与窗口管理器保持连接，
-    Activity依然保持活力（保持所有的状态，成员信息，和窗口管理器保持连接）
-    但是在系统内存极端低下的时候将被强行终止掉。所以它仍然可见，但已经失去了焦点故不可与用户进行交互
+<h5 id="2-Paused"><a href="#2-Paused" class="headerlink" title="2. Paused"></a>2. Paused</h5></blockquote>
+<pre><code>当 Activity失去焦点， 被一个新的非全屏的Activity 或者一个透明的Activity 被放置在栈顶
+此时的状态叫做暂停状态（Paused）。此时它依然与窗口管理器保持连接，
+Activity依然保持活力（保持所有的状态，成员信息，和窗口管理器保持连接）
+但是在系统内存极端低下的时候将被强行终止掉。所以它仍然可见，但已经失去了焦点故不可与用户进行交互
 </code></pre>
-</blockquote>
 <blockquote>
-<h5 id="3-Stopped"><a href="#3-Stopped" class="headerlink" title="3. Stopped"></a>3. Stopped</h5><pre><code>    如果一个Activity被另外的Activity完全覆盖掉，叫做停止状态（Stopped）
-    它依然保持所有状态和成员信息，但是它不再可见，所以它的窗口被隐藏
-    当系统内存需要被用在其他地方的时候，Stopped的Activity将被强行终止掉
+<h5 id="3-Stopped"><a href="#3-Stopped" class="headerlink" title="3. Stopped"></a>3. Stopped</h5></blockquote>
+<pre><code>如果一个Activity被另外的Activity完全覆盖掉，叫做停止状态（Stopped）
+它依然保持所有状态和成员信息，但是它不再可见，所以它的窗口被隐藏
+当系统内存需要被用在其他地方的时候，Stopped的Activity将被强行终止掉
 </code></pre>
-</blockquote>
 <blockquote>
-<h5 id="4-Killed"><a href="#4-Killed" class="headerlink" title="4. Killed"></a>4. Killed</h5><pre><code>    如果一个Activity是Paused或者Stopped状态，系统可以将该Activity从内存中删除
-    Android系统采用两种方式进行删除，要么要求该Activity结束，要么直接终止它的进程
-    当该Activity再次显示给用户时，它必须重新开始和重置前面的状态
+<h5 id="4-Killed"><a href="#4-Killed" class="headerlink" title="4. Killed"></a>4. Killed</h5></blockquote>
+<pre><code>如果一个Activity是Paused或者Stopped状态，系统可以将该Activity从内存中删除
+Android系统采用两种方式进行删除，要么要求该Activity结束，要么直接终止它的进程
+当该Activity再次显示给用户时，它必须重新开始和重置前面的状态
 </code></pre>
-</blockquote>
 <br/>
 
 <blockquote>
@@ -380,13 +383,6 @@ Activity1 和 Activity2 的生命周期
     </tr>
 </table>
 
-<pre><code>这张图非常重要，可以帮我们解决异常情况下activity如何正常回复的问题
-当系统停止activity时，它会调用onSaveInstanceState()（过程1），
-如果activity被销毁了，但是需要创建同样的实例，
-系统会把过程1中的状态数据传给onCreate()和onRestoreInstanceState()，
-所以我们要在onSaveInstanceState()内做保存参数的动作，
-在onRestoreInstanceState()做获取参数的动作
-</code></pre>
 <br/>
 
 <blockquote>
@@ -453,6 +449,9 @@ Activity1 和 Activity2 的生命周期
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2022/10/17/android/Android02_Fragment/" rel="next" title="Android开发--Fragment">
+                  Android开发--Fragment <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

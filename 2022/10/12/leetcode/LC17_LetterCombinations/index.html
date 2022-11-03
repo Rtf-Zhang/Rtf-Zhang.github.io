@@ -20,16 +20,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"rtf-zhang.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="LeetCode 17 电话号码的字母组合  题目: 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。    示例 1：  输入：digits &#x3D; &quot;23&quot; 输出：[&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&amp;qu">
+    <meta name="description" content="LeetCode 17 电话号码的字母组合  题目:  给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。      示例 1：  输入：digits &#x3D; &quot;23&quot; 输出：[&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;] 示例 2：  输入">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode 17 电话号码的字母组合">
 <meta property="og:url" content="https://rtf-zhang.github.io/2022/10/12/leetcode/LC17_LetterCombinations/index.html">
 <meta property="og:site_name" content="Blogz">
-<meta property="og:description" content="LeetCode 17 电话号码的字母组合  题目: 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。    示例 1：  输入：digits &#x3D; &quot;23&quot; 输出：[&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&amp;qu">
+<meta property="og:description" content="LeetCode 17 电话号码的字母组合  题目:  给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。      示例 1：  输入：digits &#x3D; &quot;23&quot; 输出：[&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;] 示例 2：  输入">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://rtf-zhang.github.io/images/img_lc_17.png">
 <meta property="article:published_time" content="2022-10-12T13:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-12T10:47:04.281Z">
+<meta property="article:modified_time" content="2022-10-27T10:04:21.362Z">
 <meta property="article:author" content="Bob">
 <meta property="article:tag" content="LeetCode">
 <meta property="article:tag" content="回溯算法">
@@ -136,7 +136,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -147,7 +147,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -219,9 +219,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-10-12 21:00:00 / Modified: 18:47:04" itemprop="dateCreated datePublished" datetime="2022-10-12T21:00:00+08:00">2022-10-12</time>
+      <time title="Created: 2022-10-12 21:00:00" itemprop="dateCreated datePublished" datetime="2022-10-12T21:00:00+08:00">2022-10-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-27 18:04:21" itemprop="dateModified" datetime="2022-10-27T18:04:21+08:00">2022-10-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -246,41 +252,46 @@
         <h4 id="LeetCode-17-电话号码的字母组合"><a href="#LeetCode-17-电话号码的字母组合" class="headerlink" title="LeetCode 17 电话号码的字母组合"></a>LeetCode 17 电话号码的字母组合</h4><hr>
 <blockquote>
 <h5 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h5></blockquote>
-<pre><code>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。
+<pre>
+给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。
 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
-</code></pre>
+</pre>
+
 <img src="/images/img_lc_17.png">
 
-<pre><code>示例 1：
+<pre>
+示例 1：
 
-输入：digits = &quot;23&quot;
-输出：[&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]
+输入：digits = "23"
+输出：["ad","ae","af","bd","be","bf","cd","ce","cf"]
 示例 2：
 
-输入：digits = &quot;&quot;
+输入：digits = ""
 输出：[]
 示例 3：
 
-输入：digits = &quot;2&quot;
-输出：[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]
+输入：digits = "2"
+输出：["a","b","c"]
  
 
 提示：
 
-0 &lt;= digits.length &lt;= 4
-digits[i] 是范围 [&#39;2&#39;, &#39;9&#39;] 的一个数字。
+0 <= digits.length <= 4
+digits[i] 是范围 ['2', '9'] 的一个数字。
 
 来源：力扣（LeetCode）
 链接：https://leetcode.cn/problems/letter-combinations-of-a-phone-number
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre>
+
+</pre>
+
 <br/>
 
 <blockquote>
 <h5 id="题解"><a href="#题解" class="headerlink" title="题解:"></a>题解:</h5></blockquote>
-<pre><code>经典回溯算法求全组合
-根据提示我们可以得到以下数字-字符数组的映射表: &quot;abc&quot;,&quot;def&quot;,&quot;ghi&quot;,&quot;jkl&quot;,&quot;mno&quot;,&quot;pqrs&quot;,&quot;tuv&quot;,&quot;wxyz&quot;
-</code></pre>
+<pre>
+经典回溯算法求全组合
+根据提示我们可以得到以下数字-字符数组的映射表: "abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
@@ -289,9 +300,11 @@ digits[i] 是范围 [&#39;2&#39;, &#39;9&#39;] 的一个数字。
         <td>[a,b,c]</td><td>[d,e,f]</td><td>[g,h,i]</td><td>[j,k,l]</td><td>[m,n,o]</td><td>[p,q,r,s]</td><td>[t,u,v]</td><td>[w,x,y,z]</td>
     </tr>
 </table>
+</pre>
 
-<pre><code>思路
-1.拆分digits= &quot;23&quot; 得数字[2,3]
+<pre>
+思路
+1.拆分digits= "23" 得数字[2,3]
 2.匹配字符数组 charList = [[a,b,c],[d,e,f]] 深度 depth = 2 
 3.根据字符数组深度 depth 定义一个同样深度的栈 stack 存储组合的字符
 4.对charList从深度0开始递归，递归方式:
@@ -300,25 +313,30 @@ digits[i] 是范围 [&#39;2&#39;, &#39;9&#39;] 的一个数字。
     c.每次遍历入栈当前字符
     d.进入下一深度递归
     e.出栈当前字符
-</code></pre>
+</pre>
+
 <br/>
 
 <blockquote>
 <h5 id="图解"><a href="#图解" class="headerlink" title="图解:"></a>图解:</h5></blockquote>
-<pre><code>例: digits = &quot;23&quot;
+<pre>
+例: digits = "23"
 匹配可得字符数组为[[a,b,c],[d,e,f]]
 
 定义字符数组 charList = [[a,b,c],[d,e,f]] 
 定义栈深度 depth = 2
 定义栈 stack 
 定义结果集 list
-</code></pre>
+</pre>
+
 <br/>
 
-<pre><code>递归第一层 
+<pre>
+递归第一层 
 取字符 a 入栈
 进入第二层递归
-</code></pre>
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -333,11 +351,13 @@ digits[i] 是范围 [&#39;2&#39;, &#39;9&#39;] 的一个数字。
 
 <br/>
 
-<pre><code>递归第二层 
+<pre>
+递归第二层 
 取字符 d 入栈
-此时到达底层，存储结果 &quot;ad&quot;
-list = [&quot;ad&quot;]
-</code></pre>
+此时到达底层，存储结果 "ad"
+list = ["ad"]
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -352,11 +372,13 @@ list = [&quot;ad&quot;]
 
 <br/>
 
-<pre><code>字符 d 出栈
+<pre>
+字符 d 出栈
 字符 e 入栈
-此时到达底层，存储结果 &quot;ae&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;]
-</code></pre>
+此时到达底层，存储结果 "ae"
+list = ["ad","ae"]
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -371,11 +393,13 @@ list = [&quot;ad&quot;,&quot;ae&quot;]
 
 <br/>
 
-<pre><code>字符 e 出栈
+<pre>
+字符 e 出栈
 字符 f 入栈
-此时到达底层，存储结果 &quot;af&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;]
-</code></pre>
+此时到达底层，存储结果 "af"
+list = ["ad","ae","af"]
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -390,12 +414,14 @@ list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;]
 
 <br/>
 
-<pre><code>字符 f 出栈
+<pre>
+字符 f 出栈
 第二层遍历结束，回退回第一层遍历
 字符 a 出栈
 字符 b 入栈
 进入第二层递归
-</code></pre>
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -410,11 +436,13 @@ list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;]
 
 <br/>
 
-<pre><code>递归第二层 
+<pre>
+递归第二层 
 取字符 d 入栈
-此时到达底层，存储结果 &quot;bd&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;]
-</code></pre>
+此时到达底层，存储结果 "bd"
+list = ["ad","ae","af","bd"]
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -429,11 +457,13 @@ list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;]
 
 <br/>
 
-<pre><code>字符 d 出栈
+<pre>
+字符 d 出栈
 字符 e 入栈
-此时到达底层，存储结果 &quot;be&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;]
-</code></pre>
+此时到达底层，存储结果 "be"
+list = ["ad","ae","af","bd","be"]
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -448,11 +478,13 @@ list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quo
 
 <br/>
 
-<pre><code>字符 e 出栈
+<pre>
+字符 e 出栈
 字符 f 入栈
-此时到达底层，存储结果 &quot;bf&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;]
-</code></pre>
+此时到达底层，存储结果 "bf"
+list = ["ad","ae","af","bd","be","bf"]
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -467,12 +499,14 @@ list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quo
 
 <br/>
 
-<pre><code>字符 f 出栈
+<pre>
+字符 f 出栈
 第二层遍历结束，回退回第一层遍历
 字符 b 出栈
 字符 c 入栈
 进入第二层递归
-</code></pre>
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -487,11 +521,13 @@ list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quo
 
 <br/>
 
-<pre><code>递归第二层 
+<pre>
+递归第二层 
 取字符 d 入栈
-此时到达底层，存储结果 &quot;cd&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;]
-</code></pre>
+此时到达底层，存储结果 "cd"
+list = ["ad","ae","af","bd","be","bf","cd"]
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -506,11 +542,13 @@ list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quo
 
 <br/>
 
-<pre><code>字符 d 出栈
+<pre>
+字符 d 出栈
 字符 e 入栈
-此时到达底层，存储结果 &quot;ce&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;]
-</code></pre>
+此时到达底层，存储结果 "ce"
+list = ["ad","ae","af","bd","be","bf","cd","ce"]
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -525,11 +563,13 @@ list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quo
 
 <br/>
 
-<pre><code>字符 e 出栈
+<pre>
+字符 e 出栈
 字符 f 入栈
-此时到达底层，存储结果 &quot;cf&quot;
-list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]
-</code></pre>
+此时到达底层，存储结果 "cf"
+list = ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+</pre>
+
 <table style = "text-align:center;font-size:14px;table-layout:fixed">
     <tr>
         <td></td><td></td><td></td><td>Stack</td>
@@ -544,19 +584,31 @@ list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quo
 
 <br/>
 
-<pre><code>字符 f 出栈
+<pre>
+字符 f 出栈
 第二层遍历结束，回退回第一层遍历
 字符 c 出栈
 第一层遍历结束
-返回结果 list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quot;,&quot;bf&quot;,&quot;cd&quot;,&quot;ce&quot;,&quot;cf&quot;]
-</code></pre>
+返回结果 list = ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+</pre>
+
 <br/>
 
 <blockquote>
 <h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;String&gt; <span class="title function_">letterCombinations</span><span class="params">(String digits)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> process(digits);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> List&lt;String&gt; <span class="title function_">process</span><span class="params">(String digits)</span> &#123;</span><br><span class="line">    List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (digits.isEmpty()) <span class="keyword">return</span> list;</span><br><span class="line">    String[] allChars = <span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;abc&quot;</span>,<span class="string">&quot;def&quot;</span>,<span class="string">&quot;ghi&quot;</span>,<span class="string">&quot;jkl&quot;</span>,<span class="string">&quot;mno&quot;</span>,<span class="string">&quot;pqrs&quot;</span>,<span class="string">&quot;tuv&quot;</span>,<span class="string">&quot;wxyz&quot;</span>&#125;;</span><br><span class="line">    <span class="type">char</span> [] nums = digits.toCharArray();</span><br><span class="line">    dfs(allChars, nums, <span class="number">0</span>, <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(), list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">dfs</span><span class="params">(String[] allChars, <span class="type">char</span>[] nums, <span class="type">int</span> depth, StringBuilder s, List&lt;String&gt; list)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (depth == nums.length) &#123;</span><br><span class="line">        list.add(s.toString());</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> nums[depth] - <span class="number">50</span>;</span><br><span class="line">    <span class="type">char</span>[] chars = allChars[index].toCharArray();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">        s.append(chars[i]);</span><br><span class="line">        dfs(allChars, nums, depth + <span class="number">1</span>, s, list);</span><br><span class="line">        s.deleteCharAt(s.length() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:10px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
     </div>
 
     
@@ -578,7 +630,7 @@ list = [&quot;ad&quot;,&quot;ae&quot;,&quot;af&quot;,&quot;bd&quot;,&quot;be&quo
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/10/17/android/activity/" rel="next" title="Android开发--Activity">
+                <a href="/2022/10/17/android/Android01_Activity/" rel="next" title="Android开发--Activity">
                   Android开发--Activity <i class="fa fa-chevron-right"></i>
                 </a>
             </div>

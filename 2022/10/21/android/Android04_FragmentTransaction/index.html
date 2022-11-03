@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rtf-zhang.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概要  在运行时，FragmentManager 可以添加、删除、替换和使用片段执行其他操作以响应用户交互。 您提交的每组片段更改称为一个事务，您可以使用 FragmentTransaction 该类提供的 API 指定在事务中执行的操作 您可以将多个操作分组到一个事务中——例如，一个事务可以添加或替换多个片段      创建和操作事务  通过调用 FragmentManagerbeginTra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发--FragmentTransaction">
+<meta property="og:url" content="https://rtf-zhang.github.io/2022/10/21/android/Android04_FragmentTransaction/index.html">
+<meta property="og:site_name" content="Blogz">
+<meta property="og:description" content="概要  在运行时，FragmentManager 可以添加、删除、替换和使用片段执行其他操作以响应用户交互。 您提交的每组片段更改称为一个事务，您可以使用 FragmentTransaction 该类提供的 API 指定在事务中执行的操作 您可以将多个操作分组到一个事务中——例如，一个事务可以添加或替换多个片段      创建和操作事务  通过调用 FragmentManagerbeginTra">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-21T12:00:00.000Z">
+<meta property="article:modified_time" content="2022-10-21T09:53:05.067Z">
+<meta property="article:author" content="Bob">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Fragment">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://rtf-zhang.github.io/2022/10/21/android/Android04_FragmentTransaction/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://rtf-zhang.github.io/2022/10/21/android/Android04_FragmentTransaction/","path":"2022/10/21/android/Android04_FragmentTransaction/","title":"Android开发--FragmentTransaction"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Android开发--FragmentTransaction | Blogz</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Blogz</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">The subtitle of your website</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">概要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%92%8C%E6%93%8D%E4%BD%9C%E4%BA%8B%E5%8A%A1"><span class="nav-number">2.</span> <span class="nav-text">创建和操作事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%87%E6%AE%B5%E7%8A%B6%E6%80%81%E6%9B%B4%E6%94%B9%E9%87%8D%E6%96%B0%E6%8E%92%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">片段状态更改重新排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%92%8C%E5%88%A0%E2%80%8B%E2%80%8B%E9%99%A4%E7%89%87%E6%AE%B5"><span class="nav-number">4.</span> <span class="nav-text">添加和删​​除片段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E5%BC%82%E6%AD%A5"><span class="nav-number">5.</span> <span class="nav-text">提交异步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">6.</span> <span class="nav-text">执行顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%92%8C%E9%9A%90%E8%97%8F"><span class="nav-number">7.</span> <span class="nav-text">显示和隐藏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%99%84%E5%8A%A0%E5%92%8C%E5%88%86%E7%A6%BB"><span class="nav-number">8.</span> <span class="nav-text">附加和分离</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Bob"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">Bob</p>
+  <div class="site-description" itemprop="description">The description of your website</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Rtf-Zhang/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Rtf-Zhang&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://rtf-zhang.github.io/2022/10/21/android/Android04_FragmentTransaction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Bob">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blogz">
+      <meta itemprop="description" content="The description of your website">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Android开发--FragmentTransaction | Blogz">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android开发--FragmentTransaction
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-10-21 20:00:00 / Modified: 17:53:05" itemprop="dateCreated datePublished" datetime="2022-10-21T20:00:00+08:00">2022-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<h4 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h4></blockquote>
+<pre>
+在运行时，FragmentManager 可以添加、删除、替换和使用片段执行其他操作以响应用户交互。
+您提交的每组片段更改称为一个事务，您可以使用 FragmentTransaction 该类提供的 API 指定在事务中执行的操作
+您可以将多个操作分组到一个事务中——例如，一个事务可以添加或替换多个片段
+</pre>
+
+</br>
+
+<blockquote>
+<h4 id="创建和操作事务"><a href="#创建和操作事务" class="headerlink" title="创建和操作事务"></a>创建和操作事务</h4></blockquote>
+<pre>
+通过调用 FragmentManagerbeginTransaction() 获取FragmentTransaction的实例，如下例所示：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> ...</span><br><span class="line"><span class="type">FragmentTransaction</span> <span class="variable">fragmentTransaction</span> <span class="operator">=</span> fragmentManager.beginTransaction();</span><br></pre></td></tr></table></figure>
+
+<pre>
+每个人的最终调用都FragmentTransaction必须提交事务。该commit()调用FragmentManager表示所有操作都已添加到事务中
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> ...</span><br><span class="line"><span class="type">FragmentTransaction</span> <span class="variable">fragmentTransaction</span> <span class="operator">=</span> fragmentManager.beginTransaction();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Add operations here</span></span><br><span class="line"></span><br><span class="line">fragmentTransaction.commit();</span><br></pre></td></tr></table></figure>
+
+</br>
+
+<blockquote>
+<h4 id="片段状态更改重新排序"><a href="#片段状态更改重新排序" class="headerlink" title="片段状态更改重新排序"></a>片段状态更改重新排序</h4></blockquote>
+<pre>
+每个都 FragmentTransaction 应该使用 setReorderingAllowed(true) 允许片段状态更改重排序
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> ...</span><br><span class="line">fragmentManager.beginTransaction()</span><br><span class="line">    ...</span><br><span class="line">    .setReorderingAllowed(<span class="literal">true</span>)</span><br><span class="line">    .commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+为了行为兼容性，默认情况下不启用重新排序标志。
+但是，它需要允许FragmentManager正确执行您的FragmentTransaction，
+特别是当它在后台堆栈上运行并运行动画和过渡时。
+启用该标志可确保如果多个事务一起执行，任何中间片段（即添加然后立即替换的片段）
+不会经历生命周期更改或执行其动画或转换。
+
+请注意，此标志会影响事务的初始执行和使用 撤销事务popBackStack()
+</pre>
+
+</br>
+
+<blockquote>
+<h4 id="添加和删​​除片段"><a href="#添加和删​​除片段" class="headerlink" title="添加和删​​除片段"></a>添加和删​​除片段</h4></blockquote>
+<pre>
+调用 add()将片段添加到 FragmentManager。此方法接收片段容器的 ID ，以及您希望添加的片段的类名。
+添加的片段被移动到 RESUMED 状态。
+强烈建议容器是 FragmentContainerView 视图层次结构的一部分。
+
+要从主机中删除片段，请调用 remove() 方法传入一个片段实例
+该实例是由 findFragmentById() or findFragmentByTag()方法找到的
+如果片段的视图先前已添加到容器中，则此时视图将从容器中删除。移除的片段被移动到 DESTROYED 状态。
+
+用于 replace() 将容器中的现有片段替换为您提供的新片段类的实例。
+调用replace()相当于调用 remove() 先移除容器中的片段，然后将新片段添加到同一个容器中。
+
+以下代码片段显示了如何将一个片段替换为另一个片段：
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create new fragment and transaction</span></span><br><span class="line"><span class="type">FragmentManager</span> <span class="variable">fragmentManager</span> <span class="operator">=</span> ...</span><br><span class="line"><span class="type">FragmentTransaction</span> <span class="variable">transaction</span> <span class="operator">=</span> fragmentManager.beginTransaction();</span><br><span class="line">transaction.setReorderingAllowed(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Replace whatever is in the fragment_container view with this fragment</span></span><br><span class="line">transaction.replace(R.id.fragment_container, ExampleFragment.class, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Commit the transaction</span></span><br><span class="line">transaction.commit();</span><br></pre></td></tr></table></figure>
+
+<pre>
+在这个例子中，一个新的实例 ExampleFragment 替换了当前位于由 
+标识的布局容器中的片段（如果有的话） R.id.fragment_container
+</pre>
+
+<pre>
+<font color=#dd0000>注意：强烈建议始终使用采用 Class 而不是片段实例的片段操作，
+以确保创建片段的相同机制也用于从保存状态恢复片段。
+有关更多详细信息，请参阅 FragmentManager</font>
+</pre>
+
+<pre>
+默认情况下，在 FragmentTransaction 中所做的更改不会添加到后台堆栈。
+要保存这些更改，您可以调用 addToBackStack()
+</pre>
+
+</br>
+
+<blockquote>
+<h4 id="提交异步"><a href="#提交异步" class="headerlink" title="提交异步"></a>提交异步</h4></blockquote>
+<pre>
+调用 commit() 不会立即执行事务。事务被安排在主 UI 线程上运行，只要它能够这样做。
+但是，如有必要，您可以调用 commitNow() 以立即在您的 UI 线程上运行片段事务。
+
+请注意，commitNow 与 addToBackStack 是不兼容的. 或者，您可以通过调用 executePendingTransactions() 
+执行所有尚未运行的由FragmentTransactions提交的事务。
+这种方法与 addToBackStack 是兼容的
+
+对于绝大多数用例，使用 commit() 就足够了
+</pre>
+
+</br>
+
+<blockquote>
+<h4 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h4></blockquote>
+<pre>
+在 FragmentTransaction 中执行操作的顺序很重要，
+尤其是在使用setCustomAnimations(). 
+此方法将给定的动画应用于其后的所有片段操作
+</pre>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">getSupportFragmentManager().beginTransaction()</span><br><span class="line">    .setCustomAnimations(enter1, exit1, popEnter1, popExit1)</span><br><span class="line">    .add(R.id.container, ExampleFragment.class, <span class="literal">null</span>) <span class="comment">// gets the first animations</span></span><br><span class="line">    .setCustomAnimations(enter2, exit2, popEnter2, popExit2)</span><br><span class="line">    .add(R.id.container, ExampleFragment.class, <span class="literal">null</span>) <span class="comment">// gets the second animations</span></span><br><span class="line">    .commit()</span><br></pre></td></tr></table></figure>
+
+</br>
+
+<blockquote>
+<h4 id="显示和隐藏"><a href="#显示和隐藏" class="headerlink" title="显示和隐藏"></a>显示和隐藏</h4></blockquote>
+<pre>
+使用 FragmentTransaction 中的 show() hide() 方法显示和隐藏已添加到容器的片段的视图
+这些方法设置片段视图的可见性，而不影响片段的生命周期
+
+虽然您不需要使用片段事务来切换片段中视图的可见性，
+但这些方法对于您希望更改可见性状态与后台堆栈上的事务相关联的情况很有用
+</pre>
+
+</br>
+
+<blockquote>
+<h4 id="附加和分离"><a href="#附加和分离" class="headerlink" title="附加和分离"></a>附加和分离</h4></blockquote>
+<pre>
+FragmentTransaction 方法 detach() 将片段与 UI 分离，破坏其视图层次结构。
+片段保持与放入回退栈时相同的状态(STOPPED)。这意味着片段已从 UI 中删除，但仍由片段管理器管理。
+
+attach() 方法重新附加之前分离的片段。这会导致其视图层次结构被重新创建、附加到 UI 并显示。
+
+由于 FragmentTransaction 被视为单个原子操作集，
+因此对同一事务中的同一片段实例的同时调用 detach 和 attach 会相互抵消，从而避免了片段 UI 的破坏和立即重建。
+如果想要实现立即 detach 然后 attach 操作需使用单独的事务分别 commit()
+然后使用 executePendingOperations() 方法立即执行挂起的事务
+</pre>
+
+<pre>
+
+</pre>
+
+<style>
+pre { 
+    background-color: rgb(243,243,243) !important; 
+    padding:20px;
+    font-size:16px;
+    color:rgb(68,68,68);
+    line-height:30px;
+    font-family:'Arial';
+    letter-spacing:1px
+}
+</style>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/Fragment/" rel="tag"># Fragment</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/20/android/Android03_FragmentManager/" rel="prev" title="Android开发--FragmentManager">
+                  <i class="fa fa-chevron-left"></i> Android开发--FragmentManager
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/10/27/leetcode/LC18_FourSum/" rel="next" title="LeetCode 18 四数之和">
+                  LeetCode 18 四数之和 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bob</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
